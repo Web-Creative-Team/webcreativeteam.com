@@ -2,6 +2,12 @@
         width: auto;
     }
 
+    header{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
     .siteContainer,
     .mainNav,
     .sectionServices {
@@ -187,7 +193,7 @@
         justify-content: space-between;
         align-items: center;
         background-color: #F8F9FA;
-        padding: 2em 25em;
+        padding: 1.5em;
         color: #1A6B41;
     }
 
@@ -349,7 +355,7 @@
         }
 
         footer {
-            flex-direction: column;
+            /* flex-direction: column; */
             gap: 2em;
             font-size: 2em;
             padding: 3em;
