@@ -1,0 +1,58 @@
+.asideLayout{
+    display: flex;
+    padding-left: 4em;
+    margin-top: 4em;
+}
+
+.withAside {
+    display: flex;
+    flex-flow: column ;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    flex: 1 1 70%;
+}
+.withAside h1{
+flex: 1 1 100%
+}
+
+
+.withAside p{
+    max-width: 70ch;
+}
+
+.blogAside{
+    padding-right: 4em;
+}
+
+.blogAside h3{
+    
+}
+
+.asideList li{
+list-style: none;
+display: block;
+}
+
+.asideList a{
+    text-decoration: none;
+    color: #1A6B41;
+}
+
+.asideList a:hover{
+    color: #EF7F19;
+}
+
+@media (max-width: 600px){
+    .asideLayout{
+        flex-direction: column;
+    }
+
+    .blogAside{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em
+    }
+}

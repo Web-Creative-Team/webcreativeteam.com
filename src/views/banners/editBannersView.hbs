@@ -1,0 +1,16 @@
+<main class="noAside">
+    {{#each banners}}
+    <fieldset>
+        <legend>Edit Banner</legend>
+
+        <div style="max-width: 500px;"><img src="{{bannerImage}}" alt="" srcset=""></div>
+
+        <p>{{bannerTitle}}</p>
+        <p>{{bannerSubtitle}}</p>
+
+        
+    <a href="/banners/{{_id}}/edit">Edit</a>
+    <a href="/banners/{{_id}}/delete">Delete</a>
+    </fieldset>
+    {{/each}}
+</main>

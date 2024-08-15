@@ -1,0 +1,29 @@
+.carouselBlock{
+    background: white;
+    opacity: 85%;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column;
+    text-align: left;
+    justify-content: start;
+    align-items: start;
+    padding-left: 2em;
+    margin-bottom: 1em;
+}
+
+.carouselTitle,
+.carouselSubtitle{
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
+.carouselTitle{
+    font-size: 4em;
+    color:  #EF7F19;
+}
+
+.carouselSubtitle{
+    font-size: 2em;
+    color: #1A6B41;
+}

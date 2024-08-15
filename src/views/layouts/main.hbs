@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.jpg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <meta name="description" content="{{description}}">
+    <title>{{title}}</title>
+</head>
+
+<!-- Starts Body Section -->
+
+<body>
+    {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
+        </div>
+    </div>
+    {{/if}}
+    {{>header}}
+    {{{body}}}
+    {{#if showSectionServices}}
+    <section id="sectionServices" class="section sectionServices">
+        {{!-- <h2 class="sectionHeading">Нашите услуги</h2> --}}
+        <a href="/services/website" class="articleServices">
+            <h3>Уебсайтове и електронни магазини</h3>
+            <div class="imageContainer">
+                <img src="/images/css-javascript-html-usage-monitor-closeup-function-source-code-abstract-it-technology-background-software-source-code.jpg"
+                    alt="Websites and E-commerce banner image" srcset="">
+            </div>
+        </a>
+
+        <a href="/services/seo" class="articleServices">
+            <h3>SEO & Google Ads</h3>
+            <div class="imageContainer">
+                <img src="/images/seo-image-new-2023.jpg" alt="SEO and Google Ads banner image" srcset="">
+            </div>
+        </a>
+
+        <a href="/services/social" class="articleServices">
+            <h3>Социални медии & Дигитален маркетинг</h3>
+            <div class="imageContainer">
+                <img src="/images/social-media-template-brand-spotlights.jpg"
+                    alt="Social Media and Digital Marketing banner image" srcset="">
+            </div>
+        </a>
+
+        <a href="/services/design" class="articleServices">
+            <h3>Дизайнерски услуги</h3>
+            <div class="imageContainer">
+                <img src="/images/colorful-neon-idea-light-bulb-colorful-exploding-glowing-illustrations-ai-generated-art.jpg"
+                    alt="Design services banner image" srcset="">
+            </div>
+        </a>
+    </section>
+    {{/if}}
+
+   
+    <footer>
+        <article class="footerArticle">
+            <p><i class="fa-solid fa-phone"></i> 0887 454 509</p>
+            <p><i class="fa-solid fa-phone"></i> 0889 912 671</p>
+            <p><i class="fa-solid fa-envelope"></i> info@webcreativeteam.com</p>
+        </article>
+
+        <article class="footerArticle">
+            <ul class="footerNav">
+                <li><a href="/">Начало</a></li>
+                <li><a class="nav-link" href="javascript:void(0);" data-target="#sectionServices">Услуги</a></li>
+                <li><a href="/prices">Цени</a></li>
+                <!-- <li><a href="#">Tемпллейти</a></li> -->
+                {{!-- <li><a class="nav-link" href="javascript:void(0);" data-target="#sectionOurTeam">За нас</a></li> --}}
+                <li><a class="nav-link" href="/ourteam">За нас</a></li>
+                <li><a href="/contacts">Контакти</a></li>
+                <li><a href="/blog">Блог</a></li>
+            </ul>
+        </article>
+
+        <article class="footerArticle">
+            <p>&copy; All rights reserved 2024</p>
+        </article>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/js/carousel.js"></script>
+    <script src="/js/scrollToSection.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<div class="articleImage">
+    <img src="{{singleArticle.articleImage}}" alt="" srcset="">
+</div>
+<div class="asideLayout">
+
+
+    <main class="withAside">
+        <h1>{{singleArticle.articleTitle}}</h1>
+        <p>{{singleArticle.articleContent}}</p>
+        <p>{{singleArticle.dateCreated}}</p>
+
+        {{#if isAuthenticated}}
+        <a class="editLink" href="/articles/{{singleArticle._id}}/edit">Edit</a>
+        <a class="deleteLink" href="/articles/{{singleArticle._id}}/delete">Delete</a>
+        {{/if}}
+    </main>
+
+    <aside class="blogAside">
+        <h3>Други теми:</h3>
+        <ul class="asideList">
+            {{#each articles}}
+            <li><a href="/articles/{{_id}}/details">{{articleTitle}}</a></li>
+            {{/each}}
+        </ul>
+    </aside>
+
+</div>
