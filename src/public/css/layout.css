@@ -201,6 +201,10 @@
         margin-right: 0.2em;
     }
 
+    footer p{
+        margin: 0;
+    }
+
     .footerNav {
         display: flex;
         flex-direction: column;
