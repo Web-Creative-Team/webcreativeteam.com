@@ -2,6 +2,7 @@
     padding-right: 4em;
     display: flex;
     gap: 4em;
+    margin-bottom: 4em;
 }
 
 .personImageContainer {
@@ -12,6 +13,7 @@
     display: flex;
     gap: 2em;
     flex-direction: column;
+    gap: 7em;
 }
 
 .bioContent p,
@@ -37,6 +39,8 @@
     justify-content: space-between;
     max-width: 100%;
     font-style: italic;
+    margin-left: 15em;
+    padding-left: 1em;
 }
 
 .fa-solid.fa-quote-left {

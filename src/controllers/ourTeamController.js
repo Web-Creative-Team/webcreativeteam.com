@@ -8,6 +8,10 @@ router.get('/petya', (req, res)=>{
     res.render('ourTeam/petyaPage')
 })
 
+router.get('/stefan', (req, res)=>{
+    res.render('ourTeam/stefanPage')
+})
+
 
 
 
