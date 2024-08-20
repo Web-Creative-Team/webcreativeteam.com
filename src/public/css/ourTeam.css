@@ -1,54 +1,43 @@
-/* .ourTeam{
-position: relative;
-margin-bottom: 7em;
-}
-
-.imageTextsContainer{
-    position: absolute;
-    top: 15%;
-    left: 10%;
-    display: flex;
-    flex-direction: column  ;
-    align-items: start;
-}
-
-.ourTeamSubheading{
-    max-width: 9ch;
-    font-size: 7em;
-    font-weight: bold;
-    text-align: left;
-}
-
-.ourTeamPersonalPageLinks{
-    display: flex;
-    justify-content: end;
-    gap: 2em;
-    padding-right: 10em;
-} */
-
 .ourTeam {
     display: flex;
-    flex-direction: column;
-    background-image: url('/images/aboutUsBannerMain_noOpacity.png');
-    background-repeat: no-repeat;
-    justify-content: start;
-    align-items: start;
+    /* flex-direction: column; */
+    /* background-image: url('/images/aboutUsBannerMain_noOpacity.png');
+    background-repeat: no-repeat; */
+    /* justify-content: end;
+    align-items: start; */
     padding: 3em;
     padding-top: 2em;
-    max-width: 1920px;
-    min-height: 600px;
+    padding-bottom: 0;
+    max-width: 100%;
+    /* min-height: 600px; */
+    margin: 3rem 0;
+    overflow-x: hidden;
+}
+
+.mobileViewBanner {
+    display: none;
+}
+
+.ourTeamContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.desktopViewBanner {
+    flex: 1 0 75%;
 }
 
 .ourTeam h2 {
     /* max-width: 16ch; */
-    font-size: 5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 4rem;
 }
 
 .ourTeam h2:first-child {
-    font-size: 12rem;
+    font-size: 8em;
+    margin-bottom: 0;
 }
-
 
 .ourTeamPersonalPageLinks {
     list-style: none;
@@ -64,6 +53,7 @@ margin-bottom: 7em;
 
 .ourTeamPersonalPageLinks .card {
     border: 1px solid #1A6B41;
+    max-width: 18rem;
 }
 
 .ourTeamPersonalPageLinks h3 {
@@ -83,4 +73,32 @@ margin-bottom: 7em;
 .ourTeamPersonalPageLinks .btn-primary:hover {
     background: #EF7F19;
     color: #1A6B41;
+}
+
+@media (max-width: 600px) {
+    .mobileViewBanner {
+        display: block;
+    }
+
+    .desktopViewBanner {
+        display: none;
+    }
+
+    .ourTeam {
+        background-image: none;
+        flex-direction: column;
+    }
+
+    .ourTeamPersonalPageLinks {
+        padding: 1em;
+        gap: 4em;
+        flex-direction: column;
+
+    }
+
+    .ourTeamPersonalPageLinks .card {
+        min-width: 100%;
+    }
+
+
 }

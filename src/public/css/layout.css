@@ -1,5 +1,5 @@
     body {
-        width: auto;
+        max-width: 1920px;
     }
 
     header{
@@ -359,7 +359,7 @@
         }
 
         footer {
-            /* flex-direction: column; */
+            flex-direction: column;
             gap: 2em;
             font-size: 2em;
             padding: 3em;
