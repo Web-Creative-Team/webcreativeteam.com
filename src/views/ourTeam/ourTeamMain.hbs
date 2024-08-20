@@ -1,23 +1,61 @@
 <div class="ourTeam">
     {{!-- <h1 class="ourTeamHeading">Запознайте се с нашия екип</h1> --}}
-    <img src="/images/ourTeamMain.jpg" alt="Image - Our Team Page" srcset="">
-    <div class="imageTextsContainer">
-        <h2 class="ourTeamSubheading">Заедно постигаме целите</h2>
-        
-        <h3><i class="fa-thin fa-hashtag"> СъздавамеЗаедно</i></h3>
+    {{!-- <img src="/images/aboutUsBannerMain.png" alt="Image - Our Team Page" srcset=""> --}}
+    {{!-- <div class="imageTextsContainer"> --}}
+        <h2 class="ourTeamSubheading">ЗАЕДНО</h2>
+        <h2 class="ourTeamSubheading">да постигнем целите</h2>
+
+        {{!-- <h3><i class="fa-thin fa-hashtag"> СъздавамеЗаедно</i></h3> --}}
         <h3><i class="fa-thin fa-hashtag"> ЕстетикаИТехнология</i></h3>
         <h3><i class="fa-thin fa-hashtag"> СтратегическиРешения</i></h3>
         <h3><i class="fa-thin fa-hashtag"> УспехЧрезСътрудничество</i></h3>
-    </div>
-
-    <ul class="ourTeamPersonalPageLinks">
-        <li><a href="/ourteam/stefan">Запознайте се със Стефан</a></li>
-
-        <li><a href="/ourteam/petya">Запознайте се с Петя new branch</a></li>
-        <li><a href="/ourteam/petya">Запознайте се с Петя</a></li>
-        <li>2222</li>
-
-    </ul>
+        {{!--
+    </div> --}}
 
 
 </div>
+
+
+<ul class="ourTeamPersonalPageLinks">
+    
+    <li>
+        <div class="card" style="width: 18rem;">
+            <img src="/images/petya.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title">Петя Бабукова</h3>
+                <p class="card-text"><i class="fa-solid fa-check"></i>
+                    Single Page Applications (SPA)
+
+                </p>
+                <p class="card-text"><i class="fa-solid fa-check"></i>
+
+                    Multy Page Applications (MPA)
+
+                </p>
+                <p class="card-text"><i class="fa-solid fa-check"></i>
+                    QA - manual and automation
+                </p>
+                <a href="/ourteam/petya" class="btn btn-primary cardButtonCustomStyles">Повече за Петя</a>
+            </div>
+        </div>
+    </li>
+        <li>
+        <div class="card" style="width: 18rem;">
+            <img src="/images/stefan.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title">Стефан Бабуков</h3>
+                <p class="card-text"><i class="fa-solid fa-check"></i>
+                    WordPress with WooCommerce
+                </p>
+                <p class="card-text"><i class="fa-solid fa-check"></i>
+                    SEO
+                </p>
+                <p class="card-text"><i class="fa-solid fa-check"></i>
+                    Digital Marketing
+                </p>
+                
+                <a href="/ourteam/stefan" class="btn btn-primary">Повече за Стефан</a>
+            </div>
+        </div>
+    </li>
+</ul>
