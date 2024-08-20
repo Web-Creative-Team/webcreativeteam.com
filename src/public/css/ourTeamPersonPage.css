@@ -1,13 +1,11 @@
-.bioContainer {
+/* .bioContainer {
     display: flex;
     max-width: 1800px;
     margin: 2em auto;
     padding: 0 5em;
-    /* border: 1px solid black; */
 }
 
 .leftContainer {
-    /* min-width: 250px; */
     flex: 1 0 25%;
     display: flex;
     flex-direction: column;
@@ -38,12 +36,10 @@
 .bioHeader {
     width: 100%;
     display: flex;
-    /* align-items: center; */
 }
 
 .coloredHeaderPart {
     flex: 0 1 65%;
-    /* background: #9CB278; */
     background: #47CEED;
     display: flex;
     justify-content: center;
@@ -84,7 +80,6 @@
 }
 
 .bioSubtitle {
-    /* flex: 1 0 8ch; */
     width: 8ch;
     font-size: 4em;
 }
@@ -115,4 +110,72 @@
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+
+
+.personPageContainer{
+    margin: 4em;
+    background-image: url('/images/petyaBackground-1.png');
+    background-repeat: no-repeat;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+    justify-content: space-between;
+    align-items: end;
+    gap: 3em;
 }
+
+.bio{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+}
+
+.bioSubtitle{
+    flex: 1 0 100%;
+}
+
+.bioPContent{
+max-width: 65ch;
+color: #1A6B41; 
+
+}
+
+.hash{
+    display: flex;
+    gap: 1.5em;
+}
+
+.hash h5{
+    color: #1A6B41; 
+
+}
+
+.quotes{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    max-width: 50%;
+    /* gap: 3em; */
+}
+
+.quoteAuthor{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    margin-bottom: 0;
+    color: #EF7F19;
+}
+
+.fa-solid.fa-quote-left{
+    font-size: 4em;
+}
+
+.quote{
+    max-width: 75%;
+    margin-left: 1.5em;
+}
+
