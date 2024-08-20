@@ -1,167 +1,53 @@
-/* .bioContainer {
+.personPageContainer {
+    padding-right: 4em;
     display: flex;
-    max-width: 1800px;
-    margin: 2em auto;
-    padding: 0 5em;
+    gap: 4em;
 }
 
-.leftContainer {
-    flex: 1 0 25%;
-    display: flex;
-    flex-direction: column;
-}
-
-.bioImageWrapper{
-    overflow: hidden;
-    max-height: 550px;
-}
-
-.quotes{
-    display: flex;
-    gap: 1.5em;
-    padding: 2em;
-    padding-left: 0;
-}
-
-.quotes i{
-    font-size: 4em;
-}
-
-.rightContainer {
-    flex: 0 1 65%;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.bioHeader {
-    width: 100%;
-    display: flex;
-}
-
-.coloredHeaderPart {
-    flex: 0 1 65%;
-    background: #47CEED;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.coloredHeaderPart h2 {
-    color: #77a4e4;
-    margin: 0;
-}
-
-.logoBio {
-    flex: 1 0 30%;
-    padding: 1.5em;
-    background: #eee;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-
+.personImageContainer {
+    min-width: 35%;
 }
 
 .bioContent {
     display: flex;
-
-    flex-flow: row wrap;
-}
-
-.bioContentContainer {
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
     gap: 2em;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3em;
-    padding-right: 0;
-}
-
-.bioSubtitle {
-    width: 8ch;
-    font-size: 4em;
-}
-
-.bioPContent {
-    flex: 0 1 65%;
-}
-
-.hash {
-    width: 100%;
-    display: flex;
-    gap: 3em;
-    padding: 3em;
-}
-
-.hash i {
-    display: inline;
-}
-
-.hash h3 {
-    display: inline;
-
-}
-
-.bioContentTitle {
-    background: #eee;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
-
-.personPageContainer{
-    margin: 4em;
-    background-image: url('/images/petyaBackground-1.png');
-    background-repeat: no-repeat;
-    min-height: 600px;
-    display: flex;
     flex-direction: column;
-    padding: 0 2em;
-    justify-content: space-between;
-    align-items: end;
-    gap: 3em;
 }
 
-.bio{
+.bioContent p,
+.bioContent h4 {
+    margin-bottom: 0;
+}
+
+.bio {
     display: flex;
     flex-direction: column;
     align-items: start;
 
 }
 
-.bioSubtitle{
-    flex: 1 0 100%;
+.hash {
+    /* color: #EF7F19; */
+    color: #1A6B41;
 }
 
-.bioPContent{
-max-width: 65ch;
-color: #1A6B41; 
-
-}
-
-.hash{
-    display: flex;
-    gap: 1.5em;
-}
-
-.hash h5{
-    color: #1A6B41; 
-
-}
-
-.quotes{
+.quotes {
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-end;
-    max-width: 50%;
-    /* gap: 3em; */
+    justify-content: space-between;
+    max-width: 100%;
+    font-style: italic;
 }
 
-.quoteAuthor{
+.fa-solid.fa-quote-left {
+    font-size: 4em;
+}
+
+.quote {
+    max-width: 100%;
+}
+
+.quoteAuthor {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -170,12 +56,22 @@ color: #1A6B41;
     color: #EF7F19;
 }
 
-.fa-solid.fa-quote-left{
-    font-size: 4em;
-}
 
-.quote{
-    max-width: 75%;
-    margin-left: 1.5em;
-}
 
+@media (max-width:600px) {
+
+    .personPageContainer {
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 0 1em;
+    }
+
+    .hash {
+        flex-direction: column;
+    }
+
+    .quotes,
+    .quote {
+        max-width: 100%;
+    }
+}
