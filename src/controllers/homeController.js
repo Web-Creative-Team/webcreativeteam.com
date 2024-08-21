@@ -12,13 +12,17 @@ router.get('/', async (req, res) => {
     });
 });
 
+router.get('/contacts', (req, res)=>{
+    res.render('contactUs')
+})
+
 router.get('/404', (req, res) => {
     res.render('404', {
         showSectionServices: false,
         title: "Page not fownd",
         description: "test"
     })
-})
+});
 
 module.exports = router;
 
