@@ -1,17 +1,14 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
-const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-
-const DBLINK = require('../src/config/config')
-
-const {auth} = require('./middlewares/authMiddleware')
- 
+const mongoose = require('mongoose');
 const routes = require('./routes');
+
+const { auth } = require('./middlewares/authMiddleware')
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
 
-const {PORT} = require('./config/config');
+const { DBLINK, PORT } = require('./config/config');
 
 const app = express();
 
@@ -25,12 +22,12 @@ const app = express();
 
 // Define Handlebars helpers
 const hbsHelpers = {
-    inc: function(value, options) {
+    inc: function (value, options) {
         return parseInt(value) + 1;
     }
 };
 
-mongoose.connect('mongodb://127.0.0.1:27017/webcreativeteam')
+mongoose.connect(DBLINK)
     .then(() => console.log('DB connected!'))
     .catch((err) => console.log('DB Error: ', err.message));
 
@@ -55,6 +52,6 @@ app.use(errorHandler);
 
 //TODO: GPT recommended:
 // const port = process.env.PORT || PORT || 3000;
-// app.listen(port, console.log(`Server is listening on port ${port}...`));
+// app.listen(port, console.log(`Server is listening on port ${PORT}...`));
 
 app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));
