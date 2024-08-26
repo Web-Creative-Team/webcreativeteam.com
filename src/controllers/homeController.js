@@ -1,6 +1,11 @@
 const router = require('express').Router();
+const axios = require('axios');
+
 const bannersManager = require('../managers/bannersManager');
 const transporter = require('../managers/emailManager'); // Adjust the path as needed
+
+const { CAPTCHA_SITE_KEY } = require('../config/config');
+
 
 router.get('/', async (req, res) => {
     let banners = await bannersManager.getAll();
@@ -9,7 +14,8 @@ router.get('/', async (req, res) => {
         showSectionServices: true,
         banners: banners,
         title: "Създаване и поддръжка на уеб сайтове",
-        description: "test"
+        description: "test",
+        recaptchaSiteKey: CAPTCHA_SITE_KEY
     });
 });
 
@@ -25,11 +31,23 @@ router.get('/contacts', async(req, res)=>{
 })
 
 router.post('/contacts/send', async (req, res) => {
-    const { email, name, phone, message } = req.body;
+    const { email, name, phone, message, recaptchaToken } = req.body;
+
+    if (!email || !name || !message) {
+        return res.status(400).send('Missing required fields');
+    }
+
+    // Optional: Verify reCAPTCHA token here
+    if (recaptchaToken) {
+        const verified = await verifyRecaptcha(recaptchaToken);
+        if (!verified) {
+            return res.status(400).send('Invalid reCAPTCHA token');
+        }
+    }
 
     const mailOptions = {
-        from: email, // Your email address
-        to: 'info@webcreativeteam.com', // Where you want to receive the messages
+        from: email, // Use your server email here, not the user email
+        to: 'info@webcreativeteam.com',
         subject: `From Contact form - new Message from ${name}`,
         html: `<p>You have received a new message from the contact form:</p>
                <p><strong>Name:</strong> ${name}</p>
@@ -41,12 +59,13 @@ router.post('/contacts/send', async (req, res) => {
     try {
         await transporter.sendMail(mailOptions);
         res.redirect('/');
-        
     } catch (error) {
         console.error('Failed to send email:', error);
         res.status(500).send('Failed to send message.');
     }
 });
+
+
 
 
 router.get('/404', (req, res) => {

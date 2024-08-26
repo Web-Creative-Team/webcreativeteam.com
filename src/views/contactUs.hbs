@@ -2,7 +2,7 @@
 <main>
     <fieldset>
         <legend>Свържете се с нас</legend>
-        <form method="POST" action="/contacts/send"> 
+        <form id="contactForm" method="POST" action="/contacts/send">
             <label for="name">Вашето име</label>
             <input type="text" id="name" name="name" required>
 
@@ -15,7 +15,9 @@
             <label for="message">Вашето съобщение</label>
             <textarea id="message" name="message" required></textarea>
 
+            <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
             <button class="additionalStyle" type="submit">Изпрати</button>
         </form>
     </fieldset>
+    <script src="/js/recaptcha.js"></script>
 </main>
