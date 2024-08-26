@@ -2,20 +2,22 @@
 <main>
     <fieldset>
         <legend>Свържете се с нас</legend>
-        <form method="POST" action="/contacts/send"> 
-            <label for="name">Вашето име</label>
+        <form id="contactForm" method="POST" action="/contacts">
+            <label for="name">Вашето име <span class="red">*</span></label>
             <input type="text" id="name" name="name" required>
 
-            <label for="email">Email</label>
+            <label for="email">Email <span class="red">*</span></label>
             <input type="email" id="email" name="email" required>
 
             <label for="phone">Телефонен номер (по избор)</label>
             <input type="tel" id="phone" name="phone" placeholder="Optional">
 
-            <label for="message">Вашето съобщение</label>
+            <label for="message">Вашето съобщение <span class="red">*</span></label>
             <textarea id="message" name="message" required></textarea>
 
+            <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
             <button class="additionalStyle" type="submit">Изпрати</button>
         </form>
     </fieldset>
+    <script src="/js/recaptcha.js"></script>
 </main>

@@ -5,3 +5,5 @@ exports.DBLINK = 'mongodb://127.0.0.1:27017/webcreativeteam';
 exports.EMAIL='info@webcreativeteam.com'
 exports.EMAIL_PASSWORD="hxvb ipht prvs sfui"
 exports.EMAIL_SERVICE="Gmail"
+exports.CAPTCHA_SITE_KEY = "6Lc8dC8qAAAAALRX6C6IuRoC8zOOMK-UCy2r9sM1"
+exports.CAPTCHA_SECRET_SITE_KEY = "6Lc8dC8qAAAAAL8QTdV0Ts6C7TPnII2EYEdW4XUi"

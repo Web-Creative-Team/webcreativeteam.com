@@ -247,6 +247,10 @@
         text-decoration: none;
     }
 
+    .red{
+        color: red;
+    }
+
 
     @media (max-width: 600px) {
 
