@@ -25,19 +25,18 @@ router.get('/contacts', async(req, res)=>{
     
     res.render('contactUs', {
         banners: banners,
-        title: "Contacts",
+        title: "Контакти",
         description: "test"
     })
 })
 
-router.post('/contacts/send', async (req, res) => {
+router.post('/contacts', async (req, res) => {
     const { email, name, phone, message, recaptchaToken } = req.body;
 
     if (!email || !name || !message) {
         return res.status(400).send('Missing required fields');
     }
 
-    // Optional: Verify reCAPTCHA token here
     if (recaptchaToken) {
         const verified = await verifyRecaptcha(recaptchaToken);
         if (!verified) {
@@ -64,9 +63,6 @@ router.post('/contacts/send', async (req, res) => {
         res.status(500).send('Failed to send message.');
     }
 });
-
-
-
 
 router.get('/404', (req, res) => {
     res.render('404', {
