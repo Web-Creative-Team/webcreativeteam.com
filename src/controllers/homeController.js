@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         showSectionServices: true,
         banners: banners,
         title: "Създаване и поддръжка на уеб сайтове",
-        description: "test1",
+        description: "test",
         recaptchaSiteKey: CAPTCHA_SITE_KEY
     });
 });
