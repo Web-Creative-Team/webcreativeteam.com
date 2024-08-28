@@ -6,37 +6,8 @@
 }
 
 
-.pricesCard {
-    flex: 0 1 25%;
-    border: 1px solid #1A6B41;
-    border-radius: 0.5em;
-    padding: 2.5em;
-    padding-bottom: 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-}
-
 .serviceIconContainer{
     display: block;
     max-width: 50%;
     overflow: hidden;
-}
-
-.pricesCard h4 {
-    font-weight: bold;
-    margin: 1em 0;
-}
-
-.pricesCard p {
-    color: #1A6B41;
-    margin-bottom: 0.5em;
-}
-
-p.pricesAmount {
-    font-weight: bold;
-    margin-top: 2em;
-    margin-bottom: 0;
-    text-align: right;
 }
