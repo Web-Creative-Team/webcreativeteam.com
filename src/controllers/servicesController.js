@@ -6,8 +6,8 @@ router.get('/website', async (req, res) => {
     res.render('servicesViews/website', { 
         showSectionServices: true, 
         banners: banners, 
-        title: "Създаване и поддръжка на уеб сайтове", 
-        description: "test" })
+        title: "Услуги за изработка на сайтове и онлайн магазини", 
+        description: "Изработка на интернет сайт и онлайн магазини. Уеб сайт по шаблон. Индивидуални решения за вас. Сингъл и мултипейдж апликации" })
 });
 
 router.get('/seo', async (req, res) => {
@@ -16,8 +16,8 @@ router.get('/seo', async (req, res) => {
     res.render('servicesViews/seo', { 
             showSectionServices: true, 
             banners: banners, 
-            title: "Създаване и поддръжка на уеб сайтове", 
-            description: "test" 
+            title: "SEO оптимизация | Първи места в търсачките", 
+            description: "Оптимизация на уеб сайт. Първи места Гугъл класацията. Повишаване на посещаемостта на сайта ви" 
         })
 });
 
@@ -27,8 +27,8 @@ router.get('/social', async (req, res) => {
     res.render('servicesViews/social', { 
         showSectionServices: true, 
         banners: banners, 
-        title: "Създаване и поддръжка на уеб сайтове", 
-        description: "test" 
+        title: "Рекламиране в интернет | Google ads | Facebook реклама", 
+        description: ": Digital marketing. Рекламиране с Google ads и Facebook. Присъствие в социалните мрежи" 
     })
 });
 
