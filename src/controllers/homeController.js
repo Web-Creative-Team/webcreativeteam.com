@@ -13,8 +13,8 @@ router.get('/', async (req, res) => {
     res.render('home', {
         showSectionServices: true,
         banners: banners,
-        title: "Създаване и поддръжка на уеб сайтове",
-        description: "test",
+        title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
+        description: "Изработка на уебсайт, управление, администриране и техническа поддръжка на уебсайт и онлайн магазин | SEO оптимизация | Домейн и хостинг",
         recaptchaSiteKey: CAPTCHA_SITE_KEY
     });
 });
@@ -25,8 +25,8 @@ router.get('/contacts', async(req, res)=>{
     
     res.render('contactUs', {
         banners: banners,
-        title: "Контакти",
-        description: "test"
+        title: "Контакти и връзка с екипа | WebCreativeTeam",
+        description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
     })
 })
 
@@ -67,7 +67,7 @@ router.post('/contacts', async (req, res) => {
 router.get('/404', (req, res) => {
     res.render('404', {
         showSectionServices: false,
-        title: "Page not fownd",
+        title: "Page not found",
         description: "test"
     })
 });
