@@ -28,7 +28,7 @@ router.get('/social', async (req, res) => {
         showSectionServices: true, 
         banners: banners, 
         title: "Рекламиране в интернет | Google ads | Facebook реклама", 
-        description: ": Digital marketing. Рекламиране с Google ads и Facebook. Присъствие в социалните мрежи" 
+        description: "Digital marketing. Рекламиране с Google ads и Facebook. Присъствие в социалните мрежи" 
     })
 });
 
