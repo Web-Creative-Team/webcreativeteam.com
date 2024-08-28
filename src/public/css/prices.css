@@ -31,5 +31,29 @@ h4.priceCardtitle{
 }
 
 .pricesCard h5{
+    /* font-weight: bold; */
+}
+
+.priceCardCustomStyle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pricesLinkToContacts a{
+    text-decoration: none;
+    margin-top: 2em;
+    align-self: end;
+    padding: 0.3em 0.5em;
+    max-width: 50%;
+    border: none;
+    border-radius: 5px;
+    background: #1A6B41;
+    color: #EF7F19;
     font-weight: bold;
+}
+
+.pricesLinkToContacts a:hover{
+    background: #EF7F19;
+    color: #1A6B41;
 }
