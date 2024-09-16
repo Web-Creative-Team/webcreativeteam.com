@@ -33,10 +33,11 @@ router.get('/create', isAuth, (req, res) => {
 router.post('/create', isAuth, async (req, res) => {
     
     try {
+        let data = req.body
         await templatesManager.create(data);
         res.redirect('/templates')
     } catch (error) {
-        res.render('templates/create', { error: getErrorMessage(err), ...bannerData });
+        res.render('templates/create', { error: getErrorMessage(err), ...data });
     }
 })
 
