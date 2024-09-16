@@ -76,7 +76,25 @@ router.post('/:templateId/edit', isAuth, async(req, res)=>{
         let edited = await templatesManager.edit(templateId, templateData)
         res.redirect('/templates')
     } catch (error) {
+        console.log(error);
         
+    }
+})
+
+router.get('/:templateId/delete', async (req, res) => {
+    if (!req.user) {
+        res.redirect('/users/login')
+    } else {
+        try {
+            let templateId = req.params.templateId;
+            console.log(templateId);
+            await templatesManager.delete(templateId);
+
+            res.redirect("/templates/edit")
+
+        } catch (error) {
+
+        }
     }
 })
 

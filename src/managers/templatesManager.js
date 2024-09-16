@@ -9,4 +9,6 @@ exports.getOne = async (templateId) => await Template.findById(templateId)
 
 exports.create = (templateData) => Template.create(templateData);
 
-exports.edit = (templateId, templateData) => Template.findByIdAndUpdate(templateId, templateData)
+exports.edit = (templateId, templateData) => Template.findByIdAndUpdate(templateId, templateData);
+
+exports.delete = (templateId) => Template.findByIdAndDelete(templateId)
