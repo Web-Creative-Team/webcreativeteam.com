@@ -25,8 +25,15 @@
         </div>
     </div>
     {{/if}}
+
     {{>header}}
+
+    {{#if showCarousel}}
+    {{>carousel}}
+    {{/if}}
+
     {{{body}}}
+
     {{#if showSectionServices}}
     <section id="sectionServices" class="section sectionServices">
         {{!-- <h2 class="sectionHeading">Нашите услуги</h2> --}}
@@ -68,12 +75,12 @@
             <p><i class="fa-solid fa-phone"></i> 0887 454 509</p>
             <p><i class="fa-solid fa-phone"></i> 0889 912 671</p>
             <p><a href="/contacts"><i class="fa-solid fa-envelope"></i> info@webcreativeteam.com</a></p>
-            <p>&copy; All rights reserved 2024</p>          
+            <p>&copy; All rights reserved 2024</p>
     </footer>
 
     <!-- Bootstrap JavaScript Bundle without integrity and crossorigin -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom Carousel Script -->
     <script src="/js/carousel.js"></script>
 </body>

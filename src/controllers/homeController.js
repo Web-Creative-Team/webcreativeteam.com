@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
     // console.log(banners);
     res.render('home', {
         showSectionServices: true,
+        showCarousel:true,
         banners: banners,
         title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
         description: "Изработка на уебсайт, управление, администриране и техническа поддръжка на уебсайт и онлайн магазин | SEO оптимизация | Домейн и хостинг",
@@ -28,6 +29,7 @@ router.get('/contacts', async(req, res)=>{
     let banners = await bannersManager.getAll();
     
     res.render('contactUs', {
+        showCarousel:true,
         banners: banners,
         title: "Контакти и връзка с екипа | WebCreativeTeam",
         description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
