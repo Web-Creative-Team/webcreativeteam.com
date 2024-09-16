@@ -20,8 +20,14 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.get ('/prices', (req, res)=>{
-    res.render('prices', {title: "Цени и промоции на уебсайт | уеб магазин | WebCreativeTeam", description: "Цялостни решения за изработване и поддръжка на уебсайт и електронен магазин. Изгодницени, промоции и отстъпки."})
+router.get ('/prices', async (req, res)=>{
+    let banners = await bannersManager.getAll();
+    res.render('prices', {
+        title: "Цени и промоции на уебсайт | уеб магазин | WebCreativeTeam", 
+        description: "Цялостни решения за изработване и поддръжка на уебсайт и електронен магазин. Изгодницени, промоции и отстъпки.",
+        banners,
+        showCarousel: true
+    })
 })
 
 router.get('/contacts', async(req, res)=>{

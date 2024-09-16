@@ -31,10 +31,9 @@ router.get('/create', isAuth, (req, res) => {
 });
 
 router.post('/create', isAuth, async (req, res) => {
-    let data = req.body;
-
+    
     try {
-        await templatesManager.create(req.body);
+        await templatesManager.create(data);
         res.redirect('/templates')
     } catch (error) {
         res.render('templates/create', { error: getErrorMessage(err), ...bannerData });
@@ -42,12 +41,40 @@ router.post('/create', isAuth, async (req, res) => {
 })
 
 router.get('/edit', isAuth, async(req, res)=>{
-    let templates = await templatesManager.getAll()
-
+    
     try {
+        let templates = await templatesManager.getAll()
         res.render('WPTemplates/editTemplatesView', {
             templates
         })
+    } catch (error) {
+        console.log(error);
+        
+    }
+})
+
+router.get('/:templateId/edit', isAuth, async(req, res)=>{
+    try {
+        let templateId = req.params.templateId;
+        let searchedTemplate = await templatesManager.getOne(templateId)
+
+        console.log(searchedTemplate);
+        
+        res.render('WPTemplates/editTemplateForm', searchedTemplate)
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+})
+
+router.post('/:templateId/edit', isAuth, async(req, res)=>{
+    let templateData = req.body;
+    let templateId = req.params.templateId;
+
+    try {
+        let edited = await templatesManager.edit(templateId, templateData)
+        res.redirect('/templates')
     } catch (error) {
         
     }

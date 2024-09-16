@@ -1,0 +1,28 @@
+<main class="noAside">
+    <fieldset>
+        <legend>Edit Template</legend>
+
+    <form method="post">
+        <div style="max-width: 500px;"><img src="{{this.templateImage}}" alt="{{this.templateAltAttribute}}"></div>
+
+        <label for="templateImage">Edit Preview Image</label>
+        <input type="text" name="templateImage" id="templateImage" value="{{this.templateImage}}">
+
+        <label for="templateAltAttribute">Edit Alt Attribute</label>
+        <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{this.templateAltAttribute}}">
+
+        <label for="templateTitle">Edit Title</label>
+        <input type="text" name="templateTitle" id="templateTitle" value="{{this.templateTitle}}">
+
+        <label for="templateShortDescription">Edit Short Description</label>
+        <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{this.templateShortDescription}}">
+
+        <label for="previewLink">Edit Preview Link</label>
+        <input type="text" name="previewLink" id="previewLink" value="{{this.previewLink}}">
+
+        
+
+    <input type="submit" value="Edit">
+    </form>
+    </fieldset>
+</main>

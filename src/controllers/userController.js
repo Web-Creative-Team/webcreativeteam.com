@@ -4,7 +4,6 @@ const { TOKEN_KEY } = require('../config/config');
 const { getErrorMessage } = require('../utils/errorHelpers');
 const { isAuth } = require('../middlewares/authMiddleware');
 
-
 router.get('/login', (req, res) => {
     res.render('users/login')
 });
