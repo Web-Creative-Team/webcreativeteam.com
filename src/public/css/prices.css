@@ -59,6 +59,15 @@ h4.priceCardtitle{
     color: #1A6B41;
 }
 
+.customOffer{
+    background: #EF7F19;
+    border-color: #EF7F19;
+}
+
+.customOffer h4{
+    color: #1A6B41;
+}
+
 @media (max-width: 600px){
     .section.sectionPricess{
         flex-direction: column;
