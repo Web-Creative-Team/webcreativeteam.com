@@ -41,6 +41,18 @@ router.post('/create', isAuth, async (req, res) => {
     }
 })
 
+router.get('/edit', isAuth, async(req, res)=>{
+    let templates = await templatesManager.getAll()
+
+    try {
+        res.render('WPTemplates/editTemplatesView', {
+            templates
+        })
+    } catch (error) {
+        
+    }
+})
+
 
 
 
