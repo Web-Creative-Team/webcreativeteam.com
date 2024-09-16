@@ -1,19 +1,9 @@
 <main>
     <section class="section sectionTemplates">
         {{!-- Card Starts here --}}
-        <div class="templatesCard">
-            <a class="templatesLink" href="">
-                <div class="templateIconContainer">
-                    <img src="https://webcreativeteam.com/wp-content/uploads/2023/07/Screenshot_1.jpg"
-                        alt="Beauty template">
-                </div>
-                <div class="card-body priceCardCustomStyle">
-                    <h4>Beauty</h4>
-                    <p> Подходящ за сайтове за козметика</p>
-
-                </div>
-            </a>
-        </div>
+        {{#each templates}}
+        {{>templatesCard}}
+        {{/each}}
         {{!-- Card ends here --}}
 
         
