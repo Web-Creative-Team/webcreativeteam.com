@@ -1,0 +1,55 @@
+.templatesCard {
+    flex: 0 1 30%;
+    /* border: 1px solid #1A6B41;
+    border-radius: 0.5em;
+    overflow: hidden;
+    padding: 1em;
+    padding-bottom: 1.5em; */
+    border-bottom: 1px solid #1A6B41;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.sectionTemplates{
+    display: flex;
+    gap: 1.5em;
+    flex-flow: row wrap;
+}
+
+.templatesLink{
+    text-decoration: none;
+}
+
+.templatesLink p{
+    color: #1A6B41;
+    max-width: 80%;
+    align-self: center;
+}
+
+.templatesLink:hover{
+    font-weight: bold;
+    border: 1px solid #1A6B41;
+
+}
+
+@media (max-width: 600px){
+    .section.sectionTemplates{
+        flex-direction: column;
+        padding: 2em;
+    }
+
+    .pricesCard h4{
+        font-size: 2.5em;
+    }
+
+    .pricesCard h5 {
+       font-size: 1.5em;
+       font-weight: bold;
+    }
+
+    .pricesCard p{
+        font-size: 2em;
+    }
+}

@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
     // console.log(banners);
     res.render('home', {
         showSectionServices: true,
+        showCarousel:true,
         banners: banners,
         title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
         description: "Изработка на уебсайт, управление, администриране и техническа поддръжка на уебсайт и онлайн магазин | SEO оптимизация | Домейн и хостинг",
@@ -19,8 +20,14 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.get ('/prices', (req, res)=>{
-    res.render('prices', {title: "Цени и промоции на уебсайт | уеб магазин | WebCreativeTeam", description: "Цялостни решения за изработване и поддръжка на уебсайт и електронен магазин. Изгодницени, промоции и отстъпки."})
+router.get ('/prices', async (req, res)=>{
+    let banners = await bannersManager.getAll();
+    res.render('prices', {
+        title: "Цени и промоции на уебсайт | уеб магазин | WebCreativeTeam", 
+        description: "Цялостни решения за изработване и поддръжка на уебсайт и електронен магазин. Изгодницени, промоции и отстъпки.",
+        banners,
+        showCarousel: true
+    })
 })
 
 router.get('/contacts', async(req, res)=>{
@@ -28,6 +35,7 @@ router.get('/contacts', async(req, res)=>{
     let banners = await bannersManager.getAll();
     
     res.render('contactUs', {
+        showCarousel:true,
         banners: banners,
         title: "Контакти и връзка с екипа | WebCreativeTeam",
         description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"

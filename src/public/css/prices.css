@@ -38,6 +38,7 @@ h4.priceCardtitle{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 .pricesLinkToContacts a{
@@ -56,4 +57,33 @@ h4.priceCardtitle{
 .pricesLinkToContacts a:hover{
     background: #EF7F19;
     color: #1A6B41;
+}
+
+.customOffer{
+    background: #EF7F19;
+    border-color: #EF7F19;
+}
+
+.customOffer h4{
+    color: #1A6B41;
+}
+
+@media (max-width: 600px){
+    .section.sectionPricess{
+        flex-direction: column;
+        padding: 2em;
+    }
+
+    .pricesCard h4{
+        font-size: 2.5em;
+    }
+
+    .pricesCard h5 {
+       font-size: 1.5em;
+       font-weight: bold;
+    }
+
+    .pricesCard p{
+        font-size: 2em;
+    }
 }

@@ -1,0 +1,16 @@
+<main class="noAside">
+    {{#each templates}}
+    <fieldset>
+        <legend>Edit Template</legend>
+
+        <div style="max-width: 500px;"><img src="{{templateImage}}" alt="" srcset=""></div>
+
+        <p>{{templateTitle}}</p>
+        <p>{{templateShortDescription}}</p>
+
+        
+    <a href="/templates/{{_id}}/edit">Edit</a>
+    <a href="/templates/{{_id}}/delete">Delete</a>
+    </fieldset>
+    {{/each}}
+</main>

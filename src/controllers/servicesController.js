@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 
+
 router.get('/website', async (req, res) => {
     let banners = await bannersManager.getAll();
     res.render('servicesViews/website', { 

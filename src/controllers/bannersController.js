@@ -38,6 +38,7 @@ router.get('/:bannerId/edit', isAuth, async (req, res) => {
     try {
         let bannerId = req.params.bannerId;
         let searchedBanner = await bannersManager.getOne(bannerId);
+console.log(searchedBanner);
 
         res.render('banners/editBannersForm', searchedBanner)
 
