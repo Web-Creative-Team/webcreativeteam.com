@@ -65,7 +65,6 @@ router.get('/:bannerId/delete', async (req, res) => {
     } else {
         try {
             let bannerId = req.params.bannerId;
-            console.log(bannerId);
             await bannersManager.delete(bannerId);
 
             res.redirect("/banners/edit")

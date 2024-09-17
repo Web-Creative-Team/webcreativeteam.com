@@ -57,10 +57,7 @@ router.get('/edit', isAuth, async(req, res)=>{
 router.get('/:templateId/edit', isAuth, async(req, res)=>{
     try {
         let templateId = req.params.templateId;
-        let searchedTemplate = await templatesManager.getOne(templateId)
-
-        console.log(searchedTemplate);
-        
+        let searchedTemplate = await templatesManager.getOne(templateId)     
         res.render('WPTemplates/editTemplateForm', searchedTemplate)
         
     } catch (error) {

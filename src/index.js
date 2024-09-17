@@ -54,4 +54,5 @@ app.use(errorHandler);
 // const port = process.env.PORT || PORT || 3000;
 // app.listen(port, console.log(`Server is listening on port ${PORT}...`));
 
-app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));
+const port = process.env.PORT || PORT || 3000;
+app.listen(port, console.log(`Server is listening on port ${port}...`));

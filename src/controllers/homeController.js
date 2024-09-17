@@ -1,58 +1,90 @@
 const router = require('express').Router();
-const axios = require('axios');
-
 const bannersManager = require('../managers/bannersManager');
-const transporter = require('../managers/emailManager'); // Adjust the path as needed
-
+const transporter = require('../managers/emailManager'); // Adjust path as needed
 const { CAPTCHA_SITE_KEY } = require('../config/config');
 
-
-router.get('/', async (req, res) => {
-    let banners = await bannersManager.getAll();
-    // console.log(banners);
-    res.render('home', {
-        showSectionServices: true,
-        showCarousel:true,
-        banners: banners,
-        title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
-        description: "Изработка на уебсайт, управление, администриране и техническа поддръжка на уебсайт и онлайн магазин | SEO оптимизация | Домейн и хостинг",
-        recaptchaSiteKey: CAPTCHA_SITE_KEY
-    });
+router.get('/', async (req, res, next) => {
+    try {
+        let banners = await bannersManager.getAll();
+        res.render('home', {
+            showSectionServices: true,
+            showCarousel: true,
+            banners,
+            title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
+            description: "Изработка на уебсайт...",
+            recaptchaSiteKey: CAPTCHA_SITE_KEY
+        });
+    } catch (error) {
+        next(error); // Pass the error to the error handler
+    }
 });
 
-router.get ('/prices', async (req, res)=>{
-    let banners = await bannersManager.getAll();
-    res.render('prices', {
-        title: "Цени и промоции на уебсайт | уеб магазин | WebCreativeTeam", 
-        description: "Цялостни решения за изработване и поддръжка на уебсайт и електронен магазин. Изгодницени, промоции и отстъпки.",
-        banners,
-        showCarousel: true
-    })
-})
+router.get('/prices', async (req, res, next) => {
+    try {
+        let banners = await bannersManager.getAll();
+        res.render('prices', {
+            title: "Цени и промоции на уебсайт...",
+            description: "Цялостни решения за изработване...",
+            banners,
+            showCarousel: true
+        });
+    } catch (error) {
+        next(error);
+    }
+});
 
-router.get('/contacts', async(req, res)=>{
+router.get('/contacts', async (req, res, next) => {
+    try {
+        let banners = await bannersManager.getAll();
+        res.render('contactUs', {
+            showCarousel: true,
+            banners,
+            title: "Контакти и връзка с екипа | WebCreativeTeam",
+            description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
+        });
+    } catch (error) {
+        next(error);
+    }
+});
 
-    let banners = await bannersManager.getAll();
-    
-    res.render('contactUs', {
-        showCarousel:true,
-        banners: banners,
-        title: "Контакти и връзка с екипа | WebCreativeTeam",
-        description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
-    })
-})
+const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};
 
-router.post('/contacts', async (req, res) => {
+router.post('/contacts', async (req, res, next) => {
     const { email, name, phone, message, recaptchaToken } = req.body;
 
     if (!email || !name || !message) {
-        return res.status(400).send('Missing required fields');
+        return res.status(400).render('contactUs', {
+            error: 'Missing required fields',
+            name,
+            email,
+            phone,
+            message
+        });
+    }
+
+    if (!validateEmail(email)) {
+        return res.status(400).send('Invalid email format');
+    }
+
+    if (name.length < 2) {
+        return res.status(400).send('Name is too short');
+    }
+
+    if (message.length < 10) {
+        return res.status(400).send('Message is too short');
     }
 
     if (recaptchaToken) {
-        const verified = await verifyRecaptcha(recaptchaToken);
-        if (!verified) {
-            return res.status(400).send('Invalid reCAPTCHA token');
+        try {
+            const verified = await verifyRecaptcha(recaptchaToken);
+            if (!verified) {
+                return res.status(400).send('Invalid reCAPTCHA token');
+            }
+        } catch (error) {
+            return next(error);
         }
     }
 
@@ -72,17 +104,8 @@ router.post('/contacts', async (req, res) => {
         res.redirect('/');
     } catch (error) {
         console.error('Failed to send email:', error);
-        res.status(500).send('Failed to send message.');
+        next(error); // Pass the error to the error handler
     }
 });
 
-router.get('/404', (req, res) => {
-    res.render('404', {
-        showSectionServices: false,
-        title: "Page not found",
-        description: "test"
-    })
-});
-
 module.exports = router;
-
