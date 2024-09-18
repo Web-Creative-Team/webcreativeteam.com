@@ -20,19 +20,19 @@ const validateEmail = (email) => {
 // Validate form inputs
 const validateFormData = ({ email, name, message }) => {
     if (!email || !name || !message) {
-        throw new Error('Missing required fields');
+        throw new Error('Моля попълнете всички задължителни полета');
     }
 
     if (!validateEmail(email)) {
-        throw new Error('Invalid email format');
+        throw new Error('Невалиден email');
     }
 
     if (name.length < 2) {
-        throw new Error('Name is too short');
+        throw new Error('Името е прекалено кратко');
     }
 
     if (message.length < 10) {
-        throw new Error('Message is too short');
+        throw new Error('Съобщението е прекалено кратко');
     }
 
     return true;  // If all validations pass, return true

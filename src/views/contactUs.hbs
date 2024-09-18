@@ -1,18 +1,19 @@
 <main>
     <fieldset>
         <legend>Свържете се с нас</legend>
-        <form id="contactForm" method="POST" action="/contacts">
+
+         <form id="contactForm" method="POST" action="/contacts">
             <label for="name">Вашето име <span class="redAsterix">*</span></label>
-            <input type="text" id="name" name="name" >
+            <input type="text" id="name" name="name" value="{{name}}">  <!-- Retain name -->
 
             <label for="email">Email <span class="redAsterix">*</span></label>
-            <input type="email" id="email" name="email" >
+            <input type="email" id="email" name="email" value="{{email}}">  <!-- Retain email -->
 
             <label for="phone">Телефонен номер (по избор)</label>
-            <input type="tel" id="phone" name="phone" >
+            <input type="tel" id="phone" name="phone" value="{{phone}}">  <!-- Retain phone -->
 
             <label for="message">Вашето съобщение <span class="redAsterix">*</span></label>
-            <textarea id="message" name="message" ></textarea>
+            <textarea id="message" name="message">{{messageContent}}</textarea>  <!-- Retain message -->
 
             <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
             <button class="additionalStyle" type="submit">Изпрати</button>

@@ -44,13 +44,14 @@ router.post('/contacts', async (req, res, next) => {
     } catch (error) {
         console.error('Error:', error.message);
 
-        // Render error message
+        // Pass back the entered data along with the error
         res.status(400).render('contactUs', {
             message: error.message,
             messageClass: 'red',
-            name,
-            email,
-            phone,
+            name, // Pass back name
+            email, // Pass back email
+            phone, // Pass back phone
+            messageContent: message, // Pass back message for the textarea
             title: "Контакти и връзка с екипа | WebCreativeTeam"
         });
     }
