@@ -19,72 +19,55 @@ const validateEmail = (email) => {
 
 // Validate form inputs
 const validateFormData = ({ email, name, textMessage }) => {
-    console.log("Validating email, name, and textMessage...");
-
-    // Check for missing fields
     if (!email || !name || !textMessage) {
         const missingField = !email ? 'email' : !name ? 'name' : 'textMessage';
         const error = new Error('Некоректно попълнена форма');
-        error.field = missingField;  // Attach the problematic field
+        error.field = missingField;
         throw error;
     }
 
-    // Check for invalid email
     if (!validateEmail(email)) {
         const error = new Error('Некоректно попълнена форма');
-        error.field = 'email';  // Attach the problematic field
+        error.field = 'email';
         throw error;
     }
 
-    // Check for short name
     if (name.length < 2) {
         const error = new Error('Некоректно попълнена форма');
-        error.field = 'name';  // Attach the problematic field
+        error.field = 'name';
         throw error;
     }
 
-    // Check for short message
     if (textMessage.length < 10) {
         const error = new Error('Некоректно попълнена форма');
-        error.field = 'textMessage';  // Attach the problematic field
+        error.field = 'textMessage';
         throw error;
     }
 
     return true;  // If all validations pass, return true
 };
 
-
-
-
-
-
 // Function to verify reCAPTCHA token
 const verifyRecaptcha = async (recaptchaToken) => {
-    try {
-        const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify`, null, {
-            params: {
-                secret: CAPTCHA_SECRET_SITE_KEY, // reCAPTCHA secret key from config
-                response: recaptchaToken,        // Token from client
-            }
-        });
-
-        const { success } = response.data;
-        if (!success) {
-            throw new Error('Invalid reCAPTCHA token');
+    const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify`, null, {
+        params: {
+            secret: CAPTCHA_SECRET_SITE_KEY,
+            response: recaptchaToken,
         }
+    });
 
-        return true;  // Return true if reCAPTCHA is verified
-    } catch (error) {
-        console.error('reCAPTCHA verification failed:', error.message);
-        throw new Error('Failed to verify reCAPTCHA');
+    if (!response.data.success) {
+        throw new Error('Invalid reCAPTCHA token');
     }
+
+    return true;
 };
 
 // Send email function
 const sendContactEmail = async ({ email, name, phone, textMessage }) => {
     const mailOptions = {
-        from: email, // Sender's email
-        to: 'info@webcreativeteam.com', // Replace with your desired email recipient
+        from: email,
+        to: 'info@webcreativeteam.com',
         subject: `From Contact form - new Message from ${name}`,
         html: `<p>You have received a new message from the contact form:</p>
                <p><strong>Name:</strong> ${name}</p>
@@ -94,9 +77,8 @@ const sendContactEmail = async ({ email, name, phone, textMessage }) => {
     };
 
     try {
-        await transporter.sendMail(mailOptions);  // Send email using nodemailer
+        await transporter.sendMail(mailOptions);
     } catch (error) {
-        console.error('Failed to send email:', error);
         throw new Error('Failed to send email');
     }
 };

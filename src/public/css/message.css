@@ -1,27 +1,26 @@
-.messageContainer{
+.messageContainer {
     margin: 1.5em auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0.4em;
     padding: 1em;
-    max-width: 35rem;
+    max-width: 50%;
 }
 
 .messageText {
     margin: 0;
-    color: red;
-    font-weight: bold;
 }
 
-.red{
+.red {
     background: rgb(255, 200, 200);
+    color: red;  /* Ensure text color is red */
 }
 
-.green{
+.green {
     background: rgb(200, 255, 200);
 }
 
-.green p{
+.green p {
     color: #1A6B41;
 }

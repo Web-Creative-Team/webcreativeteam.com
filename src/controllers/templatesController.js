@@ -10,8 +10,6 @@ router.get("/", async (req, res) => {
     let banners = await bannersManager.getAll();
     let templates = await templatesManager.getAll();
 
-    console.log(templates);
-    
     try {
         res.render('WPTemplates/templatesPage', {
             banners,
