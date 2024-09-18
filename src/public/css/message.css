@@ -1,11 +1,11 @@
 .messageContainer{
-    margin: 0 auto;
+    margin: 1.5em auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0.4em;
     padding: 1em;
-    min-width: 15rem;
+    max-width: 35rem;
 }
 
 .messageText {
