@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
             recaptchaSiteKey: CAPTCHA_SITE_KEY
         });
     } catch (error) {
-        next(error); // Pass the error to the error handler
+        next(error);
     }
 });
 
@@ -26,7 +26,7 @@ router.get('/prices', async (req, res, next) => {
             title: "Цени и промоции на уебсайт...",
             description: "Цялостни решения за изработване...",
             banners,
-            showCarousel: true
+            showCarousel: true,
         });
     } catch (error) {
         next(error);
@@ -40,7 +40,7 @@ router.get('/contacts', async (req, res, next) => {
             showCarousel: true,
             banners,
             title: "Контакти и връзка с екипа | WebCreativeTeam",
-            description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
+            description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam",
         });
     } catch (error) {
         next(error);
@@ -57,31 +57,55 @@ router.post('/contacts', async (req, res, next) => {
 
     if (!email || !name || !message) {
         return res.status(400).render('contactUs', {
-            error: 'Missing required fields',
+            message: 'Missing required fields',
+            messageClass: 'red', // Error class
             name,
             email,
-            phone,
-            message
+            phone
         });
     }
 
     if (!validateEmail(email)) {
-        return res.status(400).send('Invalid email format');
+        return res.status(400).render('contactUs', {
+            message: 'Invalid email format',
+            messageClass: 'red', // Error class
+            name,
+            email,
+            phone
+        });
     }
 
     if (name.length < 2) {
-        return res.status(400).send('Name is too short');
+        return res.status(400).render('contactUs', {
+            message: 'Name is too short',
+            messageClass: 'red', // Error class
+            name,
+            email,
+            phone
+        });
     }
 
     if (message.length < 10) {
-        return res.status(400).send('Message is too short');
+        return res.status(400).render('contactUs', {
+            message: 'Message is too short',
+            messageClass: 'red', // Error class
+            name,
+            email,
+            phone
+        });
     }
 
     if (recaptchaToken) {
         try {
             const verified = await verifyRecaptcha(recaptchaToken);
             if (!verified) {
-                return res.status(400).send('Invalid reCAPTCHA token');
+                return res.status(400).render('contactUs', {
+                    message: 'Invalid reCAPTCHA token',
+                    messageClass: 'red', // Error class
+                    name,
+                    email,
+                    phone
+                });
             }
         } catch (error) {
             return next(error);
@@ -89,7 +113,7 @@ router.post('/contacts', async (req, res, next) => {
     }
 
     const mailOptions = {
-        from: email, // Use your server email here, not the user email
+        from: email,
         to: 'info@webcreativeteam.com',
         subject: `From Contact form - new Message from ${name}`,
         html: `<p>You have received a new message from the contact form:</p>
@@ -101,11 +125,26 @@ router.post('/contacts', async (req, res, next) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.redirect('/');
+        // Show success message when email is sent
+        res.render('contactUs', {
+            message: 'Your message was successfully sent!',
+            messageClass: 'green',  // Success class
+            title: "Контакти и връзка с екипа | WebCreativeTeam"
+        });
     } catch (error) {
         console.error('Failed to send email:', error);
-        next(error); // Pass the error to the error handler
+        // Show error message if email sending fails
+        res.render('contactUs', {
+            message: 'Failed to send your message. Please try again later.',
+            messageClass: 'red',  // Error class
+            title: "Контакти и връзка с екипа | WebCreativeTeam"
+        });
     }
 });
+
+
+router.get('/404', (req, res)=>{
+    res.render('404')
+})
 
 module.exports = router;
