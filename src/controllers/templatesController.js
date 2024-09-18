@@ -14,7 +14,9 @@ router.get("/", async (req, res) => {
         res.render('WPTemplates/templatesPage', {
             banners,
             showCarousel: true,
-            templates
+            templates,
+            title: 'Тест',
+            description: 'Тест'
         })
         
     } catch (error) {
