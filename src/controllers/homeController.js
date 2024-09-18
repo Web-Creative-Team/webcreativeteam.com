@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
             recaptchaSiteKey: CAPTCHA_SITE_KEY
         });
     } catch (error) {
-        next(error); // Pass the error to the error handler
+        next(error);
     }
 });
 
@@ -26,86 +26,125 @@ router.get('/prices', async (req, res, next) => {
             title: "Цени и промоции на уебсайт...",
             description: "Цялостни решения за изработване...",
             banners,
-            showCarousel: true
-        });
-    } catch (error) {
-        next(error);
-    }
-});
-
-router.get('/contacts', async (req, res, next) => {
-    try {
-        let banners = await bannersManager.getAll();
-        res.render('contactUs', {
             showCarousel: true,
-            banners,
-            title: "Контакти и връзка с екипа | WebCreativeTeam",
-            description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
         });
     } catch (error) {
         next(error);
     }
 });
 
-const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-};
+// router.get('/contacts', async (req, res, next) => {
+//     try {
+//         let banners = await bannersManager.getAll();
+//         res.render('contactUs', {
+//             showCarousel: true,
+//             banners,
+//             title: "Контакти и връзка с екипа | WebCreativeTeam",
+//             description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam",
+//         });
+//     } catch (error) {
+//         next(error);
+//     }
+// });
 
-router.post('/contacts', async (req, res, next) => {
-    const { email, name, phone, message, recaptchaToken } = req.body;
+// const validateEmail = (email) => {
+//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return regex.test(email);
+// };
 
-    if (!email || !name || !message) {
-        return res.status(400).render('contactUs', {
-            error: 'Missing required fields',
-            name,
-            email,
-            phone,
-            message
-        });
-    }
+// router.post('/contacts', async (req, res, next) => {
+//     const { email, name, phone, message, recaptchaToken } = req.body;
 
-    if (!validateEmail(email)) {
-        return res.status(400).send('Invalid email format');
-    }
+//     if (!email || !name || !message) {
+//         return res.status(400).render('contactUs', {
+//             message: 'Моля попълнете всички задължителни полета',
+//             messageClass: 'red', // Error class
+//             name,
+//             email,
+//             phone
+//         });
+//     }
 
-    if (name.length < 2) {
-        return res.status(400).send('Name is too short');
-    }
+//     if (!validateEmail(email)) {
+//         return res.status(400).render('contactUs', {
+//             message: 'Невалиден e-mail формат',
+//             messageClass: 'red', // Error class
+//             name,
+//             email,
+//             phone
+//         });
+//     }
 
-    if (message.length < 10) {
-        return res.status(400).send('Message is too short');
-    }
+//     if (name.length < 2) {
+//         return res.status(400).render('contactUs', {
+//             message: 'Името е прекалено късо',
+//             messageClass: 'red', // Error class
+//             name,
+//             email,
+//             phone
+//         });
+//     }
 
-    if (recaptchaToken) {
-        try {
-            const verified = await verifyRecaptcha(recaptchaToken);
-            if (!verified) {
-                return res.status(400).send('Invalid reCAPTCHA token');
-            }
-        } catch (error) {
-            return next(error);
-        }
-    }
+//     if (message.length < 10) {
+//         return res.status(400).render('contactUs', {
+//             message: 'Съобщението е прекалено кратко',
+//             messageClass: 'red', // Error class
+//             name,
+//             email,
+//             phone
+//         });
+//     }
 
-    const mailOptions = {
-        from: email, // Use your server email here, not the user email
-        to: 'info@webcreativeteam.com',
-        subject: `From Contact form - new Message from ${name}`,
-        html: `<p>You have received a new message from the contact form:</p>
-               <p><strong>Name:</strong> ${name}</p>
-               <p><strong>Email:</strong> ${email}</p>
-               <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-               <p><strong>Message:</strong> ${message}</p>`
-    };
+//     if (recaptchaToken) {
+//         try {
+//             const verified = await verifyRecaptcha(recaptchaToken);
+//             if (!verified) {
+//                 return res.status(400).render('contactUs', {
+//                     message: 'Invalid reCAPTCHA token',
+//                     messageClass: 'red', // Error class
+//                     name,
+//                     email,
+//                     phone
+//                 });
+//             }
+//         } catch (error) {
+//             return next(error);
+//         }
+//     }
 
-    try {
-        await transporter.sendMail(mailOptions);
-        res.redirect('/');
-    } catch (error) {
-        console.error('Failed to send email:', error);
-        next(error); // Pass the error to the error handler
-    }
-});
+//     const mailOptions = {
+//         from: email,
+//         to: 'info@webcreativeteam.com',
+//         subject: `From Contact form - new Message from ${name}`,
+//         html: `<p>You have received a new message from the contact form:</p>
+//                <p><strong>Name:</strong> ${name}</p>
+//                <p><strong>Email:</strong> ${email}</p>
+//                <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+//                <p><strong>Message:</strong> ${message}</p>`
+//     };
+
+//     try {
+//         await transporter.sendMail(mailOptions);
+//         // Show success message when email is sent
+//         res.render('contactUs', {
+//             message: 'Вашето съобщение е изпратено успешно, благодарим! Ще се свържем с вас при първа възможност.',
+//             messageClass: 'green',  // Success class
+//             title: "Контакти и връзка с екипа | WebCreativeTeam"
+//         });
+//     } catch (error) {
+//         console.error('Failed to send email:', error);
+//         // Show error message if email sending fails
+//         res.render('contactUs', {
+//             message: 'Failed to send your message. Please try again later.',
+//             messageClass: 'red',  // Error class
+//             title: "Контакти и връзка с екипа | WebCreativeTeam"
+//         });
+//     }
+// });
+
+
+router.get('/404', (req, res)=>{
+    res.render('404')
+})
 
 module.exports = router;

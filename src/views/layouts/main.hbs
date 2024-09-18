@@ -18,18 +18,18 @@
 <!-- Starts Body Section -->
 
 <body>
-    {{#if error}}
-    <div>
-        <div class="errorContainer">
-            <p>{{error}}</p>
-        </div>
-    </div>
-    {{/if}}
 
-    {{>header}}
+
+     {{>header}}
 
     {{#if showCarousel}}
     {{>carousel}}
+    {{/if}}
+
+    {{#if message}}
+    <div class="messageContainer {{messageClass}}">
+        <p class="messageText">{{message}}</p>
+    </div>
     {{/if}}
 
     {{{body}}}
@@ -83,6 +83,10 @@
 
     <!-- Custom Carousel Script -->
     <script src="/js/carousel.js"></script>
+
+    {{!-- message handler --}}
+    <script src="/js/messageHandler.js"></script>
+
 </body>
 
 </html>
