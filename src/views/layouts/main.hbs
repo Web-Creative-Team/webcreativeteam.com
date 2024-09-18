@@ -27,7 +27,9 @@
     {{/if}}
 
     {{#if message}}
-    {{>message}}
+    <div class="messageContainer {{messageClass}}">
+        <p class="messageText">{{message}}</p>  <!-- Display message (error or success) here -->
+    </div>
     {{/if}}
 
     {{{body}}}

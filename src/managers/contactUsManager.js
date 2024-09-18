@@ -18,25 +18,45 @@ const validateEmail = (email) => {
 };
 
 // Validate form inputs
-const validateFormData = ({ email, name, message }) => {
-    if (!email || !name || !message) {
-        throw new Error('Моля попълнете всички задължителни полета');
+const validateFormData = ({ email, name, textMessage }) => {
+    console.log("Validating email, name, and textMessage...");
+
+    // Check for missing fields
+    if (!email || !name || !textMessage) {
+        const missingField = !email ? 'email' : !name ? 'name' : 'textMessage';
+        const error = new Error('Некоректно попълнена форма');
+        error.field = missingField;  // Attach the problematic field
+        throw error;
     }
 
+    // Check for invalid email
     if (!validateEmail(email)) {
-        throw new Error('Невалиден email');
+        const error = new Error('Некоректно попълнена форма');
+        error.field = 'email';  // Attach the problematic field
+        throw error;
     }
 
+    // Check for short name
     if (name.length < 2) {
-        throw new Error('Името е прекалено кратко');
+        const error = new Error('Некоректно попълнена форма');
+        error.field = 'name';  // Attach the problematic field
+        throw error;
     }
 
-    if (message.length < 10) {
-        throw new Error('Съобщението е прекалено кратко');
+    // Check for short message
+    if (textMessage.length < 10) {
+        const error = new Error('Некоректно попълнена форма');
+        error.field = 'textMessage';  // Attach the problematic field
+        throw error;
     }
 
     return true;  // If all validations pass, return true
 };
+
+
+
+
+
 
 // Function to verify reCAPTCHA token
 const verifyRecaptcha = async (recaptchaToken) => {
@@ -61,7 +81,7 @@ const verifyRecaptcha = async (recaptchaToken) => {
 };
 
 // Send email function
-const sendContactEmail = async ({ email, name, phone, message }) => {
+const sendContactEmail = async ({ email, name, phone, textMessage }) => {
     const mailOptions = {
         from: email, // Sender's email
         to: 'info@webcreativeteam.com', // Replace with your desired email recipient
@@ -70,7 +90,7 @@ const sendContactEmail = async ({ email, name, phone, message }) => {
                <p><strong>Name:</strong> ${name}</p>
                <p><strong>Email:</strong> ${email}</p>
                <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-               <p><strong>Message:</strong> ${message}</p>`
+               <p><strong>Message:</strong> ${textMessage}</p>`
     };
 
     try {
