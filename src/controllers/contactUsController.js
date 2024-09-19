@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const contactUsManager = require('../managers/contactUsManager');
-const { CAPTCHA_SITE_KEY } = require('../config/config');
 
 // Render the contact page
 router.get('/contacts', async (req, res, next) => {
