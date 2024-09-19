@@ -33,15 +33,20 @@ router.post('/contacts', async (req, res, next) => {
         // Send the contact email
         await contactUsManager.sendContactEmail({ email, name, phone, textMessage });
 
+        // Render success message
         res.render('contactUs', {
-            message: 'Вашето съобщение е изпратено, благодарим. Ще се свържем с вас възможно най-скоро.',
+            message: 'Вашето съобщение е изпратено, благодарим. Ще се свържем с вас възможно най-скоро',
             messageClass: 'green',
             title: "Контакти и връзка с екипа | WebCreativeTeam"
         });
 
     } catch (error) {
+        console.error('Error:', error);
+
+        // Render error message
         res.status(400).render('contactUs', {
-            focusField: error.field,  // Focus on the problematic field
+            message: 'Използване на забранени символи!',
+            messageClass: 'red',
             name,
             email,
             phone,
@@ -50,5 +55,6 @@ router.post('/contacts', async (req, res, next) => {
         });
     }
 });
+
 
 module.exports = router;

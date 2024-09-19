@@ -1,24 +1,27 @@
 const nodemailer = require('nodemailer');
 const axios = require('axios');
+const validator = require('validator');
 const { EMAIL, EMAIL_PASSWORD, EMAIL_SERVICE, CAPTCHA_SECRET_SITE_KEY } = require('../config/config');
-
-// Set up the email transporter using nodemailer
-const transporter = nodemailer.createTransport({
-    service: EMAIL_SERVICE,
-    auth: {
-        user: EMAIL,
-        pass: EMAIL_PASSWORD
-    }
-});
 
 // Validate email format
 const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+    return validator.isEmail(email);
 };
+
+// Sanitize form inputs to avoid XSS or malicious input
+const sanitizeInput = (input) => {
+    return validator.escape(input.trim()); // Remove unwanted characters and trim whitespace
+};
+
+
 
 // Validate form inputs
 const validateFormData = ({ email, name, textMessage }) => {
+    email = sanitizeInput(email);
+    name = sanitizeInput(name);
+    textMessage = sanitizeInput(textMessage);
+
+    // Check for missing fields
     if (!email || !name || !textMessage) {
         const missingField = !email ? 'email' : !name ? 'name' : 'textMessage';
         const error = new Error('Некоректно попълнена форма');
@@ -26,26 +29,38 @@ const validateFormData = ({ email, name, textMessage }) => {
         throw error;
     }
 
+    // Validate email format
     if (!validateEmail(email)) {
         const error = new Error('Некоректно попълнена форма');
         error.field = 'email';
         throw error;
     }
 
-    if (name.length < 2) {
+    if (email.length > 255 || name.length > 50 || textMessage.length > 1000) {
+        const error = new Error('Некоректно попълнена форма');
+        const field = email.length > 255 ? 'email' : name.length > 50 ? 'name' : 'textMessage';
+        error.field = field;
+        throw error;
+    }
+
+    // Check for invalid name (e.g., no numbers or special characters)
+    if (!validator.isAlpha(name.replace(/\s+/g, ''))) {  // Allow spaces but not numbers or special characters
         const error = new Error('Некоректно попълнена форма');
         error.field = 'name';
         throw error;
     }
 
-    if (textMessage.length < 10) {
+    // Check for short name or message length
+    if (name.length < 2 || textMessage.length < 10) {
         const error = new Error('Некоректно попълнена форма');
-        error.field = 'textMessage';
+        const field = name.length < 2 ? 'name' : 'textMessage';
+        error.field = field;
         throw error;
     }
 
     return true;  // If all validations pass, return true
 };
+
 
 // Function to verify reCAPTCHA token
 const verifyRecaptcha = async (recaptchaToken) => {
@@ -62,6 +77,23 @@ const verifyRecaptcha = async (recaptchaToken) => {
 
     return true;
 };
+
+// Set up the email transporter using nodemailer
+const transporter = nodemailer.createTransport({
+    service: EMAIL_SERVICE,
+    auth: {
+        user: EMAIL,
+        pass: EMAIL_PASSWORD
+    }
+});
+
+module.exports = {
+    validateEmail,
+    validateFormData,
+    sanitizeInput,
+};
+
+
 
 // Send email function
 const sendContactEmail = async ({ email, name, phone, textMessage }) => {

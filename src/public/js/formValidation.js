@@ -11,8 +11,23 @@ document.getElementById('contactForm').onsubmit = function (event) {
     // Assume the form is valid
     let valid = true;
 
-    // Check if name is valid
-    if (!nameInput.value || nameInput.value.length < 2) {
+    // Forbidden symbols (like <>, /, \, etc.)
+    const forbiddenPattern = /[<>\/\\]/;
+
+    // Check if forbidden symbols are used
+    if (forbiddenPattern.test(nameInput.value) || forbiddenPattern.test(emailInput.value) || forbiddenPattern.test(messageTextarea.value)) {
+        // Show global notification instead of alert
+        const globalMessageContainer = document.querySelector('.messageContainer');
+        globalMessageContainer.innerHTML = '<p class="messageText red">Използване на забранени символи!</p>';
+        globalMessageContainer.classList.add('red');
+        
+        event.preventDefault();
+        return;  // Stop further validation
+    }
+
+    // Name validation: must contain only alphabetic characters and be at least 2 characters
+    const namePattern = /^[a-zA-Z\s]+$/; // Alphabetic characters and spaces
+    if (!nameInput.value || nameInput.value.length < 2 || !namePattern.test(nameInput.value)) {
         nameError.classList.add('red');
         nameInput.focus();
         valid = false;
@@ -20,7 +35,7 @@ document.getElementById('contactForm').onsubmit = function (event) {
         nameError.classList.remove('red');
     }
 
-    // Check if email is valid
+    // Email validation: must follow the correct email format
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
     if (!emailInput.value || !emailPattern.test(emailInput.value)) {
         emailError.classList.add('red');
@@ -32,8 +47,8 @@ document.getElementById('contactForm').onsubmit = function (event) {
         emailError.classList.remove('red');
     }
 
-    // Check if message is valid
-    if (!messageTextarea.value || messageTextarea.value.length < 10) {
+    // Message validation: must be between 10 and 1000 characters
+    if (!messageTextarea.value || messageTextarea.value.length < 10 || messageTextarea.value.length > 1000) {
         messageError.classList.add('red');
         if (valid) {
             messageTextarea.focus();

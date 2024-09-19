@@ -22,6 +22,7 @@
     "express-handlebars": "^7.1.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.2",
-    "nodemailer": "^6.9.14"
+    "nodemailer": "^6.9.14",
+    "validator": "^13.12.0"
   }
 }
