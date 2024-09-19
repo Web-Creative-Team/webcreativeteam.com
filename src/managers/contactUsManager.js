@@ -14,12 +14,21 @@ const sanitizeInput = (input) => {
 };
 
 
+const forbiddenPattern = /<\/?[a-z]+>|[<>\/\\]{2,}/i;
 
 // Validate form inputs
-const validateFormData = ({ email, name, textMessage }) => {
+const validateFormData = ({ email, name, textMessage, phone }) => {
     email = sanitizeInput(email);
     name = sanitizeInput(name);
     textMessage = sanitizeInput(textMessage);
+    phone = sanitizeInput(phone || ''); // Optional field
+
+    // Check for forbidden symbols
+    if (forbiddenPattern.test(email) || forbiddenPattern.test(name) || forbiddenPattern.test(textMessage) || (phone && forbiddenPattern.test(phone))) {
+        const error = new Error('Използване на забранени символи!');
+        error.field = 'global';
+        throw error;
+    }
 
     // Check for missing fields
     if (!email || !name || !textMessage) {
@@ -61,7 +70,6 @@ const validateFormData = ({ email, name, textMessage }) => {
     return true;  // If all validations pass, return true
 };
 
-
 // Function to verify reCAPTCHA token
 const verifyRecaptcha = async (recaptchaToken) => {
     const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify`, null, {
@@ -87,14 +95,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports = {
-    validateEmail,
-    validateFormData,
-    sanitizeInput,
-};
-
-
-
 // Send email function
 const sendContactEmail = async ({ email, name, phone, textMessage }) => {
     const mailOptions = {
@@ -115,9 +115,11 @@ const sendContactEmail = async ({ email, name, phone, textMessage }) => {
     }
 };
 
+// Export all functions
 module.exports = {
     validateEmail,
     validateFormData,
+    sanitizeInput,
     verifyRecaptcha,
-    sendContactEmail
+    sendContactEmail // Ensure this function is correctly exported
 };
