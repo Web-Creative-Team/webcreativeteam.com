@@ -14,7 +14,7 @@
 
 .red {
     background: rgb(255, 200, 200);
-    color: red;  /* Ensure text color is red */
+    color: red;  
 }
 
 .green {
@@ -24,3 +24,4 @@
 .green p {
     color: #1A6B41;
 }
+
