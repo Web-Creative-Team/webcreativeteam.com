@@ -1,3 +1,11 @@
+.section.sectionPrices{
+    display: flex;
+    flex-flow: row;
+    gap: 3em;
+    padding: 0 4em;
+    margin: 3em 0;
+}
+
 .pricesCard {
     flex: 0 1 25%;
     border: 1px solid #1A6B41;
@@ -8,6 +16,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1em;
+    /* min-width: 35%; */
 }
 
 .pricesCard h4 {
@@ -60,12 +69,20 @@ h4.priceCardtitle{
 }
 
 .customOffer{
-    background: #EF7F19;
-    border-color: #EF7F19;
+    background: #f7d7b9;
+    border-color: #f7d7b9;
 }
 
 .customOffer h4{
     color: #1A6B41;
+}
+
+.allIncluded{
+    border: none;
+}
+
+.pricessParagraph{
+    max-width: 100ch;
 }
 
 @media (max-width: 600px){
