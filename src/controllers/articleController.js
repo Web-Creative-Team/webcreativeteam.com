@@ -112,18 +112,29 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
 });
 
 router.post('/:articleId/edit', isAuth, async (req, res) => {
+    const articleId = req.params.articleId;
+    const articleData = req.body;
 
     try {
-        let articleId = req.params.articleId;
-        let articleData = req.body;
+        // Validate form data before saving
+        validateFormData(articleData);
+        
+        // If no validation errors, save the updated article
         await articleManager.edit(articleId, articleData);
         res.redirect(`/articles/${articleId}/details`);
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error deleting article');
-        
+        console.error('Failed to edit article:', error);
+
+        // Render the edit page with the error message and retain field values
+        res.render('articles/editArticle', {
+            messageContent: error.message,        // Global error message
+            messageClass: 'red',                  // Styling for error
+            errors: error.fields || {},           // Specific field errors
+            ...articleData  // Retain the filled fields
+        });
     }
 });
+
 
 router.get('/:articleId/delete', async(req, res)=>{
     if (!req.user) {

@@ -43,21 +43,21 @@ const validateFormData = (data) => {
         errors.global = 'Използване на забранени символи!';
     }
 
-    // Check for missing required fields
-    if (!sanitizedArticleTitle) {
-        errors.articleTitle = 'Моля въведете заглавие';
+    // Validation for required fields and length
+    if (!sanitizedArticleTitle || sanitizedArticleTitle.length < 2 || sanitizedArticleTitle.length > 100) {
+        errors.articleTitle = sanitizedArticleTitle.length < 2 ? 'Моля въведете заглавие с поне 2 символа' : 'Заглавието е твърде дълго';
     }
-    if (!sanitizedArticleImage) {
-        errors.articleImage = 'Моля въведете изображение';
+    if (!sanitizedArticleImage || sanitizedArticleImage.length < 10 || sanitizedArticleImage.length > 255) {
+        errors.articleImage = sanitizedArticleImage.length < 10 ? 'Моля въведете изображение с поне 10 символа' : 'URL на изображението е твърде дълъг';
     }
-    if (!sanitizedArticleContent) {
-        errors.articleContent = 'Моля въведете съдържание';
+    if (!sanitizedArticleContent || sanitizedArticleContent.length < 10 || sanitizedArticleContent.length > 1000) {
+        errors.articleContent = sanitizedArticleContent.length < 10 ? 'Моля въведете съдържание с поне 10 символа' : 'Съдържанието е твърде дълго';
     }
-    if (!sanitizedArticleMetaTitle || sanitizedArticleMetaTitle.length > 55) {
-        errors.articleMetaTitle = sanitizedArticleMetaTitle.length > 55 ? 'Meta Title е твърде дълъг' : 'Моля въведете Meta Title';
+    if (!sanitizedArticleMetaTitle || sanitizedArticleMetaTitle.length < 2 || sanitizedArticleMetaTitle.length > 55) {
+        errors.articleMetaTitle = sanitizedArticleMetaTitle.length < 2 ? 'Meta Title трябва да съдържа поне 2 символа' : 'Meta Title е твърде дълъг';
     }
-    if (!sanitizedArticleMetaDescription || sanitizedArticleMetaDescription.length > 136) {
-        errors.articleMetaDescription = sanitizedArticleMetaDescription.length > 136 ? 'Meta Description е твърде дълго' : 'Моля въведете Meta Description';
+    if (!sanitizedArticleMetaDescription || sanitizedArticleMetaDescription.length < 10 || sanitizedArticleMetaDescription.length > 136) {
+        errors.articleMetaDescription = sanitizedArticleMetaDescription.length < 10 ? 'Meta Description трябва да съдържа поне 10 символа' : 'Meta Description е твърде дълга';
     }
 
     // If there are errors, throw them to be handled by the controller
