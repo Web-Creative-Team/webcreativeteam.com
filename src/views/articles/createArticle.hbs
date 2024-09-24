@@ -1,12 +1,26 @@
         <fieldset >
             <legend>Create Article</legend>
             <form method="POST">
-                <label for="articleTitle">Title</label>
+                <label for="articleTitle">Title<span class="redAsterix">*</span></label>
                 <input type="articleTitle" name="articleTitle" id="articleTitle"  />
-                <label for="articleTitle">Image URL</label>
+                <p class="inputRequirements">Моля въведете име</p>
+
+                <label for="articleImage">Image URL<span class="redAsterix">*</span></label>
                 <input type="articleImage" name="articleImage" id="articleImage"  />
-                <label for="articleImage">Content</label>
-                <textarea name="articleContent" id="articleContent" placeholder="Write here the Article content"></textarea>
+                <p class="inputRequirements">Моля въведете изображение</p>
+
+                <label for="articleContent">Content<span class="redAsterix">*</span></label>
+                <textarea name="articleContent" id="articleContent"></textarea>
+                <p class="inputRequirements">Моля въведете съдържание</p>
+
+                <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
+                <input name="articleMetaTitle" id="articleMetaTitle"></input>
+                <p class="inputRequirements">Моля въведете Meta Title (до 55 символа)</p>
+
+                <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
+                <input name="articleMetaDescription" id="articleMetaDescription"></input>
+                <p class="inputRequirements">Моля въведете Meta Description(до 136 символа)</p>
+
                 <button class="additionalStyle">Create Article</button>
             </form>
         </fieldset>
