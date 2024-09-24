@@ -1,8 +1,25 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const articleManager = require('../managers/articlesManager');
-
 const { isAuth } = require('../middlewares/authMiddleware');
+const { validateFormData } = require('../lib/validations');
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString('en-US', options);
+}
+
+// Validation configuration for articles
+const articleValidationConfig = {
+    requiredFields: ['articleTitle', 'articleImage', 'articleContent', 'articleMetaTitle', 'articleMetaDescription'],
+    fieldLimits: {
+        articleTitle: { min: 2, max: 100 },
+        articleImage: { min: 10, max: 255 },
+        articleContent: { min: 10, max: 1000 },
+        articleMetaTitle: { min: 2, max: 55 },
+        articleMetaDescription: { min: 10, max: 136 }
+    }
+};
 
 function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -37,14 +54,23 @@ router.get('/create', isAuth, (req, res) => {
 router.post('/create', isAuth, async (req, res) => {
     let articleData = {
         ...req.body,
-        dateCreated: formatDate(new Date())
+        dateCreated: formatDate(new Date())  // Keep the date formatting as it was
     };
+
     try {
+        validateFormData(articleData);  // Validate the form data
         await articleManager.create(articleData);
         res.redirect('/articles');
     } catch (error) {
         console.error('Failed to create article:', error);
-        res.render('articles/create', { error: 'Error creating article', ...articleData });
+
+        // Pass errors back to the template
+        res.render('articles/createArticle', {
+            messageContent: error.message,        // Global error message
+            messageClass: 'red',                  // Styling for error
+            errors: error.fields || {},           // Specific field errors
+            ...articleData                       // Retain entered data in the form
+        });
     }
 });
 
