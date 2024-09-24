@@ -1,5 +1,5 @@
 <div class="articleImage">
-    <img src="{{singleArticle.articleImage}}" alt="" srcset="">
+    <img src="{{singleArticle.articleImage}}" alt="Image of {{singleArticle.articleTitle}}" srcset="">
 </div>
 <div class="asideLayout">
 
@@ -19,7 +19,7 @@
         <h3>Други теми:</h3>
         <ul class="asideList">
             {{#each articles}}
-            <li><a href="/articles/{{_id}}/details">{{articleTitle}}</a></li>
+            <li style="margin-bottom: 0.5em;"><a href="/articles/{{_id}}/details">{{articleTitle}}</a></li>
             {{/each}}
         </ul>
     </aside>

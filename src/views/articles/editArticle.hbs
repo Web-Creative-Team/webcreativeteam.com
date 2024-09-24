@@ -1,12 +1,32 @@
- <fieldset >
-            <legend>Edit Article</legend>
-            <form method="POST">
-                <label for="articleTitle">Title</label>
-                <input type="articleTitle" name="articleTitle" id="articleTitle"  value="{{articleTitle}}"/>
-                <label for="articleTitle">Image URL</label>
-                <input type="articleImage" name="articleImage" id="articleImage" value="{{articleImage}}"  />
-                <label for="articleImage">Content</label>
-                <textarea name="articleContent" id="articleContent" placeholder="Write here the Article content">{{articleContent}}</textarea>
-                <button class="additionalStyle">Edit Article</button>
-            </form>
-        </fieldset>
+{{#if messageContent}}
+<div class="messageContainer {{messageClass}}">
+    <p class="messageText">{{messageContent}}</p>
+</div>
+{{/if}}
+
+<fieldset>
+    <legend>Edit Article</legend>
+    <form method="POST">
+        <label for="articleTitle">Title<span class="redAsterix">*</span></label>
+        <input type="text" name="articleTitle" id="articleTitle" value="{{articleTitle}}">
+        <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">{{#if errors.articleTitle}}{{errors.articleTitle}}{{else}}Моля въведете име{{/if}}</p>
+
+        <label for="articleImage">Image URL<span class="redAsterix">*</span></label>
+        <input type="text" name="articleImage" id="articleImage" value="{{articleImage}}">
+        <p class="inputRequirements {{#if errors.articleImage}}red{{/if}}">{{#if errors.articleImage}}{{errors.articleImage}}{{else}}Моля въведете изображение{{/if}}</p>
+
+        <label for="articleContent">Content<span class="redAsterix">*</span></label>
+        <textarea name="articleContent" id="articleContent">{{articleContent}}</textarea>
+        <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">{{#if errors.articleContent}}{{errors.articleContent}}{{else}}Моля въведете съдържание{{/if}}</p>
+
+        <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
+        <input type="text" name="articleMetaTitle" id="articleMetaTitle" value="{{articleMetaTitle}}">
+        <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">{{#if errors.articleMetaTitle}}{{errors.articleMetaTitle}}{{else}}Моля въведете Meta Title (до 55 символа){{/if}}</p>
+
+        <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
+        <input type="text" name="articleMetaDescription" id="articleMetaDescription" value="{{articleMetaDescription}}">
+        <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">{{#if errors.articleMetaDescription}}{{errors.articleMetaDescription}}{{else}}Моля въведете Meta Description (до 136 символа){{/if}}</p>
+
+        <button class="additionalStyle">Edit Article</button>
+    </form>
+</fieldset>
