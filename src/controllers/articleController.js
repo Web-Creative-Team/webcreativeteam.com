@@ -14,12 +14,15 @@ router.get('/', async (req, res) => {
         let articles = await articleManager.getAll();
         let index = articles.length - 1;
         let singleArticle = articles[index];
+        let title = singleArticle.articleMetaTitle;
+        let description = singleArticle.articleMetaDescription
+        
         res.render('articles/article', {
             showSectionServices: true,
             singleArticle,
             articles,
-            title: "Блог",
-            description: "test"
+            title,
+            description
         });
     } catch (error) {
         console.error('Error loading articles or banners:', error);
