@@ -53,13 +53,15 @@ router.get('/:articleId/details', async (req, res) => {
         let articles = await articleManager.getAll();
         let articleId = req.params.articleId.toString();
         let singleArticle = await articleManager.getOne(articleId);
+        let title = singleArticle.articleMetaTitle;
+        let description = singleArticle.articleMetaDescription
         singleArticle.dateCreated = formatDate(singleArticle.dateCreated); // Formatting the date for display
         res.render('articles/article', {
             showSectionServices: true,
             singleArticle,
             articles,
-            title: "Блог",
-            description: "test"
+            title,
+            description
         });
     } catch (error) {
         console.error('Error loading article:', error);
@@ -72,6 +74,9 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
     try {
         let articleId = req.params.articleId;
         let articleData = await articleManager.getOne(articleId);
+
+        console.log(articleData);
+        
         res.render('articles/editArticle', { ...articleData, title: "Редактиране на Блог статия" })
 
     } catch (error) {
