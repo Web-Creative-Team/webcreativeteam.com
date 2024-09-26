@@ -24,6 +24,7 @@ form {
     color: #1A6B41;
     display: flex;
     flex-direction: column;
+    width: 100%
 }
 
 fieldset {

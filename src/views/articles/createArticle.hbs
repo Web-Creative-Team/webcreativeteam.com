@@ -9,23 +9,23 @@
         <legend>Създаване на блог статия</legend>
 
         <form id="createArticleForm" method="POST" action="/articles/create">
-            <label for="articleTitle">Заглавие <span class="redAsterix">*</span></label>
+            <label for="articleTitle">Заглавие<span class="redAsterix">*</span></label>
             <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
             <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">Моля въведете заглавие</p>
 
-            <label for="articleImage">Изображение <span class="redAsterix">*</span></label>
+            <label for="articleImage">Изображение<span class="redAsterix">*</span></label>
             <input type="text" id="articleImage" name="articleImage" value="{{articleImage}}">
             <p class="inputRequirements {{#if errors.articleImage}}red{{/if}}">Моля въведете изображение</p>
 
-            <label for="articleContent">Съдържание <span class="redAsterix">*</span></label>
+            <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
             <textarea id="articleContent" name="articleContent">{{articleContent}}</textarea>
             <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">Моля въведете съдържание</p>
 
-            <label for="articleMetaTitle">Meta Title <span class="redAsterix">*</span></label>
+            <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
             <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
             <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">Моля въведете Meta Title (до 55 символа)</p>
 
-            <label for="articleMetaDescription">Meta Description <span class="redAsterix">*</span></label>
+            <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
             <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
             <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">Моля въведете Meta Description (до 136 символа)</p>
 
