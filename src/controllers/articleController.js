@@ -136,7 +136,7 @@ router.post('/:articleId/edit', isAuth, async (req, res) => {
 });
 
 
-router.get('/:articleId/delete', async(req, res)=>{
+router.get('/:articleId/delete', isAuth, async(req, res)=>{
     if (!req.user) {
         res.redirect('/users/login')
     } else{

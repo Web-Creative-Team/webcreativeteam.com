@@ -79,7 +79,7 @@ router.post('/:templateId/edit', isAuth, async(req, res)=>{
     }
 })
 
-router.get('/:templateId/delete', async (req, res) => {
+router.get('/:templateId/delete', isAuth, async (req, res) => {
     if (!req.user) {
         res.redirect('/users/login')
     } else {

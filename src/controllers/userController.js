@@ -14,7 +14,12 @@ router.post('/login', async (req, res) => {
     try {
         const token = await userManager.login(username, password);
 
-        res.cookie(TOKEN_KEY, token);
+        res.cookie(TOKEN_KEY, token, {
+            httpOnly: true,
+            secure: true,       // Set to true if using HTTPS
+            sameSite: 'Strict', // Helps protect against CSRF
+            maxAge: 2 * 24 * 60 * 60 * 1000 // Token expires in 2 days
+          });
 
         res.redirect('/');
 
@@ -40,7 +45,12 @@ router.post('/register', async (req, res) => {
 
     try {
         const token = await userManager.register({ username, email, password, repeatPassword });
-        res.cookie(TOKEN_KEY, token); 
+        res.cookie(TOKEN_KEY, token, {
+            httpOnly: true,
+            secure: true,       // Set to true if using HTTPS
+            sameSite: 'Strict', // Helps protect against CSRF
+            maxAge: 2 * 24 * 60 * 60 * 1000 // Token expires in 2 days
+        });
         res.redirect('/');
 
     } catch (err) {
@@ -51,7 +61,11 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    res.clearCookie('token');
+    res.clearCookie('token',  {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'Strict'
+      });
 
     res.redirect('/');
 })

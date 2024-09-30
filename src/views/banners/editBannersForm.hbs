@@ -1,20 +1,25 @@
-<main class="noAside">
-    <fieldset>
-        <legend>Edit Banner</legend>
+<fieldset>
+    <legend>Edit Banner</legend>
 
-    <form method="post">
-        <div style="max-width: 500px;"><img src="{{this.bannerImage}}" alt="" srcset=""></div>
+    {{#if error}}
+    <div class="messageContainer {{messageClass}}">
+        <p class="messageText">{{error}}</p>
+    </div>
+    {{/if}}
 
-        <label for="bannerImage">Edit Image URL</label>
-        <input type="text" name="bannerImage" id="bannerImage" value="{{this.bannerImage}}">
+    <form method="POST">
+        <label for="bannerImage">Banner Image URL<span class="redAsterix">*</span></label>
+        <input type="text" name="bannerImage" id="bannerImage" value="{{bannerImage}}"/>
+        <p class="inputRequirements {{#if errors.bannerImage}}red{{/if}}">Изображение</p>
 
-        <label for="bannerTitle">Edit Title</label>
-        <input type="text" name="bannerTitle" id="bannerTitle" value="{{this.bannerTitle}}">
+        <label for="bannerTitle">Banner Title<span class="redAsterix">*</span></label>
+        <input type="bannerTitle" name="bannerTitle" id="bannerTitle" value="{{bannerTitle}}"/>
+        <p class="inputRequirements {{#if errors.bannerTitle}}red{{/if}}">Основно заглавие</p>
 
-        <label for="bannerSubtitle">Edit Subtitle</label>
-        <input type="text" name="bannerSubtitle" id="bannerSubtitle" value="{{this.bannerSubtitle}}">
+        <label for="bannerSubtitle">Banner Subtitle<span class="redAsterix">*</span></label>
+        <input type="bannerSubtitle" name="bannerSubtitle" id="bannerSubtitle" value="{{bannerSubtitle}}"/>
+        <p class="inputRequirements {{#if errors.bannerSubtitle}}red{{/if}}">Подзаглавие</p>
 
-    <input type="submit" value="Edit">
+        <button class="additionalStyle">Edit Banner</button>
     </form>
-    </fieldset>
-</main>
+</fieldset>

@@ -9,65 +9,40 @@ const sanitizeInput = (input) => {
 const forbiddenPattern = /[<>\/\\]/;
 
 // Universal form data validation function
-const validateFormData = (data, formType = 'article') => {
-    // Sanitize all inputs based on form type
-    const {
-        email, name, phone, textMessage,
-        articleTitle, articleImage, articleContent,
-        articleMetaTitle, articleMetaDescription,
-        bannerImage, bannerTitle, bannerSubtitle
-    } = data;
+const validateFormData = (data, formType) => {
+    let errors = {};  // To store field-specific errors
 
-    let errors = {}; // To store field-specific errors
+    // Sanitize and validate banner fields if formType is 'banner'
+    if (formType === 'banner') {
+        const { bannerImage, bannerTitle, bannerSubtitle } = data;
 
-    // Check for forbidden symbols
-    Object.keys(data).forEach((key) => {
-        const sanitizedValue = sanitizeInput(data[key]);
-        if (forbiddenPattern.test(sanitizedValue)) {
+        const sanitizedBannerImage = sanitizeInput(bannerImage);
+        const sanitizedBannerTitle = sanitizeInput(bannerTitle);
+        const sanitizedBannerSubtitle = sanitizeInput(bannerSubtitle);
+
+        // Check for forbidden symbols
+        if (forbiddenPattern.test(sanitizedBannerImage) || forbiddenPattern.test(sanitizedBannerTitle) || forbiddenPattern.test(sanitizedBannerSubtitle)) {
             errors.global = 'Използване на забранени символи!';
         }
-    });
 
-    // Article validations
-    if (formType === 'article') {
-        if (!articleTitle || articleTitle.length < 2 || articleTitle.length > 100) {
-            errors.articleTitle = articleTitle?.length < 2 ? 'Моля въведете заглавие с поне 2 символа' : 'Заглавието е твърде дълго';
+        // Validate required fields
+        if (!sanitizedBannerImage || sanitizedBannerImage.length < 10) {
+            errors.bannerImage = 'Изображението трябва да съдържа поне 10 символа';
         }
-        if (!articleImage || articleImage.length < 10 || articleImage.length > 255) {
-            errors.articleImage = articleImage?.length < 10 ? 'Моля въведете изображение с поне 10 символа' : 'URL на изображението е твърде дълъг';
+        if (!sanitizedBannerTitle || sanitizedBannerTitle.length < 2) {
+            errors.bannerTitle = 'Заглавието трябва да съдържа поне 2 символа';
         }
-        if (!articleContent || articleContent.length < 10 || articleContent.length > 1000) {
-            errors.articleContent = articleContent?.length < 10 ? 'Моля въведете съдържание с поне 10 символа' : 'Съдържанието е твърде дълго';
+        if (!sanitizedBannerSubtitle || sanitizedBannerSubtitle.length < 2) {
+            errors.bannerSubtitle = 'Подзаглавието трябва да съдържа поне 2 символа';
         }
-        if (!articleMetaTitle || articleMetaTitle.length < 2 || articleMetaTitle.length > 55) {
-            errors.articleMetaTitle = articleMetaTitle?.length < 2 ? 'Meta Title трябва да съдържа поне 2 символа' : 'Meta Title е твърде дълъг';
-        }
-        if (!articleMetaDescription || articleMetaDescription.length < 10 || articleMetaDescription.length > 136) {
-            errors.articleMetaDescription = articleMetaDescription?.length < 10 ? 'Meta Description трябва да съдържа поне 10 символа' : 'Meta Description е твърде дълга';
+
+        // Throw errors if there are any
+        if (Object.keys(errors).length > 0) {
+            const error = new Error('Некоректно попълнена форма');
+            error.fields = errors;  // Attach the field-specific errors
+            throw error;
         }
     }
-
-    // Banner validations
-    if (formType === 'banner') {
-        if (!bannerImage || bannerImage.length < 10 || bannerImage.length > 255) {
-            errors.bannerImage = bannerImage?.length < 10 ? 'Моля въведете изображение с поне 10 символа' : 'URL на изображението е твърде дълъг';
-        }
-        if (!bannerTitle || bannerTitle.length < 2 || bannerTitle.length > 100) {
-            errors.bannerTitle = bannerTitle?.length < 2 ? 'Моля въведете заглавие с поне 2 символа' : 'Заглавието е твърде дълго';
-        }
-        if (!bannerSubtitle || bannerSubtitle.length < 2 || bannerSubtitle.length > 100) {
-            errors.bannerSubtitle = bannerSubtitle?.length < 2 ? 'Подзаглавието трябва да съдържа поне 2 символа' : 'Подзаглавието е твърде дълго';
-        }
-    }
-
-    // If there are errors, throw them to be handled by the controller
-    if (Object.keys(errors).length > 0) {
-        const error = new Error('Некоректно попълнена форма');
-        error.fields = errors; // Pass field-specific errors
-        throw error;
-    }
-
-    return true; // If all validations pass, return true
 };
 
 module.exports = {
