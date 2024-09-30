@@ -1,22 +1,46 @@
 <main>
+    <fieldset>
+        <legend>Register form</legend>
 
-        <fieldset>
-            <legend>Register form</legend>
-            <form method="POST" action="/users/register">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" />
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText">{{{error}}}</p>
+        </div>
+        {{/if}}
 
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" />
+        <form method="POST" action="/users/register">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" />
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="{{username}}" />
+            <p class="inputRequirements {{#if (includes emptyFields 'username')}}red{{/if}}">Моля въведете потребителско име</p>
 
-                <label for="repeatPassword">Repeat Password</label>
-                <input type="password" name="repeatPassword" id="repeatPassword" />
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{email}}" />
+            <p class="inputRequirements {{#if (includes emptyFields 'email')}}red{{/if}}">Моля въведете e-mail</p>
 
-                <button class="additionalStyle">Register</button>
-            </form>
-        </fieldset>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" />
+            <p class="inputRequirements {{#if (includes emptyFields 'password')}}red{{/if}}">Моля въведете парола</p>
 
+            <label for="repeatPassword">Repeat Password</label>
+            <input type="password" name="repeatPassword" id="repeatPassword" />
+            <p class="inputRequirements {{#if (includes emptyFields 'repeatPassword')}}red{{/if}}">Повторете паролата</p>
+
+            <button class="additionalStyle">Register</button>
+        </form>
+    </fieldset>
 </main>
+
+<!-- Add script to focus on the first empty field -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emptyFields = {{{json emptyFields}}};
+        if (emptyFields && emptyFields.length > 0) {
+            const firstEmptyField = document.getElementById(emptyFields[0]);
+            if (firstEmptyField) {
+                firstEmptyField.focus();
+            }
+        }
+    });
+</script>

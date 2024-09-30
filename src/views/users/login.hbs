@@ -2,14 +2,25 @@
 <main>
     <fieldset>
         <legend>Log in form</legend>
+
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText">{{{error}}}</p>
+        </div>
+        {{/if}}
+
         <form method="post">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" />
+            <input type="text" name="username" id="username" value="{{username}}" />
+            <p class="inputRequirements">Моля въведете потребителско име</p>
 
             <label for="password">Password</label>
             <input type="password" name="password" id="password" />
-            
-            <button class="additionalStyle" >Log in</button>
+            <p class="inputRequirements">Моля въведете парола</p>
+
+            <button class="additionalStyle">Log in</button>
         </form>
     </fieldset>
 </main>
