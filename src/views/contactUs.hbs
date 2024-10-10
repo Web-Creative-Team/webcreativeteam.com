@@ -1,18 +1,18 @@
 <main>
-    {{#if messageContent}}
-<div class="messageContainer red">
-    <p class="messageText">{{messageContent}}</p>
-</div>
-{{/if}}
+    {{> message}}
 
     <fieldset>
         <legend>Свържете се с нас</legend>
 
         <form id="contactForm" method="POST" action="/contacts">
+            <!-- CSRF Token Input -->
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
             <!-- Name Input -->
             <label for="name">Вашето име <span class="redAsterix">*</span></label>
             <input type="text" id="name" name="name" value="{{name}}">
-            <p class="inputRequirements {{#if (eq focusField 'name')}}red{{/if}}">Името трябва да съдържа поне 2 символа</p>
+            <p class="inputRequirements {{#if (eq focusField 'name')}}red{{/if}}">Името трябва да съдържа поне 2 символа
+            </p>
 
             <!-- Email Input -->
             <label for="email">Email <span class="redAsterix">*</span></label>
@@ -27,11 +27,11 @@
             <!-- Message Input -->
             <label for="message">Вашето съобщение <span class="redAsterix">*</span></label>
             <textarea id="message" name="textMessage">{{textMessage}}</textarea>
-            <p class="inputRequirements {{#if (eq focusField 'textMessage')}}red{{/if}}">Съобщението ви трябва да съдържа поне 10 символа</p>
+            <p class="inputRequirements {{#if (eq focusField 'textMessage')}}red{{/if}}">Съобщението ви трябва да
+                съдържа поне 10 символа</p>
 
-            <!-- Hidden inputs for recaptcha and focusField -->
+            <!-- Hidden inputs for recaptcha -->
             <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
-            <input type="hidden" id="focusField" value="{{focusField}}">  <!-- Pass focusField value -->
 
             <!-- Submit Button -->
             <button class="additionalStyle" type="submit">Изпрати</button>

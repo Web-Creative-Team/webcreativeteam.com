@@ -1,3 +1,5 @@
+// contactUsController.js
+
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const contactUsManager = require('../managers/contactUsManager');
@@ -10,7 +12,8 @@ router.get('/contacts', async (req, res, next) => {
             showCarousel: true,
             banners,
             title: "Контакти и връзка с екипа | WebCreativeTeam",
-            description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
+            description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam",
+            csrfToken: req.csrfToken()
         });
     } catch (error) {
         next(error);
@@ -23,7 +26,7 @@ router.post('/contacts', async (req, res, next) => {
 
     try {
         // Validate form data
-        contactUsManager.validateFormData({ email, name, textMessage });
+        await contactUsManager.validateFormData({ email, name, textMessage });
 
         // Verify reCAPTCHA (if needed)
         if (recaptchaToken) {
@@ -37,24 +40,28 @@ router.post('/contacts', async (req, res, next) => {
         res.render('contactUs', {
             message: 'Вашето съобщение е изпратено, благодарим. Ще се свържем с вас възможно най-скоро',
             messageClass: 'green',
-            title: "Контакти и връзка с екипа | WebCreativeTeam"
+            title: "Контакти и връзка с екипа | WebCreativeTeam",
+            csrfToken: req.csrfToken()
         });
 
     } catch (error) {
         console.error('Error:', error);
-
+        console.log('Error message:', error.message);
+        console.log('Error field:', error.field);
+        
         // Render error message
         res.status(400).render('contactUs', {
-            message: 'Използване на забранени символи!',
+            message: error.message,
             messageClass: 'red',
             name,
             email,
             phone,
             textMessage,
-            title: "Контакти и връзка с екипа | WebCreativeTeam"
+            title: "Контакти и връзка с екипа | WebCreativeTeam",
+            csrfToken: req.csrfToken(),
+            focusField: error.field // Pass the field that caused the error
         });
     }
 });
-
 
 module.exports = router;

@@ -10,7 +10,7 @@ const routes = require('./routes');
 
 const { auth } = require('./middlewares/authMiddleware');
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
-const { DBLINK, PORT, SESSION_SECRET } = require('./config/config');
+const { DBLINK, PORT, SECRET, SESSION_SECRET } = require('./config/config');
 
 const app = express();
 
@@ -38,8 +38,11 @@ mongoose.connect(DBLINK)
 // Set up Handlebars
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
-    helpers: hbsHelpers
+    helpers: hbsHelpers,
+    partialsDir: path.join(__dirname, 'views', 'partials'), // Ensure this is correct
+    layoutsDir: path.join(__dirname, 'views', 'layouts')
 }));
+
 app.set('view engine', 'hbs');
 app.set('views', 'src/views');
 
@@ -65,17 +68,20 @@ app.use(session({
 // Body parsing middleware
 app.use(express.urlencoded({ extended: false }));
 
-// Authentication middleware
-app.use(auth);
-
 // CSRF protection with lusca
 app.use(lusca.csrf());
 
 // Make the CSRF token available in templates
 app.use((req, res, next) => {
-    res.locals.csrfToken = req.lusca && req.lusca.csrfToken();
+    const token = req.csrfToken();
+    // console.log('CSRF Token:', token); // For debugging purposes
+    res.locals.csrfToken = token;
     next();
 });
+
+
+// Authentication middleware
+app.use(auth);
 
 // Routes
 app.use(routes);
