@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
+const { getErrorMessage } = require('../utils/errorHelpers');
+
 
 let { isAuth } = require('../middlewares/authMiddleware');
 
@@ -31,13 +33,13 @@ router.get('/create', isAuth, (req, res) => {
 });
 
 router.post('/create', isAuth, async (req, res) => {
+    let data = req.body
     
     try {
-        let data = req.body
         await templatesManager.create(data);
         res.redirect('/templates')
-    } catch (error) {
-        res.render('templates/create', { error: getErrorMessage(err), ...data });
+    } catch (err) {
+        res.render('WPTemplates/createTemplate', { error: getErrorMessage(err), ...data });
     }
 })
 
@@ -79,7 +81,7 @@ router.post('/:templateId/edit', isAuth, async(req, res)=>{
     }
 })
 
-router.get('/:templateId/delete', isAuth, async (req, res) => {
+router.get('/:templateId/delete', async (req, res) => {
     if (!req.user) {
         res.redirect('/users/login')
     } else {

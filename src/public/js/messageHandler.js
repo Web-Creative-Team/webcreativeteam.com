@@ -1,8 +1,8 @@
 window.onload = function () {
-    const messageContainers = document.querySelectorAll('.messageContainer');
-    messageContainers.forEach((messageContainer) => {
+    const messageContainer = document.querySelector('.messageContainer');
+    if (messageContainer) {
         setTimeout(() => {
             messageContainer.style.display = 'none';
-        }, 4000); // 4000 milliseconds = 4 seconds
-    });
+        }, 3000); // 3000 milliseconds = 3 seconds
+    }
 };
