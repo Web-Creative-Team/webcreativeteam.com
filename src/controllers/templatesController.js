@@ -4,6 +4,7 @@ const bannersManager = require('../managers/bannersManager');
 let { isAuth } = require('../middlewares/authMiddleware');
 
 const templatesManager = require('../managers/templatesManager');
+const { getErrorMessage } = require('../utils/errorHelpers');
 
 
 router.get("/", async (req, res) => {
@@ -37,7 +38,7 @@ router.post('/create', isAuth, async (req, res) => {
         await templatesManager.create(data);
         res.redirect('/templates')
     } catch (error) {
-        res.render('templates/create', { error: getErrorMessage(err), ...data });
+        res.render('templates/create', { error: getErrorMessage(error), ...data });
     }
 })
 

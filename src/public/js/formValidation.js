@@ -1,73 +1,99 @@
 document.getElementById('contactForm').onsubmit = function (event) {
-    // Get form inputs and associated error messages
+    // Get all form inputs
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
-    const messageTextarea = document.getElementById('message');
+    const phoneInput = document.getElementById('phone');
+    const messageInput = document.getElementById('message');
 
-    const nameError = nameInput.nextElementSibling;  // The <p> after the input field
-    const emailError = emailInput.nextElementSibling; // The <p> after the input field
-    const messageError = messageTextarea.nextElementSibling; // The <p> after the textarea
+    // Get the <p> right after each field (the default help/error text)
+    const nameError    = nameInput.nextElementSibling;
+    const emailError   = emailInput.nextElementSibling;
+    const phoneError   = phoneInput.nextElementSibling;
+    const messageError = messageInput.nextElementSibling;
 
-    // Assume the form is valid
+    // Keep the original help text so we can restore it if the field is valid
+    const defaultNameError    = nameError.textContent;
+    const defaultEmailError   = emailError.textContent;
+    const defaultPhoneError   = phoneError.textContent;
+    const defaultMessageError = messageError.textContent;
+
+    // Assume form is valid unless a field check fails
     let valid = true;
 
-    // Forbidden symbols (like <>, /, \, etc.)
-    const forbiddenPattern = /[<>\/\\]/;
+    // Forbid < or > anywhere in the input (common for blocking HTML/script tags)
+    const forbiddenPattern = /[<>]/;
 
-    // Check if forbidden symbols are used
-    if (forbiddenPattern.test(nameInput.value) || forbiddenPattern.test(emailInput.value) || forbiddenPattern.test(messageTextarea.value)) {
-        // Show global notification instead of alert
-        const globalMessageContainer = document.querySelector('.messageContainer');
-        globalMessageContainer.innerHTML = '<p class="messageText red">Използване на забранени символи!</p>';
-        globalMessageContainer.classList.add('red');
-        
-        event.preventDefault();
-        return;  // Stop further validation
-    }
-
-    // Name validation: must contain only alphabetic characters and be at least 2 characters
-    const namePattern = /^[a-zA-Z\s]+$/; // Alphabetic characters and spaces
-    if (!nameInput.value || nameInput.value.length < 2 || !namePattern.test(nameInput.value)) {
-        nameError.classList.add('red');
-        nameInput.focus();
-        valid = false;
-    } else {
-        nameError.classList.remove('red');
-    }
-
-    // Email validation: must follow the correct email format
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
-    if (!emailInput.value || !emailPattern.test(emailInput.value)) {
-        emailError.classList.add('red');
+    // Helper to mark a field invalid with a custom message
+    function invalidateField(inputElem, errorElem, message) {
+        errorElem.textContent = message;
+        errorElem.classList.add('red');
         if (valid) {
-            emailInput.focus();
+            // Focus the first invalid field we encounter
+            inputElem.focus();
         }
         valid = false;
-    } else {
-        emailError.classList.remove('red');
     }
 
-    // Message validation: must be between 10 and 1000 characters
-    if (!messageTextarea.value || messageTextarea.value.length < 10 || messageTextarea.value.length > 1000) {
-        messageError.classList.add('red');
-        if (valid) {
-            messageTextarea.focus();
+    // ------------ NAME FIELD VALIDATION ------------
+    if (forbiddenPattern.test(nameInput.value)) {
+        invalidateField(nameInput, nameError, 'Използване на забранени символи');
+    } else {
+        // Must be at least 2 chars, only letters/spaces
+        const namePattern = /^[a-zA-Z\s]+$/;
+        if (!nameInput.value || nameInput.value.length < 2 || !namePattern.test(nameInput.value)) {
+            invalidateField(nameInput, nameError, 'Името трябва да съдържа поне 2 символа');
+        } else {
+            // Valid: restore the default text & remove red
+            nameError.textContent = defaultNameError;
+            nameError.classList.remove('red');
         }
-        valid = false;
-    } else {
-        messageError.classList.remove('red');
     }
 
-    // If the form is invalid, prevent submission
+    // ------------ EMAIL FIELD VALIDATION ------------
+    if (forbiddenPattern.test(emailInput.value)) {
+        invalidateField(emailInput, emailError, 'Използване на забранени символи');
+    } else {
+        // Must follow a valid email pattern
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput.value || !emailPattern.test(emailInput.value)) {
+            invalidateField(emailInput, emailError, 'Моля въведете валиден Email адрес');
+        } else {
+            emailError.textContent = defaultEmailError;
+            emailError.classList.remove('red');
+        }
+    }
+
+    // ------------ PHONE FIELD VALIDATION (Optional) ------------
+    if (forbiddenPattern.test(phoneInput.value)) {
+        invalidateField(phoneInput, phoneError, 'Използване на забранени символи');
+    } else {
+        // Assuming phone is optional & no length checks
+        phoneError.textContent = defaultPhoneError;
+        phoneError.classList.remove('red');
+    }
+
+    // ------------ MESSAGE FIELD VALIDATION ------------
+    if (forbiddenPattern.test(messageInput.value)) {
+        invalidateField(messageInput, messageError, 'Използване на забранени символи');
+    } else {
+        // Must be 10-1000 characters
+        if (!messageInput.value || messageInput.value.length < 10 || messageInput.value.length > 1000) {
+            invalidateField(messageInput, messageError, 'Съобщението ви трябва да съдържа поне 10 символа');
+        } else {
+            messageError.textContent = defaultMessageError;
+            messageError.classList.remove('red');
+        }
+    }
+
+    // If any field was invalid, stop the form submission
     if (!valid) {
         event.preventDefault();
     }
 };
 
+// Keep your existing onload/focus logic
 window.onload = function () {
     const focusField = document.getElementById('focusField').value;
-
-    // Focus on the field with the error
     if (focusField) {
         document.getElementById(focusField).focus();
     }
