@@ -1,23 +1,48 @@
-        <fieldset >
-            <legend>Create Template</legend>
-            <form method="POST">
+<main>
+    <fieldset>
+        <legend>Create Template</legend>
+        <form id="createTemplateForm" method="POST">
 
-                <label for="templateImage">Template Image URL</label>
-                <input type="text" name="templateImage" id="templateImage" />
+            <!-- Template Image URL -->
+            <label for="templateImage">Template Image URL</label>
+            <input type="text" name="templateImage" id="templateImage" />
+            <p class="inputRequirements {{#if (eq focusField 'templateImage')}}red{{/if}}">
+                Основно изображение на темплейта (задължително)
+            </p>
 
-                <label for="templateAltAttribute">Alt</label>
-                <input type="templateAltAttribute" name="templateAltAttribute" id="templateAltAttribute"  />
+            <!-- Template Alt Attribute -->
+            <label for="templateAltAttribute">Alt</label>
+            <input type="text" name="templateAltAttribute" id="templateAltAttribute" />
+            <p class="inputRequirements {{#if (eq focusField 'templateAltAttribute')}}red{{/if}}">
+                Моля въведете Alt текст (задължително)
+            </p>
 
-                <label for="templateTitle">Template Title</label>
-                <input type="templateTitle" name="templateTitle" id="templateTitle"  />
+            <!-- Template Title -->
+            <label for="templateTitle">Template Title</label>
+            <input type="text" name="templateTitle" id="templateTitle" />
+            <p class="inputRequirements {{#if (eq focusField 'templateTitle')}}red{{/if}}">
+                Моля въведете името на темплейта (задължително)
+            </p>
 
-                <label for="templateShortDescription">Template Short Description</label>
-                <input type="templateShortDescription" name="templateShortDescription" id="templateShortDescription"  />
+            <!-- Template Short Description -->
+            <label for="templateShortDescription">Template Short Description</label>
+            <input type="text" name="templateShortDescription"
+                   id="templateShortDescription" />
+            <p class="inputRequirements {{#if (eq focusField 'templateShortDescription')}}red{{/if}}">
+                Моля въведете описание на темплейта – от 10 до 50 символа
+            </p>
 
-                <label for="previewLink">Preview Link</label>
-                <input type="previewLink" name="previewLink" id="previewLink"  />
+            <!-- Preview Link -->
+            <label for="previewLink">Preview Link</label>
+            <input type="text" name="previewLink" id="previewLink" />
+            <p class="inputRequirements {{#if (eq focusField 'previewLink')}}red{{/if}}">
+                Моля въведете Preview на темплейта
+            </p>
 
-                <button class="additionalStyle">Create Template</button>
+            <button class="additionalStyle">Create Template</button>
+        </form>
+    </fieldset>
 
-            </form>
-        </fieldset>
+    <!-- Attach your SINGLE universal validation script -->
+    <script src="/js/formValidation.js"></script>
+</main>

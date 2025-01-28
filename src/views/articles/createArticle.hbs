@@ -8,7 +8,7 @@
     <fieldset>
         <legend>Създаване на блог статия</legend>
 
-        <form id="createArticleForm" method="POST" action="/articles/create">
+        <form id="createArticleForm" method="POST" >
             <label for="articleTitle">Заглавие<span class="redAsterix">*</span></label>
             <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
             <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">Моля въведете заглавие</p>

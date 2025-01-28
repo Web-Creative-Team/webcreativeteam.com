@@ -15,7 +15,9 @@ const templateSchema = new mongoose.Schema({
 
     templateShortDescription: {
         type: String,
-        required: [true, "Short description for the template is required"]
+        required: [true, "Short description for the template is required"],
+        min: 10,
+        max: 50
     },
 
     previewLink: {

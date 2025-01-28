@@ -1,3 +1,5 @@
+<main>
+
 <fieldset>
     <legend>Create Banner</legend>
 
@@ -7,19 +9,21 @@
     </div>
     {{/if}}
 
-    <form method="POST">
+    <form id="createBannerForm" method="POST">
         <label for="bannerImage">Banner Image URL<span class="redAsterix">*</span></label>
         <input type="text" name="bannerImage" id="bannerImage" value="{{bannerImage}}"/>
         <p class="inputRequirements {{#if errors.bannerImage}}red{{/if}}">Изображение</p>
 
         <label for="bannerTitle">Banner Title<span class="redAsterix">*</span></label>
-        <input type="bannerTitle" name="bannerTitle" id="bannerTitle" value="{{bannerTitle}}"/>
+        <input type="text" name="bannerTitle" id="bannerTitle" value="{{bannerTitle}}"/>
         <p class="inputRequirements {{#if errors.bannerTitle}}red{{/if}}">Основно заглавие</p>
 
         <label for="bannerSubtitle">Banner Subtitle<span class="redAsterix">*</span></label>
-        <input type="bannerSubtitle" name="bannerSubtitle" id="bannerSubtitle" value="{{bannerSubtitle}}"/>
+        <input type="text" name="bannerSubtitle" id="bannerSubtitle" value="{{bannerSubtitle}}"/>
         <p class="inputRequirements {{#if errors.bannerSubtitle}}red{{/if}}">Подзаглавие</p>
 
         <button class="additionalStyle">Create Banner</button>
     </form>
 </fieldset>
+<script src="/js/formValidation.js"></script>
+</main>

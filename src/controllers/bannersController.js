@@ -24,7 +24,7 @@ router.post('/create', isAuth, async (req, res) => {
     } catch (error) {
         // Pass the errors to the template
         res.render('banners/createBanner', {
-            error: error.message,
+            error: getErrorMessage(error),
             messageClass: 'red',
             errors: error.fields || {},  // Ensure field-specific errors are passed
             ...bannerData  // Keep the entered data in the form
