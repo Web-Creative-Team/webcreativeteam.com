@@ -39,7 +39,7 @@ app.set('view engine', 'hbs');
 app.set('views', 'src/views');
 
 // app.use(express.static('src/public'));
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // It`s very impotrtant authMiddleware to be after cookieParser;

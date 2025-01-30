@@ -1,6 +1,13 @@
 <main>
     <fieldset>
         <legend>Свържете се с нас</legend>
+
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText">{{error}}</p>
+        </div>
+        {{/if}}
+
         <form id="contactForm" method="POST" action="/contacts">
             <label for="name">Вашето име <span class="red">*</span></label>
             <input type="text" id="name" name="name" required>
