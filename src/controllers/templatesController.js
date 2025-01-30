@@ -1,22 +1,23 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
+const templatesManager = require('../managers/templatesManager');
 
 let { isAuth } = require('../middlewares/authMiddleware');
+const { getErrorMessage } = require('../utils/errorHelpers');
 
-const templatesManager = require('../managers/templatesManager');
 
 
 router.get("/", async (req, res) => {
     let banners = await bannersManager.getAll();
     let templates = await templatesManager.getAll();
 
+    console.log(templates);
+    
     try {
         res.render('WPTemplates/templatesPage', {
             banners,
             showCarousel: true,
-            templates,
-            title: 'Тест',
-            description: 'Тест'
+            templates
         })
         
     } catch (error) {
@@ -31,13 +32,15 @@ router.get('/create', isAuth, (req, res) => {
 });
 
 router.post('/create', isAuth, async (req, res) => {
+    let data = req.body
+    console.log(data);
     
     try {
-        let data = req.body
         await templatesManager.create(data);
         res.redirect('/templates')
-    } catch (error) {
-        res.render('templates/create', { error: getErrorMessage(err), ...data });
+    } catch (err) {
+        
+        res.render('WPTemplates/createTemplate', { error: getErrorMessage(err), ...data });
     }
 })
 
@@ -79,7 +82,7 @@ router.post('/:templateId/edit', isAuth, async(req, res)=>{
     }
 })
 
-router.get('/:templateId/delete', isAuth, async (req, res) => {
+router.get('/:templateId/delete', async (req, res) => {
     if (!req.user) {
         res.redirect('/users/login')
     } else {

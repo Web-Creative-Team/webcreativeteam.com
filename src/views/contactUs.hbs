@@ -1,44 +1,22 @@
 <main>
-    {{> message}}
-
     <fieldset>
         <legend>Свържете се с нас</legend>
-
         <form id="contactForm" method="POST" action="/contacts">
-            <!-- CSRF Token Input -->
-            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <label for="name">Вашето име <span class="red">*</span></label>
+            <input type="text" id="name" name="name" required>
 
-            <!-- Name Input -->
-            <label for="name">Вашето име <span class="redAsterix">*</span></label>
-            <input type="text" id="name" name="name" value="{{name}}">
-            <p class="inputRequirements {{#if (eq focusField 'name')}}red{{/if}}">Името трябва да съдържа поне 2 символа
-            </p>
+            <label for="email">Email <span class="red">*</span></label>
+            <input type="email" id="email" name="email" required>
 
-            <!-- Email Input -->
-            <label for="email">Email <span class="redAsterix">*</span></label>
-            <input type="email" id="email" name="email" value="{{email}}">
-            <p class="inputRequirements {{#if (eq focusField 'email')}}red{{/if}}">Моля въведете валиден Email адрес</p>
+            <label for="phone">Телефонен номер (по избор)</label>
+            <input type="tel" id="phone" name="phone" placeholder="Optional">
 
-            <!-- Phone Input -->
-            <label for="phone">Телефонен номер</label>
-            <input type="tel" id="phone" name="phone" value="{{phone}}">
-            <p class="inputRequirements">Ако желаете посочете телефонният си номер</p>
+            <label for="message">Вашето съобщение <span class="red">*</span></label>
+            <textarea id="message" name="message" required></textarea>
 
-            <!-- Message Input -->
-            <label for="message">Вашето съобщение <span class="redAsterix">*</span></label>
-            <textarea id="message" name="textMessage">{{textMessage}}</textarea>
-            <p class="inputRequirements {{#if (eq focusField 'textMessage')}}red{{/if}}">Съобщението ви трябва да
-                съдържа поне 10 символа</p>
-
-            <!-- Hidden inputs for recaptcha -->
             <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
-
-            <!-- Submit Button -->
             <button class="additionalStyle" type="submit">Изпрати</button>
         </form>
     </fieldset>
-
-    <!-- JavaScript for Validation and Recaptcha -->
-    <script src="/js/formValidation.js"></script>
     <script src="/js/recaptcha.js"></script>
 </main>

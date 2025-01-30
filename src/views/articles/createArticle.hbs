@@ -1,14 +1,16 @@
 <main>
-    {{#if messageContent}}
-    <div class="messageContainer red">
-        <p class="messageText">{{messageContent}}</p>
-    </div>
-    {{/if}}
 
     <fieldset>
         <legend>Създаване на блог статия</legend>
 
-        <form id="createArticleForm" method="POST" action="/articles/create">
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText">{{error}}</p>
+        </div>
+        {{/if}}
+
+
+        <form id="createArticleForm" method="POST">
             <label for="articleTitle">Заглавие<span class="redAsterix">*</span></label>
             <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
             <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">Моля въведете заглавие</p>
@@ -23,15 +25,17 @@
 
             <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
             <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
-            <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">Моля въведете Meta Title (до 55 символа)</p>
+            <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">Моля въведете Meta Title (до 55
+                символа)</p>
 
             <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
-            <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
-            <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">Моля въведете Meta Description (до 136 символа)</p>
+            <input type="text" id="articleMetaDescription" name="articleMetaDescription"
+                value="{{articleMetaDescription}}">
+            <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">Моля въведете Meta Description
+                (до 136 символа)</p>
 
             <button class="additionalStyle">Създай статия</button>
         </form>
     </fieldset>
 
-    <script src="/js/formValidation.js"></script>
 </main>

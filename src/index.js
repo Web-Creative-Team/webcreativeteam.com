@@ -1,105 +1,58 @@
-require('dotenv').config();
 const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const lusca = require('lusca');
 const routes = require('./routes');
 
-const { auth } = require('./middlewares/authMiddleware');
+const { auth } = require('./middlewares/authMiddleware')
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
-const { DBLINK, PORT, SECRET, SESSION_SECRET } = require('./config/config');
+
+const { DBLINK, PORT } = require('./config/config');
 
 const app = express();
 
+//TODO: change DB name
+//GPT recommended:
+// Use environment variables for sensitive data
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/webcreativeteam')
+//     .then(() => console.log('DB connected!'))
+//     .catch((err) => console.log('DB Error: ', err.message));
+
+
 // Define Handlebars helpers
 const hbsHelpers = {
-    inc: function (value) {
+    inc: function (value, options) {
         return parseInt(value) + 1;
-    },
-    eq: function (a, b) {
-        return a === b;
-    },
-    includes: function (array, value) {
-        return array && array.includes(value);
-    },
-    json: function (context) {
-        return JSON.stringify(context);
     }
 };
 
-// Connect to the database
 mongoose.connect(DBLINK)
     .then(() => console.log('DB connected!'))
     .catch((err) => console.log('DB Error: ', err.message));
 
-// Set up Handlebars
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
-    helpers: hbsHelpers,
-    partialsDir: path.join(__dirname, 'views', 'partials'), // Ensure this is correct
-    layoutsDir: path.join(__dirname, 'views', 'layouts')
+    helpers: hbsHelpers // passing the helpers to Handlebars
 }));
-
 app.set('view engine', 'hbs');
 app.set('views', 'src/views');
 
-// Static files
+// app.use(express.static('src/public'));
 app.use(express.static(path.resolve(__dirname, 'public')));
-
-// Cookie parser
-app.use(cookieParser());
-
-// Session middleware
-app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false, // Set to false in production
-    cookie: {
-        httpOnly: true,
-        secure: false,      // Set to true in production with HTTPS
-        sameSite: 'Lax',    // Consider 'Strict' in production
-        maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
-    }
-}));
-
-// Body parsing middleware
 app.use(express.urlencoded({ extended: false }));
-
-// CSRF protection with lusca
-app.use(lusca.csrf());
-
-// Make the CSRF token available in templates
-app.use((req, res, next) => {
-    const token = req.csrfToken();
-    // console.log('CSRF Token:', token); // For debugging purposes
-    res.locals.csrfToken = token;
-    next();
-});
-
-
-// Authentication middleware
-app.use(auth);
-
-// Routes
+app.use(cookieParser());
+// It`s very impotrtant authMiddleware to be after cookieParser;
+app.use(auth)
 app.use(routes);
-
-// Error handling middleware for CSRF errors
-app.use((err, req, res, next) => {
-    if (err.code === 'EBADCSRFTOKEN') {
-        // CSRF token validation failed
-        res.status(403);
-        res.render('error', { message: 'Invalid CSRF token' });
-    } else {
-        next(err);
-    }
-});
-
-// Custom error handler
+// after routes!
 app.use(errorHandler);
 
-// Start the server
+
+
+//TODO: GPT recommended:
+// const port = process.env.PORT || PORT || 3000;
+// app.listen(port, console.log(`Server is listening on port ${PORT}...`));
+
 const port = process.env.PORT || PORT || 3000;
-app.listen(port, () => console.log(`Server is listening on port ${port}...`));
+app.listen(port, console.log(`Server is listening on port ${port}...`));

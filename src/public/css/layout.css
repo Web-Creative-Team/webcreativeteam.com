@@ -101,8 +101,6 @@
     .section.sectionAboutUs {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         padding: 0 15em;
     }
 
@@ -255,7 +253,7 @@
         text-decoration: none;
     }
 
-    .redAsterix {
+    .red {
         color: red;
     }
 
