@@ -1,41 +1,57 @@
 <main>
     <fieldset>
         <legend>Create Template</legend>
+
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText">{{error}}</p>
+        </div>
+        {{/if}}
+
         <form id="createTemplateForm" method="POST">
 
             <!-- Template Image URL -->
             <label for="templateImage">Template Image URL</label>
-            <input type="text" name="templateImage" id="templateImage" />
-            <p class="inputRequirements {{#if (eq focusField 'templateImage')}}red{{/if}}">
+            <input type="text" name="templateImage" id="templateImage" value="{{templateImage}}"/>
+            <p class="inputRequirements ">
+                {{!--
+            <p class="inputRequirements {{#if (eq focusField 'templateImage')}}red{{/if}}"> --}}
                 Основно изображение на темплейта (задължително)
             </p>
 
             <!-- Template Alt Attribute -->
             <label for="templateAltAttribute">Alt</label>
-            <input type="text" name="templateAltAttribute" id="templateAltAttribute" />
-            <p class="inputRequirements {{#if (eq focusField 'templateAltAttribute')}}red{{/if}}">
+            <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{templateAltAttribute}}"/>
+            <p class="inputRequirements">
+                {{!--
+            <p class="inputRequirements {{#if (eq focusField 'templateAltAttribute')}}red{{/if}}"> --}}
                 Моля въведете Alt текст (задължително)
             </p>
 
             <!-- Template Title -->
             <label for="templateTitle">Template Title</label>
-            <input type="text" name="templateTitle" id="templateTitle" />
-            <p class="inputRequirements {{#if (eq focusField 'templateTitle')}}red{{/if}}">
+            <input type="text" name="templateTitle" id="templateTitle" value="{{templateTitle}}"/>
+            <p class="inputRequirements">
+                {{!--
+            <p class="inputRequirements {{#if (eq focusField 'templateTitle')}}red{{/if}}"> --}}
                 Моля въведете името на темплейта (задължително)
             </p>
 
             <!-- Template Short Description -->
             <label for="templateShortDescription">Template Short Description</label>
-            <input type="text" name="templateShortDescription"
-                   id="templateShortDescription" />
-            <p class="inputRequirements {{#if (eq focusField 'templateShortDescription')}}red{{/if}}">
+            <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{templateShortDescription}}"/>
+                        <p class="inputRequirements">
+                {{!--
+            <p class="inputRequirements {{#if (eq focusField 'templateShortDescription')}}red{{/if}}"> --}}
                 Моля въведете описание на темплейта – от 10 до 50 символа
             </p>
 
             <!-- Preview Link -->
             <label for="previewLink">Preview Link</label>
-            <input type="text" name="previewLink" id="previewLink" />
-            <p class="inputRequirements {{#if (eq focusField 'previewLink')}}red{{/if}}">
+            <input type="text" name="previewLink" id="previewLink" value="{{previewLink}}"/>
+            <p class="inputRequirements">
+                {{!--
+            <p class="inputRequirements {{#if (eq focusField 'previewLink')}}red{{/if}}"> --}}
                 Моля въведете Preview на темплейта
             </p>
 
@@ -44,5 +60,4 @@
     </fieldset>
 
     <!-- Attach your SINGLE universal validation script -->
-    <script src="/js/formValidation.js"></script>
 </main>

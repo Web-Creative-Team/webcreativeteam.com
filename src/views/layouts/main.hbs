@@ -18,20 +18,19 @@
 <!-- Starts Body Section -->
 
 <body>
+    {{!-- {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
+        </div>
+    </div>
+    {{/if}} --}}
 
-
-     {{>header}}
+    {{>header}}
 
     {{#if showCarousel}}
     {{>carousel}}
     {{/if}}
-
-    {{#if message}}
-    <div class="messageContainer {{messageClass}}">
-        <p class="messageText">{{message}}</p>
-    </div>
-    {{/if}}
-
 
     {{{body}}}
 
@@ -54,7 +53,7 @@
         </a>
 
         <a href="/services/social" class="articleServices">
-            <h3>Социални медии & Google Ads</h3>
+            <h3>Социални медии & Дигитален маркетинг</h3>
             <div class="imageContainer">
                 <img src="/images/social-media-template-brand-spotlights.jpg"
                     alt="Social Media and Digital Marketing banner image" srcset="">
@@ -84,10 +83,6 @@
 
     <!-- Custom Carousel Script -->
     <script src="/js/carousel.js"></script>
-
-    {{!-- message handler --}}
-    <script src="/js/messageHandler.js"></script>
-
 </body>
 
 </html>

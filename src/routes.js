@@ -6,7 +6,6 @@ const bannersController = require('./controllers/bannersController');
 const articleController = require('./controllers/articleController');
 const ourTeamController = require('./controllers/ourTeamController');
 const templatesController = require('./controllers/templatesController');
-const contactUsController = require('./controllers/contactUsController');
 
 router.use(homeController);
 router.use( '/users', userController);
@@ -15,7 +14,6 @@ router.use('/banners', bannersController);
 router.use('/articles', articleController);
 router.use('/ourteam', ourTeamController);
 router.use('/templates', templatesController);
-router.use(contactUsController)
 
 
 router.get('*', (req, res)=>{

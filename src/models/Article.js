@@ -4,17 +4,17 @@ const articleSchema = new mongoose.Schema({
 
     articleTitle: {
         type: String,
-        required: [true, "Article title is required!"]
+        required: [true, "Title is required!"]
     },
-    
-    articleContent: {
-        type: String,
-        required: [true, "Article content is required!"]
-    },
-
+        
     articleImage: {
         type: String,
-        required: [true, "Article image is required!"]
+        required: [true, "Image is required!"]
+    },
+
+    articleContent: {
+        type: String,
+        required: [true, "Content is required!"]
     },
 
     articleMetaTitle:{

@@ -9,12 +9,12 @@ const bannerSchema = new mongoose.Schema({
 
     bannerTitle: {
         type: String,
-        required: [true, "Banner Slogan is Required"]
+        required: [true, "Banner Title is Required"]
     },
     
     bannerSubtitle: {
         type: String,
-        required: [true, "Banner Slogan is Required"]
+        required: [true, "Banner Subtitle is Required"]
     }
 
 })

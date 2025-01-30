@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
+const templatesManager = require('../managers/templatesManager');
 
 let { isAuth } = require('../middlewares/authMiddleware');
-
-const templatesManager = require('../managers/templatesManager');
 const { getErrorMessage } = require('../utils/errorHelpers');
 
 
@@ -12,13 +11,13 @@ router.get("/", async (req, res) => {
     let banners = await bannersManager.getAll();
     let templates = await templatesManager.getAll();
 
+    console.log(templates);
+    
     try {
         res.render('WPTemplates/templatesPage', {
             banners,
             showCarousel: true,
-            templates,
-            title: 'Тест',
-            description: 'Тест'
+            templates
         })
         
     } catch (error) {
@@ -34,19 +33,14 @@ router.get('/create', isAuth, (req, res) => {
 
 router.post('/create', isAuth, async (req, res) => {
     let data = req.body
+    console.log(data);
     
     try {
         await templatesManager.create(data);
         res.redirect('/templates')
-    } catch (error) {
-        res.render(
-            'WPTemplates/createTemplate', {
-            error: error.message,
-            messageClass: 'red',
-            errors: error.fields || {},
-             ...data
-    }
-        );
+    } catch (err) {
+        
+        res.render('WPTemplates/createTemplate', { error: getErrorMessage(err), ...data });
     }
 })
 

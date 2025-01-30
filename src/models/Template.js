@@ -5,32 +5,28 @@ const templateSchema = new mongoose.Schema({
 
     templateImage: {
         type: String,
-        required: [true, "Template image is required"]
-    },
-
-    templateTitle: {
-        type: String,
-        required: [true, "Template title is required"]
-    },
-
-    templateShortDescription: {
-        type: String,
-        required: [true, "Short description for the template is required"],
-        min: 10,
-        max: 50
-    },
-
-    previewLink: {
-        type: String,
-        required: [true, "Link for the preview is required"]
+        required: [true, "Image is required"]
     },
 
     templateAltAttribute: {
         type: String,
-        reqquired: [true, 'Attribute "alt" is required' ]
-    }
+        required: [true, 'Alt attribute is required' ]
+    },
     
+    templateTitle: {
+        type: String,
+        required: [true, "Title is required"]
+    },
 
+    templateShortDescription: {
+        type: String,
+        required: [true, "Short description is required"]
+    },
+
+    previewLink: {
+        type: String,
+        required: [true, "Preview link is required"]
+    },
 
 })
 

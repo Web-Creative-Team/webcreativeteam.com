@@ -1,22 +1,28 @@
 <main>
 
-        <fieldset>
-            <legend>Register form</legend>
-            <form method="POST" action="/users/register">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" />
+    <fieldset>
+        <legend>Register form</legend>
 
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" />
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText">{{error}}</p>
+        </div>
+        {{/if}}
+        <form method="POST" action="/users/register">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="{{username}}"/>
 
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" />
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{email}}"/>
 
-                <label for="repeatPassword">Repeat Password</label>
-                <input type="password" name="repeatPassword" id="repeatPassword" />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" />
 
-                <button class="additionalStyle">Register</button>
-            </form>
-        </fieldset>
+            <label for="repeatPassword">Repeat Password</label>
+            <input type="password" name="repeatPassword" id="repeatPassword" />
+
+            <button class="additionalStyle">Register</button>
+        </form>
+    </fieldset>
 
 </main>

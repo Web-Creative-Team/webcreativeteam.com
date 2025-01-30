@@ -23,7 +23,7 @@ body, input, button, textarea, table, th, td {
 
 h1, h2, h3, h4, h5, h6 {
     font-size: 1em;
-    margin-bottom: 0.5em;
+    /* margin-bottom: 0.5em; */
     /* font-weight: normal; */
     font-weight: lighter;
     display: flex;
@@ -47,7 +47,3 @@ h6 { font-size: 1em; }
 /* p, ul, ol {
     padding-bottom: 1.5em;
 } */
-
-p{
-    max-width: 100ch;
-}
