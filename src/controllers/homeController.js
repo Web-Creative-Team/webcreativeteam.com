@@ -2,11 +2,15 @@ const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const transporter = require('../managers/emailManager'); // Adjust path as needed
 const { CAPTCHA_SITE_KEY } = require('../config/config');
+const { hasForbiddenChars } = require('../utils/validationHelpers')
 
 router.get('/', async (req, res, next) => {
-
     try {
         let banners = await bannersManager.getAll();
+
+        // Grab optional "notifyMessage" and "notifyClass" from the query string
+        const { notifyMessage, notifyClass } = req.query;
+
         res.render('home', {
             showSectionServices: true,
             showCarousel: true,
@@ -14,12 +18,16 @@ router.get('/', async (req, res, next) => {
             title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
             description: "Изработка на уебсайт...",
             recaptchaSiteKey: CAPTCHA_SITE_KEY,
-            
+
+            // Pass them to the template
+            notifyMessage,
+            notifyClass,
         });
     } catch (error) {
-        next(error); // Pass the error to the error handler
+        next(error);
     }
 });
+
 
 router.get('/prices', async (req, res, next) => {
     try {
@@ -45,21 +53,23 @@ router.get('/contacts', async (req, res, next) => {
             description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
         });
     } catch (error) {
-        next(error);
+        console.log(error);
+
     }
 });
 
-const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-};
+// const validateEmail = (email) => {
+//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return regex.test(email);
+// };
 
 router.post('/contacts', async (req, res, next) => {
     const { email, name, phone, message, recaptchaToken } = req.body;
 
+    // 1) Basic checks
     if (!email || !name || !message) {
         return res.status(400).render('contactUs', {
-            error: 'Missing required fields',
+            error: 'Всички полета отбелязани със * са задължителни.',
             name,
             email,
             phone,
@@ -67,16 +77,34 @@ router.post('/contacts', async (req, res, next) => {
         });
     }
 
-    if (!validateEmail(email)) {
-        return res.status(400).send('Invalid email format');
+    if (hasForbiddenChars(email) || hasForbiddenChars(name) || hasForbiddenChars(phone) || hasForbiddenChars(message)) {
+        return res.status(400).render('contactUs', {
+            error: 'Използване на забранени символи!',
+            name,
+            email,
+            phone,
+            message
+        });
     }
 
     if (name.length < 2) {
-        return res.status(400).send('Name is too short');
+        return res.status(400).render('contactUs', {
+            error: 'Името трябва да съдържа поне 2 символа',
+            name,
+            email,
+            phone,
+            message
+        });
     }
 
     if (message.length < 10) {
-        return res.status(400).send('Message is too short');
+        return res.status(400).render('contactUs', {
+            error: 'Съобщението трябва да съдържа поне 10 символа',
+            name,
+            email,
+            phone,
+            message
+        });
     }
 
     if (recaptchaToken) {
@@ -86,27 +114,40 @@ router.post('/contacts', async (req, res, next) => {
                 return res.status(400).send('Invalid reCAPTCHA token');
             }
         } catch (error) {
-            return next(error);
+            console.log(error);
+
+            // return next(error);
         }
     }
 
     const mailOptions = {
-        from: email, // Use your server email here, not the user email
+        from: email,
         to: 'info@webcreativeteam.com',
         subject: `From Contact form - new Message from ${name}`,
-        html: `<p>You have received a new message from the contact form:</p>
-               <p><strong>Name:</strong> ${name}</p>
-               <p><strong>Email:</strong> ${email}</p>
-               <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-               <p><strong>Message:</strong> ${message}</p>`
+        html: `
+          <p>You have a new message from the contact form:</p>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        `
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        res.redirect('/', {message:"Success!"});
+
+        // SUCCESS -> Redirect to home page with success message in query
+        return res.redirect('/?notifyMessage=Благодарим! Ще ви отговорим възможно най-бързо!&messageText=green');
     } catch (error) {
-        console.error('Failed to send email:', error);
-        next(error); // Pass the error to the error handler
+        // ERROR -> Rerender contactUs with red error
+        // (We attach the user input so they don't lose what they typed)
+        return res.render('contactUs', {
+            error: 'Възникна грешка при изпращане на имейл. Опитайте отново.',
+            name,
+            email,
+            phone,
+            message
+        });
     }
 });
 
