@@ -33,9 +33,10 @@
     {{>carousel}}
     {{/if}}
 
-    {{#if message}}
-    <div class="messageContainer red">
-        <p class="messageText">{{message}}</p>
+
+    {{#if notifyMessage}}
+    <div class="messageContainer green {{notifyClass}}">
+        <p class="messageText green">{{notifyMessage}}</p>
     </div>
     {{/if}}
 
@@ -91,6 +92,8 @@
 
     <!-- Custom Carousel Script -->
     <script src="/js/carousel.js"></script>
+    <script src="/js/fadeOutMessages.js"></script>
+
 </body>
 
 </html>

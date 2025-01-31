@@ -206,7 +206,7 @@
         margin: 0;
     }
 
-    footer a{
+    footer a {
         text-decoration: none;
         color: #1A6B41
     }
@@ -252,10 +252,48 @@
     .goHomeLink {
         text-decoration: none;
     }
-
-    .red {
+    
+    .messageText{
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    
+    .red, .messageText.red {
         color: red;
     }
+    
+    .messageText.green{
+        color: #1A6B41;
+    }
+
+    .messageContainer {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0.8em;
+        max-width: 60%;
+        margin: auto;
+        /* background-color: #eee; */
+        border-radius: 0.5em;
+    }
+    .messageContainer.green {
+        background-color: #cdffe5;
+    }
+
+    .messageContainer.red {
+        background-color: rgb(252, 208, 208);
+    }
+
+    .fade-out {
+        animation: fadeOut 1s forwards; /* 1s fade, fill forwards means stay at opacity: 0 */
+      }
+      
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+        }
+      }
 
 
     @media (max-width: 600px) {

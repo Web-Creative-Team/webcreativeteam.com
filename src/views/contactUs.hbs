@@ -1,18 +1,25 @@
 <main>
     <fieldset>
         <legend>Свържете се с нас</legend>
+
+        {{#if error}}
+        <div class="messageContainer red">
+            <p class="messageText red">{{error}}</p>
+        </div>
+        {{/if}}
+
         <form id="contactForm" method="POST" action="/contacts">
             <label for="name">Вашето име <span class="red">*</span></label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" value="{{name}}" required>
 
             <label for="email">Email <span class="red">*</span></label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" value="{{email}}" required>
 
             <label for="phone">Телефонен номер (по избор)</label>
-            <input type="tel" id="phone" name="phone" placeholder="Optional">
+            <input type="text" id="phone" name="phone" placeholder="Optional" value="{{phone}}">
 
             <label for="message">Вашето съобщение <span class="red">*</span></label>
-            <textarea id="message" name="message" required></textarea>
+            <textarea id="message" name="message" required>{{message}}</textarea>
 
             <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
             <button class="additionalStyle" type="submit">Изпрати</button>
