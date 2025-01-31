@@ -40,6 +40,13 @@
     {{/if}} --}}
 
 
+    {{#if message}}
+    <div class="messageContainer red">
+        <p class="messageText">{{message}}</p>
+    </div>
+    {{/if}}
+
+
     {{{body}}}
 
     {{#if showSectionServices}}

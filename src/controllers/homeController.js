@@ -103,7 +103,7 @@ router.post('/contacts', async (req, res, next) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.redirect('/');
+        res.redirect('/', {message:"Success!"});
     } catch (error) {
         console.error('Failed to send email:', error);
         next(error); // Pass the error to the error handler
