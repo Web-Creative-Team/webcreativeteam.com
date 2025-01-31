@@ -4,6 +4,7 @@ const transporter = require('../managers/emailManager'); // Adjust path as neede
 const { CAPTCHA_SITE_KEY } = require('../config/config');
 
 router.get('/', async (req, res, next) => {
+
     try {
         let banners = await bannersManager.getAll();
         res.render('home', {
@@ -12,7 +13,8 @@ router.get('/', async (req, res, next) => {
             banners,
             title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
             description: "Изработка на уебсайт...",
-            recaptchaSiteKey: CAPTCHA_SITE_KEY
+            recaptchaSiteKey: CAPTCHA_SITE_KEY,
+            
         });
     } catch (error) {
         next(error); // Pass the error to the error handler
@@ -101,7 +103,7 @@ router.post('/contacts', async (req, res, next) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.redirect('/');
+        res.redirect('/', {message:"Success!"});
     } catch (error) {
         console.error('Failed to send email:', error);
         next(error); // Pass the error to the error handler

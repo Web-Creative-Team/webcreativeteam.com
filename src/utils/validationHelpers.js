@@ -5,3 +5,4 @@ exports.hasForbiddenChars = (value)=>{
     return forbiddenPattern.test(value);
 }
 
+// /^[A-Za-z0-9._,<,>,&,\/,\\,\[,\].\{,\}]+$/gi
