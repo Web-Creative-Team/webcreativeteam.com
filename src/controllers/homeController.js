@@ -5,9 +5,8 @@ const { CAPTCHA_SITE_KEY } = require('../config/config');
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
 router.get('/', async (req, res, next) => {
+    let banners = await bannersManager.getAll();
     try {
-        let banners = await bannersManager.getAll();
-
         // Grab optional "notifyMessage" and "notifyClass" from the query string
         const { notifyMessage, notifyClass } = req.query;
 
@@ -146,7 +145,7 @@ router.post('/contacts', async (req, res, next) => {
             name,
             email,
             phone,
-            message
+            message,
         });
     }
 });
