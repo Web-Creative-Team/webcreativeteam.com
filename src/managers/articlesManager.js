@@ -1,14 +1,21 @@
 const Article = require('../models/Article');
 
 exports.getAll = async () => {
-let articles = Article.find({}).lean();
-return articles;
-}
+    return await Article.find({}).lean();
+};
 
-exports.create = (articleData)=> Article.create(articleData);
+exports.getOne = (articleId) => {
+    return Article.findById(articleId).lean();
+};
 
-exports.getOne = (articleId)=> Article.findById(articleId).lean();
+exports.create = (articleData) => {
+    return Article.create(articleData);
+};
 
-exports.edit = (articleId, articleData)=> Article.findByIdAndUpdate(articleId, articleData);
+exports.edit = async (articleId, articleData) => {
+    return await Article.findByIdAndUpdate(articleId, articleData, { new: true });
+};
 
-exports.delete = (articleId) => Article.findByIdAndDelete(articleId);
+exports.delete = (articleId) => {
+    return Article.findByIdAndDelete(articleId);
+};

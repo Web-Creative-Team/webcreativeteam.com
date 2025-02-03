@@ -3,14 +3,20 @@
     <fieldset>
         <legend>Edit Banner</legend>
 
-        <div style="max-width: 500px;"><img src="{{bannerImage}}" alt="" srcset=""></div>
-
+        <div style="max-width: 500px;"><img src="{{bannerImage}}" alt=""></div>
         <p>{{bannerTitle}}</p>
         <p>{{bannerSubtitle}}</p>
 
-        
-    <a href="/banners/{{_id}}/edit">Edit</a>
-    <a href="/banners/{{_id}}/delete">Delete</a>
+        <a href="/banners/{{_id}}/edit">Edit</a>
+        <a href="javascript:void(0);" onclick="confirmDelete('{{_id}}', '{{bannerTitle}}')">Delete</a>
+
+        <script>
+            function confirmDelete(bannerId, bannerTitle) {
+                if (confirm(`You will delete the banner "${bannerTitle}". Are you sure?`)) {
+                    window.location.href = `/banners/${bannerId}/delete`;
+                }
+            }
+        </script>
     </fieldset>
     {{/each}}
 </main>

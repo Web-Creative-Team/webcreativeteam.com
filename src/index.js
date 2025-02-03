@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const handlebars = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
