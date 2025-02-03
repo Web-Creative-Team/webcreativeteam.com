@@ -23,14 +23,17 @@ router.post("/create", isAuth, upload.single("bannerImage"), async (req, res) =>
             return res.status(400).render("banners/createBanner", { error: "No file uploaded!" });
         }
 
+        const storageFolder = "herobanner";  // ✅ Ensure the correct folder is assigned
+
         // ✅ Upload the image to pCloud
-        const imageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "banners");
+        const imageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder);
 
         // ✅ Ensure **MongoDB record is created**
         const bannerData = {
-            bannerImage: imageUrl,   // ✅ Store the direct file URL
+            bannerImage: imageUrl,
             bannerTitle: req.body.bannerTitle,
-            bannerSubtitle: req.body.bannerSubtitle
+            bannerSubtitle: req.body.bannerSubtitle,
+            storageFolder: storageFolder  // ✅ Save folder name inside DB
         };
 
         await bannersManager.create(bannerData);
@@ -43,6 +46,7 @@ router.post("/create", isAuth, upload.single("bannerImage"), async (req, res) =>
         res.render("banners/createBanner", { error: error.message });
     }
 });
+
 
 router.get('/edit', isAuth, async (req, res) => {
     try {
@@ -70,6 +74,12 @@ console.log(searchedBanner);
 router.post('/:bannerId/edit', isAuth, upload.single("bannerImage"), async (req, res) => {
     try {
         let bannerId = req.params.bannerId;
+        let existingBanner = await bannersManager.getOne(bannerId); // ✅ Fetch existing banner
+
+        if (!existingBanner) {
+            throw new Error("Banner not found.");
+        }
+
         let bannerData = {
             bannerTitle: req.body.bannerTitle,
             bannerSubtitle: req.body.bannerSubtitle,
@@ -77,7 +87,8 @@ router.post('/:bannerId/edit', isAuth, upload.single("bannerImage"), async (req,
 
         if (req.file) {
             console.log("✅ New image uploaded, replacing existing one...");
-            const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "banners");
+            const storageFolder = existingBanner.storageFolder || "herobanner"; // ✅ Use existing storage folder
+            const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder);
             bannerData.bannerImage = newImageUrl;
         } else {
             console.log("ℹ️ No new image uploaded, keeping the old one.");

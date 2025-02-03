@@ -1,10 +1,12 @@
+// articlesController.js
+const multer = require("multer"); // For handling file uploads
 const router = require('express').Router();
-const bannersManager = require('../managers/bannersManager');
 const articleManager = require('../managers/articlesManager');
-
 const { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorHelpers');
+const { uploadFileToPCloud } = require("../managers/pClowdManager");
 
+const upload = multer({ storage: multer.memoryStorage() });
 
 function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -29,21 +31,43 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET - Render create article page
+// ✅ GET - Render article creation page
 router.get('/create', isAuth, (req, res) => {
     res.render('articles/createArticle', { title: "Създаване на блог статия" });
 });
 
-router.post('/create', isAuth, async (req, res) => {
-    let articleData = {
-        ...req.body,
-        dateCreated: formatDate(new Date())
-    };
-
+// ✅ POST - Handle article creation with image upload
+router.post("/create", isAuth, upload.single("articleImage"), async (req, res) => {
     try {
+        if (!req.file) {
+            return res.status(400).render("articles/createArticle", { error: "No file uploaded!" });
+        }
+
+        // ✅ Use schema's `storageFolder`
+        const storageFolder = "blogimages";
+
+        // ✅ Upload the image to pCloud
+        const imageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder);
+
+        // ✅ Create the article entry
+        const articleData = {
+            articleTitle: req.body.articleTitle,
+            articleImage: imageUrl,   // ✅ Store correct URL
+            articleContent: req.body.articleContent,
+            articleMetaTitle: req.body.articleMetaTitle,
+            articleMetaDescription: req.body.articleMetaDescription,
+            dateCreated: new Date().toISOString(),
+        };
+
         await articleManager.create(articleData);
-        res.redirect('/articles');
-    } catch (err) {
-        res.render('articles/createArticle', { error: getErrorMessage(err), ...articleData });
+        console.log("✅ Article saved to database:", articleData);
+
+        res.redirect("/articles");
+
+    } catch (error) {
+        console.error("❌ Article creation failed:", error);
+        res.render("articles/createArticle", { error: error.message });
     }
 });
 
