@@ -1,8 +1,12 @@
+const multer = require("multer"); // For handling file uploads
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 let { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorHelpers');
 
+const { uploadFileToPCloud } = require("../managers/pClowdManager")
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/create', isAuth, (req, res) => {
     try {
@@ -13,18 +17,32 @@ router.get('/create', isAuth, (req, res) => {
     }
 })
 
-router.post('/create', isAuth, async (req, res) => {
-    const bannerData = req.body
+router.post("/create", isAuth, upload.single("bannerImage"), async (req, res) => {
     try {
-        await bannersManager.create(req.body);
-        res.redirect('/')
-    } catch (err) {
-        console.log(err);
-        
-        res.render('banners/createBanner', { error: getErrorMessage(err), ...bannerData });
+        if (!req.file) {
+            return res.status(400).render("banners/createBanner", { error: "No file uploaded!" });
+        }
 
+        // ✅ Upload the image to pCloud
+        const imageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "banners");
+
+        // ✅ Ensure **MongoDB record is created**
+        const bannerData = {
+            bannerImage: imageUrl,   // ✅ Store the direct file URL
+            bannerTitle: req.body.bannerTitle,
+            bannerSubtitle: req.body.bannerSubtitle
+        };
+
+        await bannersManager.create(bannerData);
+        console.log("✅ Banner saved to database:", bannerData);
+
+        res.redirect("/banners/edit");
+
+    } catch (error) {
+        console.error("❌ Banner creation failed:", error);
+        res.render("banners/createBanner", { error: error.message });
     }
-})
+});
 
 router.get('/edit', isAuth, async (req, res) => {
     try {
