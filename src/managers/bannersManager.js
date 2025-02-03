@@ -1,14 +1,22 @@
+// bannersManager.js
 const Banner = require('../models/Banner');
 
 exports.getAll = async () => {
-    let banners = await Banner.find({}).lean();
-    return banners;
-}
+    return await Banner.find({}).lean();
+};
 
-exports.getOne = async (bannerId) => await Banner.findById(bannerId)
+exports.getOne = async (bannerId) => {
+    return await Banner.findById(bannerId);
+};
 
-exports.create = (bannerData) => Banner.create(bannerData)
+exports.create = (bannerData) => {
+    return Banner.create(bannerData);
+};
 
-exports.edit = (bannerId, bannerData)=> Banner.findByIdAndUpdate(bannerId, bannerData);
+exports.edit = async (bannerId, bannerData) => {
+    return await Banner.findByIdAndUpdate(bannerId, bannerData, { new: true });
+};
 
-exports.delete = (bannerId) => Banner.findByIdAndDelete(bannerId);
+exports.delete = (bannerId) => {
+    return Banner.findByIdAndDelete(bannerId);
+};

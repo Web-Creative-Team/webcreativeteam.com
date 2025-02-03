@@ -1,10 +1,10 @@
+// bannersController.js
 const multer = require("multer"); // For handling file uploads
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 let { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorHelpers');
-
-const { uploadFileToPCloud } = require("../managers/pClowdManager")
+const { uploadFileToPCloud } = require("../managers/pClowdManager");
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -47,12 +47,11 @@ router.post("/create", isAuth, upload.single("bannerImage"), async (req, res) =>
 router.get('/edit', isAuth, async (req, res) => {
     try {
         let banners = await bannersManager.getAll();
-        res.render('banners/editBannersView', { banners })
-
+        res.render('banners/editBannersView', { banners });
     } catch (error) {
         console.log(error);
     }
-})
+});
 
 router.get('/:bannerId/edit', isAuth, async (req, res) => {
 
@@ -68,17 +67,30 @@ console.log(searchedBanner);
     }
 })
 
-router.post('/:bannerId/edit', isAuth, async (req, res) => {
+router.post('/:bannerId/edit', isAuth, upload.single("bannerImage"), async (req, res) => {
     try {
         let bannerId = req.params.bannerId;
-        let bannerData = req.body
-        await bannersManager.edit(bannerId, bannerData);
+        let bannerData = {
+            bannerTitle: req.body.bannerTitle,
+            bannerSubtitle: req.body.bannerSubtitle,
+        };
 
-        res.redirect('/banners/edit')
+        if (req.file) {
+            console.log("✅ New image uploaded, replacing existing one...");
+            const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "banners");
+            bannerData.bannerImage = newImageUrl;
+        } else {
+            console.log("ℹ️ No new image uploaded, keeping the old one.");
+        }
+
+        await bannersManager.edit(bannerId, bannerData);
+        console.log("✅ Banner updated:", bannerData);
+        res.redirect('/banners/edit');
     } catch (error) {
-        console.log(error);
+        console.log("❌ Error updating banner:", error);
+        res.render("banners/editBannersForm", { error: error.message });
     }
-})
+});
 
 router.get('/:bannerId/delete', async (req, res) => {
     if (!req.user) {
@@ -95,11 +107,5 @@ router.get('/:bannerId/delete', async (req, res) => {
         }
     }
 })
-
-
-
-
-
-
 
 module.exports = router;
