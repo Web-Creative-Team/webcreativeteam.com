@@ -8,56 +8,34 @@
         </div>
         {{/if}}
 
-        <form id="createTemplateForm" method="POST">
+        <form id="createTemplateForm" method="POST" enctype="multipart/form-data">
 
-            <!-- Template Image URL -->
-            <label for="templateImage">Template Image URL<span class="redAsterix">*</span></label>
-            <input type="text" name="templateImage" id="templateImage" value="{{templateImage}}"/>
-            <p class="inputRequirements ">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateImage')}}red{{/if}}"> --}}
-                Основно изображение на темплейта (задължително)
-            </p>
+            <!-- Template Image Upload -->
+            <label for="templateImage">Upload Template Image<span class="redAsterix">*</span></label>
+            <input type="file" name="templateImage" id="templateImage" accept="image/*" />
+            <p class="inputRequirements">Upload an image for the template (required)</p>
 
             <!-- Template Alt Attribute -->
-            <label for="templateAltAttribute">Alt<span class="redAsterix">*</span></label>
-            <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{templateAltAttribute}}"/>
-            <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateAltAttribute')}}red{{/if}}"> --}}
-                Моля въведете Alt текст (задължително)
-            </p>
+            <label for="templateAltAttribute">Alt Attribute<span class="redAsterix">*</span></label>
+            <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{templateAltAttribute}}" />
+            <p class="inputRequirements">Please enter an Alt text (required)</p>
 
             <!-- Template Title -->
             <label for="templateTitle">Template Title<span class="redAsterix">*</span></label>
-            <input type="text" name="templateTitle" id="templateTitle" value="{{templateTitle}}"/>
-            <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateTitle')}}red{{/if}}"> --}}
-                Моля въведете името на темплейта (задължително)
-            </p>
+            <input type="text" name="templateTitle" id="templateTitle" value="{{templateTitle}}" />
+            <p class="inputRequirements">Enter the template name (required)</p>
 
             <!-- Template Short Description -->
             <label for="templateShortDescription">Template Short Description<span class="redAsterix">*</span></label>
-            <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{templateShortDescription}}"/>
-                        <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateShortDescription')}}red{{/if}}"> --}}
-                Моля въведете описание на темплейта – от 10 до 50 символа
-            </p>
+            <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{templateShortDescription}}" />
+            <p class="inputRequirements">Enter a short description of the template (10-50 characters required)</p>
 
             <!-- Preview Link -->
             <label for="previewLink">Preview Link<span class="redAsterix">*</span></label>
-            <input type="text" name="previewLink" id="previewLink" value="{{previewLink}}"/>
-            <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'previewLink')}}red{{/if}}"> --}}
-                Моля въведете Preview на темплейта
-            </p>
+            <input type="text" name="previewLink" id="previewLink" value="{{previewLink}}" />
+            <p class="inputRequirements">Enter the preview link for the template</p>
 
             <button class="additionalStyle">Create Template</button>
         </form>
     </fieldset>
-
-    <!-- Attach your SINGLE universal validation script -->
 </main>

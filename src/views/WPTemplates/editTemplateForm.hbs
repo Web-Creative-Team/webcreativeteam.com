@@ -2,11 +2,13 @@
     <fieldset>
         <legend>Edit Template</legend>
 
-    <form method="post">
-        <div style="max-width: 500px;"><img src="{{this.templateImage}}" alt="{{this.templateAltAttribute}}"></div>
+    <form method="post" enctype="multipart/form-data">
+        <div style="max-width: 500px;">
+            <img src="{{this.templateImage}}" alt="{{this.templateAltAttribute}}">
+        </div>
 
-        <label for="templateImage">Edit Preview Image</label>
-        <input type="text" name="templateImage" id="templateImage" value="{{this.templateImage}}">
+        <label for="templateImage">Upload New Image</label>
+        <input type="file" name="templateImage" id="templateImage">
 
         <label for="templateAltAttribute">Edit Alt Attribute</label>
         <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{this.templateAltAttribute}}">
@@ -20,9 +22,7 @@
         <label for="previewLink">Edit Preview Link</label>
         <input type="text" name="previewLink" id="previewLink" value="{{this.previewLink}}">
 
-        
-
-    <input type="submit" value="Edit">
+    <input type="submit" value="Save Changes">
     </form>
     </fieldset>
 </main>

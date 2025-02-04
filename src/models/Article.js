@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const articleSchema = new mongoose.Schema({
     articleTitle: {
         type: String,
-        required: [true, "Title is required!"]
+        required: [true, "Title is required!"],
+        minLength: [3, "The title is too short!"],
+        maxLength: [35, "The title is too long!"],
+        match: [/^[A-Za-z0-9]+$/, 'The title must be alphanumeric'],
+
     },
 
     articleImage: {
