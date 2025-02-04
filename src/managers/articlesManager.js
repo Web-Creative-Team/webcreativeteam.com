@@ -1,5 +1,9 @@
 const Article = require('../models/Article');
 
+exports.getAllSorted = async () => {
+    return await Article.find({}).sort({ dateCreated: -1 }).lean(); // 🔥 Sort by newest first
+};
+
 exports.getAll = async () => {
     return await Article.find({}).lean();
 };

@@ -15,15 +15,16 @@ function formatDate(date) {
 
 router.get('/', async (req, res) => {
     try {
-        let articles = await articleManager.getAll();
+        let articles = await articleManager.getAllSorted(); // 🔥 Fetch sorted articles
         let index = articles.length - 1;
         let singleArticle = articles[index];
         res.render('articles/article', {
             showSectionServices: true,
             singleArticle,
             articles,
-            title: "Блог",
-            description: "test"
+            title: singleArticle.articleTitle,
+            description: singleArticle.articleMetaDescription,
+            alt:singleArticle.articleAlt
         });
     } catch (error) {
         console.error('Error loading articles or banners:', error);
@@ -44,16 +45,13 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
             return res.status(400).render("articles/createArticle", { error: "No file uploaded!" });
         }
 
-        // ✅ Use schema's `storageFolder`
         const storageFolder = "blogimages";
-
-        // ✅ Upload the image to pCloud
         const imageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder);
 
-        // ✅ Create the article entry
         const articleData = {
             articleTitle: req.body.articleTitle,
-            articleImage: imageUrl,   // ✅ Store correct URL
+            articleImage: imageUrl,
+            articleAlt: req.body.articleAlt, // ✅ Store Alt Text
             articleContent: req.body.articleContent,
             articleMetaTitle: req.body.articleMetaTitle,
             articleMetaDescription: req.body.articleMetaDescription,
@@ -62,7 +60,6 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
 
         await articleManager.create(articleData);
         console.log("✅ Article saved to database:", articleData);
-
         res.redirect("/articles");
 
     } catch (error) {
@@ -71,9 +68,10 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
     }
 });
 
+
 router.get('/:articleId/details', async (req, res) => {
     try {
-        let articles = await articleManager.getAll();
+        let articles = await articleManager.getAllSorted();
         let articleId = req.params.articleId.toString();
         let singleArticle = await articleManager.getOne(articleId);
         singleArticle.dateCreated = formatDate(singleArticle.dateCreated); // Formatting the date for display
@@ -81,8 +79,9 @@ router.get('/:articleId/details', async (req, res) => {
             showSectionServices: true,
             singleArticle,
             articles,
-            title: "Блог",
-            description: "test"
+            title: singleArticle.articleTitle,
+            description: singleArticle.articleMetaDescription,
+            alt:singleArticle.articleAlt
         });
     } catch (error) {
         console.error('Error loading article:', error);
@@ -103,19 +102,35 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
     }
 });
 
-router.post('/:articleId/edit', isAuth, async (req, res) => {
-
+router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (req, res) => {
     try {
         let articleId = req.params.articleId;
-        let articleData = req.body;
+        let articleData = {
+            articleTitle: req.body.articleTitle,
+            articleContent: req.body.articleContent,
+            articleMetaTitle: req.body.articleMetaTitle,
+            articleMetaDescription: req.body.articleMetaDescription,
+            articleAlt: req.body.articleAlt, // ✅ Store Alt Text
+        };
+
+        if (req.file) {
+            console.log("✅ New image uploaded, replacing existing one...");
+            const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "blogimages");
+            articleData.articleImage = newImageUrl;
+        } else {
+            console.log("ℹ️ No new image uploaded, keeping the old one.");
+        }
+
         await articleManager.edit(articleId, articleData);
+        console.log("✅ Article updated:", articleData);
         res.redirect(`/articles/${articleId}/details`);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error deleting article');
-        
+        console.log("❌ Error updating article:", error);
+        res.render("articles/editArticle", { error: error.message });
     }
 });
+
 
 router.get('/:articleId/delete', async(req, res)=>{
     if (!req.user) {

@@ -1,12 +1,28 @@
- <fieldset >
-            <legend>Edit Article</legend>
-            <form method="POST">
-                <label for="articleTitle">Title</label>
-                <input type="articleTitle" name="articleTitle" id="articleTitle"  value="{{articleTitle}}"/>
-                <label for="articleTitle">Image URL</label>
-                <input type="articleImage" name="articleImage" id="articleImage" value="{{articleImage}}"  />
-                <label for="articleImage">Content</label>
-                <textarea name="articleContent" id="articleContent" placeholder="Write here the Article content">{{articleContent}}</textarea>
-                <button class="additionalStyle">Edit Article</button>
-            </form>
-        </fieldset>
+<fieldset>
+    <legend>Редактиране на статия</legend>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="articleTitle">Заглавие</label>
+        <input type="text" name="articleTitle" id="articleTitle" value="{{articleTitle}}"/>
+
+        <div style="max-width: 500px;">
+            <img src="{{articleImage}}" alt="{{articleAlt}}" />
+        </div>
+
+        <label for="articleImage">Качи ново изображение (по желание)</label>
+        <input type="file" name="articleImage" id="articleImage">
+
+        <label for="articleAlt">Alt Текст за изображението</label>
+        <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
+
+        <label for="articleContent">Съдържание</label>
+        <textarea name="articleContent" id="articleContent">{{articleContent}}</textarea>
+
+        <label for="articleMetaTitle">Meta Title</label>
+        <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
+
+        <label for="articleMetaDescription">Meta Description</label>
+        <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
+
+        <button class="additionalStyle">Запази промените</button>
+    </form>
+</fieldset>

@@ -1,28 +1,31 @@
-<main>
-    <fieldset>
-        <legend>Създаване на блог статия</legend>
-        {{#if error}}
-        <div class="messageContainer red">
-            <p class="messageText">{{error}}</p>
-        </div>
-        {{/if}}
-        <form id="createArticleForm" method="POST" enctype="multipart/form-data">
-            <label for="articleTitle">Заглавие<span class="redAsterix">*</span></label>
-            <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
+<fieldset>
+    <legend>Създаване на блог статия</legend>
 
-            <label for="articleImage">Изображение<span class="redAsterix">*</span></label>
-            <input type="file" id="articleImage" name="articleImage">
+    {{#if error}}
+    <div class="messageContainer red">
+        <p class="messageText">{{error}}</p>
+    </div>
+    {{/if}}
 
-            <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
-            <textarea id="articleContent" name="articleContent">{{articleContent}}</textarea>
+    <form id="createArticleForm" method="POST" enctype="multipart/form-data">
+        <label for="articleTitle">Заглавие<span class="redAsterix">*</span></label>
+        <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
 
-            <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
-            <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
+        <label for="articleImage">Изображение<span class="redAsterix">*</span></label>
+        <input type="file" id="articleImage" name="articleImage">
 
-            <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
-            <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
-            
-            <button class="additionalStyle">Създай статия</button>
-        </form>
-    </fieldset>
-</main>
+        <label for="articleAlt">Alt Текст за изображението<span class="redAsterix">*</span></label>
+        <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
+
+        <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
+        <textarea id="articleContent" name="articleContent">{{articleContent}}</textarea>
+
+        <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
+        <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
+
+        <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
+        <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
+
+        <button class="additionalStyle">Създай статия</button>
+    </form>
+</fieldset>
