@@ -11,15 +11,15 @@
         <form id="createBannerForm" method="POST" action="/banners/create" enctype="multipart/form-data">
             <label for="bannerImage">Banner Image <span class="redAsterix">*</span></label>
             <input type="file" name="bannerImage" id="bannerImage" required/>
-            <p class="inputRequirements {{#if errors.bannerImage}}red{{/if}}">Please upload an image</p>
+            <p class="inputRequirements {{#if errors.bannerImage}}red{{/if}}">Моля изберете изображение</p>
 
             <label for="bannerTitle">Banner Title <span class="redAsterix">*</span></label>
             <input type="text" name="bannerTitle" id="bannerTitle" required/>
-            <p class="inputRequirements {{#if errors.bannerTitle}}red{{/if}}">Enter a title</p>
+            <p class="inputRequirements {{#if errors.bannerTitle}}red{{/if}}">Моля въведете слоган - до 40 символа</p>
 
             <label for="bannerSubtitle">Banner Subtitle <span class="redAsterix">*</span></label>
             <input type="text" name="bannerSubtitle" id="bannerSubtitle" required/>
-            <p class="inputRequirements {{#if errors.bannerSubtitle}}red{{/if}}">Enter a subtitle</p>
+            <p class="inputRequirements {{#if errors.bannerSubtitle}}red{{/if}}">Моля въведете кратко изречение, свързано със слогана - до 80 символа</p>
 
             <button class="additionalStyle">Create Banner</button>
         </form>
