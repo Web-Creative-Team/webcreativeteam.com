@@ -9,28 +9,29 @@ const { uploadFileToPCloud } = require("../managers/pClowdManager");
 const upload = multer({ storage: multer.memoryStorage() });
 
 function formatDate(date) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(date).toLocaleDateString('en-US', options);
+    const options = { day: '2-digit', month: 'long', year: 'numeric' };
+    return new Date(date).toLocaleDateString('bg-BG', options); // ✅ 'en-GB' ensures correct format
 }
 
 router.get('/', async (req, res) => {
     try {
         let articles = await articleManager.getAllSorted(); // 🔥 Fetch sorted articles
-        let index = articles.length - 1;
-        let singleArticle = articles[index];
+        let singleArticle = articles[0]; // ✅ Select the newest article
+
         res.render('articles/article', {
             showSectionServices: true,
             singleArticle,
             articles,
             title: singleArticle.articleTitle,
             description: singleArticle.articleMetaDescription,
-            alt:singleArticle.articleAlt
+            alt: singleArticle.articleAlt
         });
     } catch (error) {
         console.error('Error loading articles or banners:', error);
         res.status(500).send('Error loading page');
     }
 });
+
 
 // GET - Render create article page
 // ✅ GET - Render article creation page
