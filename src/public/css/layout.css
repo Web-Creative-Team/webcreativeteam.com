@@ -268,10 +268,11 @@
 
     .messageContainer {
         display: flex;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: flex-start;
         padding: 0.8em;
-        max-width: 60%;
+        max-width: 80%;
         margin: auto;
         /* background-color: #eee; */
         border-radius: 0.5em;

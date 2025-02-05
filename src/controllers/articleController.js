@@ -32,18 +32,26 @@ router.get('/', async (req, res) => {
     }
 });
 
-
-// GET - Render create article page
-// ✅ GET - Render article creation page
 router.get('/create', isAuth, (req, res) => {
     res.render('articles/createArticle', { title: "Създаване на блог статия" });
 });
 
-// ✅ POST - Handle article creation with image upload
+
 router.post("/create", isAuth, upload.single("articleImage"), async (req, res) => {
     try {
         if (!req.file) {
-            return res.status(400).render("articles/createArticle", { error: "No file uploaded!" });
+            return res.status(400).render("articles/createArticle", { 
+                error: { messages: ["Моля изберете файл!"], fields: { articleImage: true } },
+                ...req.body 
+            });
+        }
+
+        const allowedMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+        if (!allowedMimeTypes.includes(req.file.mimetype)) {
+            return res.status(400).render("articles/createArticle", { 
+                error: { messages: ["Невалиден файл!"], fields: { articleImage: true } },
+                ...req.body 
+            });
         }
 
         const storageFolder = "blogimages";
@@ -52,7 +60,7 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
         const articleData = {
             articleTitle: req.body.articleTitle,
             articleImage: imageUrl,
-            articleAlt: req.body.articleAlt, // ✅ Store Alt Text
+            articleAlt: req.body.articleAlt,
             articleContent: req.body.articleContent,
             articleMetaTitle: req.body.articleMetaTitle,
             articleMetaDescription: req.body.articleMetaDescription,
@@ -65,7 +73,12 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
 
     } catch (error) {
         console.error("❌ Article creation failed:", error);
-        res.render("articles/createArticle", { error: error.message });
+        const validationResult = getErrorMessage(error);
+        res.render("articles/createArticle", { 
+            error: validationResult,
+            errors: validationResult.fields,
+            ...req.body 
+        });
     }
 });
 

@@ -1,9 +1,11 @@
 <fieldset>
     <legend>Създаване на блог статия</legend>
 
-    {{#if error}}
+    {{#if error.messages.length}}
     <div class="messageContainer red">
-        <p class="messageText">{{error}}</p>
+        {{#each error.messages}}
+            <p class="messageText">{{this}}</p> <!-- Each message now appears on a new line -->
+        {{/each}}
     </div>
     {{/if}}
 
@@ -12,16 +14,13 @@
         <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
         <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">Моля въведете заглавие на статията</p>
 
-
         <label for="articleImage">Изображение<span class="redAsterix">*</span></label>
         <input type="file" id="articleImage" name="articleImage">
         <p class="inputRequirements {{#if errors.articleImage}}red{{/if}}">Моля изберете изображение на статията</p>
 
-
         <label for="articleAlt">Alt Текст за изображението<span class="redAsterix">*</span></label>
         <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
         <p class="inputRequirements {{#if errors.articleAlt}}red{{/if}}">Моля добавете Alt атрибут, касаещ изображението на статията </p>
-
 
         <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
         <textarea id="articleContent" name="articleContent">{{articleContent}}</textarea>
@@ -33,7 +32,7 @@
 
         <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
         <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
-        <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">Моля въведете Meta Description на статията - до 160 символа</p>
+        <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">Моля въведете Meta Description на статията - до 160 символа</p>
 
         <button class="additionalStyle">Създай статия</button>
     </form>
