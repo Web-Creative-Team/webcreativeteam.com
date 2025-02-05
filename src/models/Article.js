@@ -6,42 +6,46 @@ const articleSchema = new mongoose.Schema({
         required: [true, "Title is required!"],
         minLength: [3, "The title is too short!"],
         maxLength: [35, "The title is too long!"],
-        match: [/^[A-Za-z0-9]+$/, 'The title must be alphanumeric'],
-
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Article title contains invalid characters!"],  
     },
 
     articleImage: {
         type: String,
-        required: [true, "Image is required!"]
+        required: [true, "Image is required!"],
     },
 
-    articleAlt: 
-    { type: String, 
-        required: [true, "Alt text is required!"] 
+    articleAlt: { 
+        type: String, 
+        required: [true, "Alt text is required!"],
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Alt text contains invalid characters!"], 
     }, 
 
     articleContent: {
         type: String,
-        required: [true, "Content is required!"]
+        required: [true, "Content is required!"],
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Article Content contains invalid characters!"], 
     },
 
     articleMetaTitle: {
         type: String,
-        required: [true, "Meta Title is required!"]
+        required: [true, "Meta Title is required!"],
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Meta Title contains invalid characters!"], 
     },
 
     articleMetaDescription: {
         type: String,
-        required: [true, "Meta Description is required!"]
+        required: [true, "Meta Description is required!"],
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Meta Description contains invalid characters!"], 
     },
 
-    dateCreated: String,
+    dateCreated: String, 
     
     storageFolder: { 
         type: String, 
-        default: "blogimages"  // ✅ Corrected: Now a valid schema field
+        default: "blogimages",
     }
 });
 
 const Article = mongoose.model('Article', articleSchema);
 module.exports = Article;
+

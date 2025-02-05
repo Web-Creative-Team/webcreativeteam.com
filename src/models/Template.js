@@ -19,7 +19,8 @@ const templateSchema = new mongoose.Schema({
     },
     previewLink: {
         type: String,
-        required: [true, "Preview link is required"]
+        required: [true, "Preview link is required"],
+        match: [/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, "Invalid URL format"],
     },
     storageFolder: { 
         type: String, 

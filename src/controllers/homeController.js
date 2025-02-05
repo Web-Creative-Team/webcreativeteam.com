@@ -57,10 +57,10 @@ router.get('/contacts', async (req, res, next) => {
     }
 });
 
-// const validateEmail = (email) => {
-//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     return regex.test(email);
-// };
+const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};
 
 router.post('/contacts', async (req, res, next) => {
     const { email, name, phone, message, recaptchaToken } = req.body;

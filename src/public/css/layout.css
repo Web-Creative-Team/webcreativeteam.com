@@ -256,7 +256,6 @@
     .messageText{
         margin: 0;
         font-size: 1.2em;
-        font-weight: bold;
     }
     
     .red,.redAsterix, .messageText.red {
