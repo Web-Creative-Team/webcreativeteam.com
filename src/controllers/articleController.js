@@ -17,12 +17,13 @@ router.get('/', async (req, res) => {
     try {
         let articles = await articleManager.getAllSorted(); // 🔥 Fetch sorted articles
         let singleArticle = articles[0]; // ✅ Select the newest article
-
+        console.log(singleArticle);
+        
         res.render('articles/article', {
             showSectionServices: true,
             singleArticle,
             articles,
-            title: singleArticle.articleTitle,
+            title: singleArticle.articleMetaTitle,
             description: singleArticle.articleMetaDescription,
             alt: singleArticle.articleAlt
         });
@@ -93,7 +94,7 @@ router.get('/:articleId/details', async (req, res) => {
             showSectionServices: true,
             singleArticle,
             articles,
-            title: singleArticle.articleTitle,
+            title: singleArticle.articleMetaTitle,
             description: singleArticle.articleMetaDescription,
             alt:singleArticle.articleAlt
         });
