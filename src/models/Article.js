@@ -18,6 +18,7 @@ const articleSchema = new mongoose.Schema({
         type: String, 
         required: [true, "Alt text is required!"],
         match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Alt text contains invalid characters!"], 
+        maxLength: [20, "The Alt text could be 20 characters long maximum"]
     }, 
 
     articleContent: {
@@ -30,12 +31,14 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: [true, "Meta Title is required!"],
         match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Meta Title contains invalid characters!"], 
+        maxLength: [70, "The Meta Title could be 70 characters long maximum"]
     },
 
     articleMetaDescription: {
         type: String,
         required: [true, "Meta Description is required!"],
         match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Meta Description contains invalid characters!"], 
+        maxLength: [160, "The Meta Describtion could be 160 characters long maximum"]
     },
 
     dateCreated: String, 
