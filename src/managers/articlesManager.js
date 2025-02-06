@@ -16,8 +16,8 @@ exports.create = (articleData) => {
     return Article.create(articleData);
 };
 
-exports.edit = async (articleId, articleData) => {
-    return await Article.findByIdAndUpdate(articleId, articleData, { new: true });
+exports.edit = (articleId, articleData) => {
+    return Article.findByIdAndUpdate(articleId, articleData, { new: true, runValidators: true });
 };
 
 exports.delete = (articleId) => {

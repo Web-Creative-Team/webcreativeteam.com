@@ -2,6 +2,7 @@
 const multer = require("multer"); // For handling file uploads
 const router = require('express').Router();
 const articleManager = require('../managers/articlesManager');
+const mongoose = require("mongoose")
 const { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorHelpers');
 const { uploadFileToPCloud } = require("../managers/pClowdManager");
@@ -125,7 +126,7 @@ router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (re
             articleContent: req.body.articleContent,
             articleMetaTitle: req.body.articleMetaTitle,
             articleMetaDescription: req.body.articleMetaDescription,
-            articleAlt: req.body.articleAlt, // ✅ Store Alt Text
+            articleAlt: req.body.articleAlt,
         };
 
         if (req.file) {
@@ -136,13 +137,33 @@ router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (re
             console.log("ℹ️ No new image uploaded, keeping the old one.");
         }
 
-        await articleManager.edit(articleId, articleData);
+        await articleManager.edit(articleId, articleData, { runValidators: true });
         console.log("✅ Article updated:", articleData);
         res.redirect(`/articles/${articleId}/details`);
 
     } catch (error) {
         console.log("❌ Error updating article:", error);
-        res.render("articles/editArticle", { error: error.message });
+
+        let errors = {};
+
+        if (error instanceof mongoose.Error.ValidationError) {
+            for (const field in error.errors) {
+                let message = error.errors[field].message;
+
+                if (message.includes("match")) {
+                    errors[field] = "Използване на забранени символи!";
+                } else {
+                    errors[field] = message;  // Default Mongoose error
+                }
+            }
+        } else {
+            errors.general = error.message;
+        }
+
+        res.render("articles/editArticle", {
+            ...req.body,
+            errors,
+        });
     }
 });
 
