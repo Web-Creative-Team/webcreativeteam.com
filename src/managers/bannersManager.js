@@ -20,3 +20,23 @@ exports.edit = async (bannerId, bannerData) => {
 exports.delete = (bannerId) => {
     return Banner.findByIdAndDelete(bannerId);
 };
+
+exports.validateAndUpdate = async (bannerId, bannerData) => {
+    let banner = await Banner.findById(bannerId);
+
+    if (!banner) {
+        throw new Error("Banner not found.");
+    }
+
+    // ✅ Apply new values, but let Mongoose handle validation
+    banner.bannerTitle = bannerData.bannerTitle;
+    banner.bannerSubtitle = bannerData.bannerSubtitle;
+    if (bannerData.bannerImage) {
+        banner.bannerImage = bannerData.bannerImage;
+    }
+
+    // ✅ Validate before saving
+    await banner.validate();
+    return banner.save();
+};
+

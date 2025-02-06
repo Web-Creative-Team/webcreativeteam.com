@@ -19,21 +19,36 @@ router.get('/create', isAuth, (req, res) => {
 
 router.post("/create", isAuth, upload.single("bannerImage"), async (req, res) => {
     try {
+        let errors = {};
+
         if (!req.file) {
-            return res.status(400).render("banners/createBanner", { error: "No file uploaded!" });
+            errors.bannerImage = "Моля изберете изображение!";
         }
 
-        const storageFolder = "herobanner";  // ✅ Ensure the correct folder is assigned
+        if (!req.body.bannerTitle?.trim()) {
+            errors.bannerTitle = "Моля въведете слоган!";
+        } else if (!/^[\p{L}0-9\s\-\.,!?%$&@]+$/u.test(req.body.bannerTitle)) {
+            errors.bannerTitle = "Използване на забранени символи!";
+        }
 
-        // ✅ Upload the image to pCloud
+        if (!req.body.bannerSubtitle?.trim()) {
+            errors.bannerSubtitle = "Моля въведете кратко изречение!";
+        } else if (!/^[\p{L}0-9\s\-\.,!?%$&@]+$/u.test(req.body.bannerSubtitle)) {
+            errors.bannerSubtitle = "Използване на забранени символи!";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).render("banners/createBanner", { errors, ...req.body });
+        }
+
+        const storageFolder = "herobanner";
         const imageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder);
 
-        // ✅ Ensure **MongoDB record is created**
         const bannerData = {
             bannerImage: imageUrl,
             bannerTitle: req.body.bannerTitle,
             bannerSubtitle: req.body.bannerSubtitle,
-            storageFolder: storageFolder  // ✅ Save folder name inside DB
+            storageFolder: storageFolder
         };
 
         await bannersManager.create(bannerData);
@@ -43,7 +58,7 @@ router.post("/create", isAuth, upload.single("bannerImage"), async (req, res) =>
 
     } catch (error) {
         console.error("❌ Banner creation failed:", error);
-        res.render("banners/createBanner", { error: error.message });
+        res.render("banners/createBanner", { error: error.message, ...req.body });
     }
 });
 
@@ -72,9 +87,11 @@ console.log(searchedBanner);
 })
 
 router.post('/:bannerId/edit', isAuth, upload.single("bannerImage"), async (req, res) => {
+    let bannerId = req.params.bannerId;
+    let existingBanner; // Declare outside try block to be available in catch
+
     try {
-        let bannerId = req.params.bannerId;
-        let existingBanner = await bannersManager.getOne(bannerId); // ✅ Fetch existing banner
+        existingBanner = await bannersManager.getOne(bannerId); // Fetch existing banner
 
         if (!existingBanner) {
             throw new Error("Banner not found.");
@@ -87,21 +104,33 @@ router.post('/:bannerId/edit', isAuth, upload.single("bannerImage"), async (req,
 
         if (req.file) {
             console.log("✅ New image uploaded, replacing existing one...");
-            const storageFolder = existingBanner.storageFolder || "herobanner"; // ✅ Use existing storage folder
+            const storageFolder = existingBanner.storageFolder || "herobanner";
             const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder);
             bannerData.bannerImage = newImageUrl;
         } else {
             console.log("ℹ️ No new image uploaded, keeping the old one.");
         }
 
-        await bannersManager.edit(bannerId, bannerData);
+        // ✅ Validate via Mongoose before saving
+        await bannersManager.validateAndUpdate(bannerId, bannerData);
+
         console.log("✅ Banner updated:", bannerData);
         res.redirect('/banners/edit');
+
     } catch (error) {
         console.log("❌ Error updating banner:", error);
-        res.render("banners/editBannersForm", { error: error.message });
+
+        const { messages, fields } = getErrorMessage(error); // ✅ Use errorHelper.js
+
+        res.render("banners/editBannersForm", {
+            errors: messages,
+            invalidFields: fields,
+            ...req.body,
+            bannerImage: existingBanner ? existingBanner.bannerImage : "", // ✅ Ensures image is passed even on error
+        });
     }
 });
+
 
 router.get('/:bannerId/delete', async (req, res) => {
     if (!req.user) {

@@ -1,4 +1,4 @@
-button.additionalStyle {
+button.additionalStyle,input.additionalStyle {
     margin-top: 2em;
     align-self: end;
     padding: 0.3em 0.5em;
@@ -10,14 +10,31 @@ button.additionalStyle {
     font-weight: bold;
 }
 
-button.additionalStyle :hover {
+button.additionalStyle:hover, input.additionalStyle:hover {
     background: #EF7F19;
     color: #1A6B41;
 }
 
-button.editBtn, button.deleteBtn{
-    min-width: 20%;
+.editBtn, .deleteBtn{
+    min-width: 30%;
 }
+
+.additionalStyle.cancel{
+    background: #EF7F19;
+    color: #1A6B41;
+}
+
+.additionalStyle.cancel:hover{
+    background: #1A6B41;
+    color: #EF7F19;
+}
+
+.editCancelBtnContainer{
+    display: flex;
+    gap: 0.5em;
+    justify-content: end;
+}
+
 
 form {
     font-weight: bold;

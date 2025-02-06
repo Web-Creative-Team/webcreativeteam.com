@@ -1,18 +1,35 @@
 <main class="noAside">
     <fieldset>
         <legend>Edit Banner</legend>
-    <form method="post" enctype="multipart/form-data">
-        <div style="max-width: 500px;"><img src="{{this.bannerImage}}" alt="Current Image"></div>
-        <label for="bannerImage">Upload New Image (Optional)</label>
-        <input type="file" name="bannerImage" id="bannerImage">
 
-        <label for="bannerTitle">Edit Title</label>
-        <input type="text" name="bannerTitle" id="bannerTitle" value="{{this.bannerTitle}}">
+        {{#if errors}}
+        <div class="messageContainer red">
+            {{#each errors}}
+            <p class="messageText">{{this}}</p>
+            {{/each}}
+        </div>
+        {{/if}}
 
-        <label for="bannerSubtitle">Edit Subtitle</label>
-        <input type="text" name="bannerSubtitle" id="bannerSubtitle" value="{{this.bannerSubtitle}}">
-        
-        <input type="submit" value="Save Changes">
-    </form>
+        <form method="post" enctype="multipart/form-data">
+            <div style="max-width: 500px;"><img src="{{this.bannerImage}}" alt="Current Image"></div>
+
+            <label for="bannerImage">Upload New Image (Optional)</label>
+            <input type="file" name="bannerImage" id="bannerImage">
+            <p class="inputRequirements {{#if invalidFields.bannerImage}}red{{/if}}">{{errors.bannerImage}}</p>
+
+            <label for="bannerTitle">Edit Title</label>
+            <input type="text" name="bannerTitle" id="bannerTitle" value="{{this.bannerTitle}}">
+            <p class="inputRequirements {{#if invalidFields.bannerTitle}}red{{/if}}">{{errors.bannerTitle}}</p>
+
+            <label for="bannerSubtitle">Edit Subtitle</label>
+            <input type="text" name="bannerSubtitle" id="bannerSubtitle" value="{{this.bannerSubtitle}}">
+            <p class="inputRequirements {{#if invalidFields.bannerSubtitle}}red{{/if}}">{{errors.bannerSubtitle}}</p>
+
+            <div class="editCancelBtnContainer">
+                <button class="additionalStyle cancel" href="/banners/edit">Cancel</button>
+                <input class="additionalStyle" type="submit" value="Save Changes">
+            </div>
+
+        </form>
     </fieldset>
 </main>

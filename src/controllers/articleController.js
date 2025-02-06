@@ -38,7 +38,6 @@ router.get('/create', isAuth, (req, res) => {
     res.render('articles/createArticle', { title: "Създаване на блог статия" });
 });
 
-
 router.post("/create", isAuth, upload.single("articleImage"), async (req, res) => {
     try {
         if (!req.file) {
@@ -83,7 +82,6 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
         });
     }
 });
-
 
 router.get('/:articleId/details', async (req, res) => {
     try {
@@ -167,7 +165,6 @@ router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (re
     }
 });
 
-
 router.get('/:articleId/delete', async(req, res)=>{
     if (!req.user) {
         res.redirect('/users/login')
@@ -185,7 +182,6 @@ router.get('/:articleId/delete', async(req, res)=>{
 
     }}
 })
-
 
 module.exports = router;
 
