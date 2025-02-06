@@ -288,6 +288,11 @@
     .fade-out {
         animation: fadeOut 1s forwards; /* 1s fade, fill forwards means stay at opacity: 0 */
       }
+
+      .dateCreated{
+        font-size: 0.8em;
+        color: #bbb;
+      }
       
       @keyframes fadeOut {
         to {

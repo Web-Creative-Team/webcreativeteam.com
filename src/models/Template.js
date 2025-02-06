@@ -9,7 +9,7 @@ const templateSchema = new mongoose.Schema({
         type: String, 
         required: [true, "Alt text is required!"],
         match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "Използване на забранени символи!"], 
-        maxLength: [20, "Alt текстът може да бъде максимум 20 символа"] 
+        maxLength: [30, "Alt текстът може да бъде максимум 30 символа"] 
     },
     templateTitle: {
         type: String,

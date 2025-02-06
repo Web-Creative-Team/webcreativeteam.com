@@ -1,13 +1,12 @@
 <fieldset>
     <legend>Създаване на блог статия</legend>
 
-    {{#if error.messages.length}}
-    <div class="messageContainer red">
-        {{#each error.messages}}
-            <p class="messageText">{{this}}</p> <!-- Each message now appears on a new line -->
-        {{/each}}
-    </div>
-    {{/if}}
+    {{#if error}}
+<div class="messageContainer red">
+    <p class="messageText">{{{error}}}</p> 
+</div>
+{{/if}}
+
 
     <form id="createArticleForm" method="POST" enctype="multipart/form-data">
         <label for="articleTitle">Заглавие<span class="redAsterix">*</span></label>

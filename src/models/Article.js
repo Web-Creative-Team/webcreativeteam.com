@@ -18,7 +18,7 @@ const articleSchema = new mongoose.Schema({
         type: String, 
         required: [true, "Alt text is required!"],
         match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Alt text contains invalid characters!"], 
-        maxLength: [20, "The Alt text could be 20 characters long maximum"]
+        maxLength: [30, "The Alt text could be 30 characters long maximum"]
     }, 
 
     articleContent: {
