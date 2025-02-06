@@ -13,7 +13,11 @@ exports.create = (templateData) => {
 };
 
 exports.edit = async (templateId, templateData) => {
-    return await Template.findByIdAndUpdate(templateId, templateData, { new: true });
+    return await Template.findOneAndUpdate(
+        { _id: templateId }, // Query by ID
+        templateData, 
+        { new: true, runValidators: true, context: "query" } // Ensure validators run
+    );
 };
 
 exports.delete = (templateId) => {

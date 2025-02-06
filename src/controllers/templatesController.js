@@ -9,7 +9,6 @@ const { uploadFileToPCloud } = require("../managers/pClowdManager");
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-// ✅ GET - Render Templates Page
 router.get("/", async (req, res) => {
     try {
         let banners = await bannersManager.getAll();
@@ -26,16 +25,18 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ✅ GET - Render Create Template Page
 router.get('/create', isAuth, (req, res) => {
     res.render('WPTemplates/createTemplate');
 });
 
-// ✅ POST - Handle Template Creation (Upload Image to pCloud + Save in DB)
 router.post("/create", isAuth, upload.single("templateImage"), async (req, res) => {
     try {
         if (!req.file) {
-            return res.status(400).render("WPTemplates/createTemplate", { error: "No file uploaded!" });
+            return res.status(400).render("WPTemplates/createTemplate", { 
+                error: "Моля изберете изображение!", 
+                errors: { templateImage: true }, 
+                ...req.body 
+            });
         }
 
         const storageFolder = "templateimages";
@@ -55,11 +56,18 @@ router.post("/create", isAuth, upload.single("templateImage"), async (req, res) 
 
     } catch (error) {
         console.error("❌ Template creation failed:", error);
-        res.render("WPTemplates/createTemplate", { error: error.message });
+
+        const errorInfo = getErrorMessage(error);
+
+        res.render("WPTemplates/createTemplate", {
+            error: errorInfo.messages.join("\n"),
+            errors: errorInfo.fields,
+            ...req.body
+        });
     }
 });
 
-// ✅ GET - Render Edit Templates View
+
 router.get('/edit', isAuth, async (req, res) => {
     try {
         let templates = await templatesManager.getAll();
@@ -69,7 +77,6 @@ router.get('/edit', isAuth, async (req, res) => {
     }
 });
 
-// ✅ GET - Render Edit Template Form
 router.get('/:templateId/edit', isAuth, async (req, res) => {
     try {
         let templateId = req.params.templateId;
@@ -88,11 +95,15 @@ router.get('/:templateId/edit', isAuth, async (req, res) => {
     }
 });
 
-
-// ✅ POST - Handle Template Update (With or Without New Image)
 router.post('/:templateId/edit', isAuth, upload.single("templateImage"), async (req, res) => {
     try {
         let templateId = req.params.templateId;
+        let existingTemplate = await templatesManager.getOne(templateId);
+
+        if (!existingTemplate) {
+            throw new Error("Template not found.");
+        }
+
         let templateData = {
             templateAltAttribute: req.body.templateAltAttribute,
             templateTitle: req.body.templateTitle,
@@ -106,19 +117,31 @@ router.post('/:templateId/edit', isAuth, upload.single("templateImage"), async (
             templateData.templateImage = newImageUrl;
         } else {
             console.log("ℹ️ No new image uploaded, keeping the old one.");
+            templateData.templateImage = existingTemplate.templateImage;
         }
 
+        // ✅ Force validation to run on update
         await templatesManager.edit(templateId, templateData);
+
         console.log("✅ Template updated:", templateData);
         res.redirect('/templates/edit');
 
     } catch (error) {
         console.error("❌ Error updating template:", error);
-        res.render("WPTemplates/editTemplateForm", { error: error.message });
+
+        const errorInfo = getErrorMessage(error);
+
+        res.render("WPTemplates/editTemplateForm", {
+            error: errorInfo.messages.join("\n"),
+            errors: errorInfo.fields,
+            ...req.body,
+            templateImage: (await templatesManager.getOne(req.params.templateId)).templateImage // Keep image
+        });
     }
 });
 
-// ✅ GET - Delete a Template (Soft Delete Confirmation)
+
+
 router.get('/:templateId/delete', isAuth, async (req, res) => {
     try {
         let templateId = req.params.templateId;

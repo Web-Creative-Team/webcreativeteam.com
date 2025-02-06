@@ -8,30 +8,29 @@ const templateSchema = new mongoose.Schema({
     templateAltAttribute: {
         type: String, 
         required: [true, "Alt text is required!"],
-        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Alt text contains invalid characters!"], 
-        maxLength: [20, "The Alt text could be 20 characters long maximum"] 
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "Използване на забранени символи!"], 
+        maxLength: [20, "Alt текстът може да бъде максимум 20 символа"] 
     },
     templateTitle: {
         type: String,
         required: [true, "Title is required"],
-        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "The Alt text contains invalid characters!"], 
-        maxLength: [25, "The title could be 25 characters long maximum"]
-
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "Използване на забранени символи!"], 
+        maxLength: [25, "Заглавието може да бъде максимум 25 символа"]
     },
     templateShortDescription: {
         type: String,
         required: [true, "Short description is required"],
-        maxLength: [50, "The Short Describtion could be 50 characters long maximum"]
-
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "Използване на забранени символи!"], 
+        maxLength: [50, "Краткото описание може да бъде максимум 50 символа"]
     },
     previewLink: {
         type: String,
         required: [true, "Preview link is required"],
-        match: [/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, "Invalid URL format"],
+        match: [/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, "Невалиден формат за линк"],
     },
     storageFolder: { 
         type: String, 
-        default: "templateimages"  // ✅ Corrected storage folder field
+        default: "templateimages"  
     }
 });
 
