@@ -7,15 +7,21 @@ const bannerSchema = new mongoose.Schema({
     },
     bannerTitle: {
         type: String,
-        required: [true, "Banner Title is Required"]
+        required: [true, "Моля въведете слоган!"],
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "Използване на забранени символи!"],
+        minLength: [3, "Слоганът е твърде кратък!"],
+        maxLength: [40, "Слоганът е твърде дълъг!"]
     },
     bannerSubtitle: {
         type: String,
-        required: [true, "Banner Subtitle is Required"]
+        required: [true, "Моля въведете кратко изречение!"],
+        match: [/^[\p{L}0-9\s\-\.,!?%$&@]+$/u, "Използване на забранени символи!"],
+        minLength: [3, "Текстът е твърде кратък!"],
+        maxLength: [80, "Текстът е твърде дълъг!"]
     },
     storageFolder: { 
         type: String, 
-        default: "herobanner",  // ✅ Ensures banners always get saved in 'herobanner'
+        default: "herobanner",  
         required: true
     }
 });

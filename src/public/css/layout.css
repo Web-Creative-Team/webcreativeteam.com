@@ -256,10 +256,9 @@
     .messageText{
         margin: 0;
         font-size: 1.2em;
-        font-weight: bold;
     }
     
-    .red, .messageText.red {
+    .red,.redAsterix, .messageText.red {
         color: red;
     }
     
@@ -269,10 +268,11 @@
 
     .messageContainer {
         display: flex;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: flex-start;
         padding: 0.8em;
-        max-width: 60%;
+        max-width: 80%;
         margin: auto;
         /* background-color: #eee; */
         border-radius: 0.5em;
@@ -287,6 +287,11 @@
 
     .fade-out {
         animation: fadeOut 1s forwards; /* 1s fade, fill forwards means stay at opacity: 0 */
+      }
+
+      .dateCreated{
+        font-size: 0.8em;
+        color: #bbb;
       }
       
       @keyframes fadeOut {

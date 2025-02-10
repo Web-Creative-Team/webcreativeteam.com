@@ -1,5 +1,5 @@
 <div class="articleImage">
-    <img src="{{singleArticle.articleImage}}" alt="" srcset="">
+    <img src="{{singleArticle.articleImage}}" alt="{{this.alt}}" srcset="">
 </div>
 <div class="asideLayout">
 
@@ -7,11 +7,14 @@
     <main class="withAside">
         <h1>{{singleArticle.articleTitle}}</h1>
         <p>{{singleArticle.articleContent}}</p>
-        <p>{{singleArticle.dateCreated}}</p>
+        <p class="dateCreated">{{singleArticle.dateCreated}}</p>
 
         {{#if isAuthenticated}}
         <a class="editLink" href="/articles/{{singleArticle._id}}/edit">Edit</a>
-        <a class="deleteLink" href="/articles/{{singleArticle._id}}/delete">Delete</a>
+        <a class="deleteLink" href="/articles/{{singleArticle._id}}/delete"
+            onclick="return confirm('Are you sure you want to delete the article: {{singleArticle.articleTitle}}?');">
+            Delete
+        </a>
         {{/if}}
     </main>
 

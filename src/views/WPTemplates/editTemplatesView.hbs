@@ -3,14 +3,23 @@
     <fieldset>
         <legend>Edit Template</legend>
 
-        <div style="max-width: 500px;"><img src="{{templateImage}}" alt="" srcset=""></div>
+        <div style="max-width: 500px;">
+            <img src="{{templateImage}}" alt="{{templateAltAttribute}}">
+        </div>
 
         <p>{{templateTitle}}</p>
         <p>{{templateShortDescription}}</p>
 
-        
-    <a href="/templates/{{_id}}/edit">Edit</a>
-    <a href="/templates/{{_id}}/delete">Delete</a>
+        <a href="/templates/{{_id}}/edit">Edit</a>
+        <a href="javascript:void(0);" onclick="confirmDelete('{{_id}}', '{{templateTitle}}')">Delete</a>
     </fieldset>
     {{/each}}
 </main>
+
+<script>
+function confirmDelete(templateId, templateTitle) {
+    if (confirm(`❗ Are you sure you want to delete the template: "${templateTitle}"?`)) {
+        window.location.href = `/templates/${templateId}/delete`;
+    }
+}
+</script>

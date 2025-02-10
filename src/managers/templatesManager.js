@@ -1,14 +1,25 @@
 const Template = require('../models/Template');
 
 exports.getAll = async () => {
-    let templates = await Template.find({}).lean();
-    return templates;
-}
+    return await Template.find({}).lean();
+};
 
-exports.getOne = async (templateId) => await Template.findById(templateId)
+exports.getOne = async (templateId) => {
+    return await Template.findById(templateId);
+};
 
-exports.create = (templateData) => Template.create(templateData);
+exports.create = (templateData) => {
+    return Template.create(templateData);
+};
 
-exports.edit = (templateId, templateData) => Template.findByIdAndUpdate(templateId, templateData);
+exports.edit = async (templateId, templateData) => {
+    return await Template.findOneAndUpdate(
+        { _id: templateId }, // Query by ID
+        templateData, 
+        { new: true, runValidators: true, context: "query" } // Ensure validators run
+    );
+};
 
-exports.delete = (templateId) => Template.findByIdAndDelete(templateId)
+exports.delete = (templateId) => {
+    return Template.findByIdAndDelete(templateId);
+};

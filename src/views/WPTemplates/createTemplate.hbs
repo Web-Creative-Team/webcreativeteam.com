@@ -8,56 +8,44 @@
         </div>
         {{/if}}
 
-        <form id="createTemplateForm" method="POST">
+        <form id="createTemplateForm" method="POST" enctype="multipart/form-data">
 
-            <!-- Template Image URL -->
-            <label for="templateImage">Template Image URL</label>
-            <input type="text" name="templateImage" id="templateImage" value="{{templateImage}}"/>
-            <p class="inputRequirements ">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateImage')}}red{{/if}}"> --}}
-                Основно изображение на темплейта (задължително)
+            <!-- Template Image Upload -->
+            <label for="templateImage">Upload Template Image<span class="redAsterix">*</span></label>
+            <input type="file" name="templateImage" id="templateImage" accept="image/*" />
+            <p class="inputRequirements {{#if errors.templateImage}}red{{/if}}">
+                {{#if errors.templateImage}}{{error}}{{/if}}
             </p>
 
             <!-- Template Alt Attribute -->
-            <label for="templateAltAttribute">Alt</label>
-            <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{templateAltAttribute}}"/>
-            <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateAltAttribute')}}red{{/if}}"> --}}
-                Моля въведете Alt текст (задължително)
+            <label for="templateAltAttribute">Alt Attribute<span class="redAsterix">*</span></label>
+            <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{templateAltAttribute}}" />
+            <p class="inputRequirements {{#if errors.templateAltAttribute}}red{{/if}}">
+                {{#if errors.templateAltAttribute}}{{error}}{{/if}}
             </p>
 
             <!-- Template Title -->
-            <label for="templateTitle">Template Title</label>
-            <input type="text" name="templateTitle" id="templateTitle" value="{{templateTitle}}"/>
-            <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateTitle')}}red{{/if}}"> --}}
-                Моля въведете името на темплейта (задължително)
+            <label for="templateTitle">Template Title<span class="redAsterix">*</span></label>
+            <input type="text" name="templateTitle" id="templateTitle" value="{{templateTitle}}" />
+            <p class="inputRequirements {{#if errors.templateTitle}}red{{/if}}">
+                {{#if errors.templateTitle}}{{error}}{{/if}}
             </p>
 
             <!-- Template Short Description -->
-            <label for="templateShortDescription">Template Short Description</label>
-            <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{templateShortDescription}}"/>
-                        <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'templateShortDescription')}}red{{/if}}"> --}}
-                Моля въведете описание на темплейта – от 10 до 50 символа
+            <label for="templateShortDescription">Template Short Description<span class="redAsterix">*</span></label>
+            <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{templateShortDescription}}" />
+            <p class="inputRequirements {{#if errors.templateShortDescription}}red{{/if}}">
+                {{#if errors.templateShortDescription}}{{error}}{{/if}}
             </p>
 
             <!-- Preview Link -->
-            <label for="previewLink">Preview Link</label>
-            <input type="text" name="previewLink" id="previewLink" value="{{previewLink}}"/>
-            <p class="inputRequirements">
-                {{!--
-            <p class="inputRequirements {{#if (eq focusField 'previewLink')}}red{{/if}}"> --}}
-                Моля въведете Preview на темплейта
+            <label for="previewLink">Preview Link<span class="redAsterix">*</span></label>
+            <input type="text" name="previewLink" id="previewLink" value="{{previewLink}}" />
+            <p class="inputRequirements {{#if errors.previewLink}}red{{/if}}">
+                {{#if errors.previewLink}}{{error}}{{/if}}
             </p>
 
             <button class="additionalStyle">Create Template</button>
         </form>
     </fieldset>
-
-    <!-- Attach your SINGLE universal validation script -->
 </main>

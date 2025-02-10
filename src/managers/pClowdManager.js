@@ -5,20 +5,21 @@ require("dotenv").config();
 const PCloudToken = process.env.PCLOUD_ACCESS_TOKEN;
 const PCloudUploadUrl = "https://api.pcloud.com/uploadfile";
 
+// ✅ Folder mappings
+const folderMapping = {
+    "herobanner": "22300824960",
+    "blogimages": "22300838896",
+    "templateimages": "23168564398"
+};
+
 /**
  * Uploads a file to pCloud inside the correct folder.
  * @param {Buffer} fileBuffer - The file data.
  * @param {string} fileName - The name of the file.
- * @param {string} folderName - The target folder (e.g., "herobanner", "blogimages").
+ * @param {string} folderName - The target folder.
  * @returns {Promise<string>} - Returns the permanent file URL.
  */
 async function uploadFileToPCloud(fileBuffer, fileName, folderName) {
-    // ✅ Correct folder mappings
-    const folderMapping = {
-        "herobanner": "22300824960",
-        "blogimages": "22300838896",  // ✅ Fixed folder ID
-    };
-
     const folderId = folderMapping[folderName];
 
     if (!folderId) {
@@ -26,23 +27,14 @@ async function uploadFileToPCloud(fileBuffer, fileName, folderName) {
         throw new Error("Invalid storage folder!");
     }
 
-    console.log(`🚀 Uploading to pCloud...`);
-    console.log(`📂 Folder: ${folderName}`);
-    console.log(`🗂 Folder ID: ${folderId}`);
-    console.log(`📎 File Name: ${fileName}`);
+    console.log(`🚀 Uploading to pCloud... 📂 Folder: ${folderName} | 🗂 Folder ID: ${folderId} | 📎 File Name: ${fileName}`);
 
-    // ✅ Prepare FormData
     const formData = new FormData();
     formData.append("file", fileBuffer, fileName);
     formData.append("folderid", folderId);
 
     try {
-        // 🔄 Upload request
-        const response = await axios.post(
-            `${PCloudUploadUrl}?auth=${PCloudToken}&folderid=${folderId}`,
-            formData,
-            { headers: { ...formData.getHeaders() } }
-        );
+        const response = await axios.post(`${PCloudUploadUrl}?auth=${PCloudToken}&folderid=${folderId}`, formData, { headers: { ...formData.getHeaders() } });
 
         if (response.data.result === 0) {
             console.log("✅ Upload successful:", response.data);
