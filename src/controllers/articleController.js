@@ -12,7 +12,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 function formatDate(date) {
     if (!date || isNaN(new Date(date))) {
-        return "Невалидна дата";  // Prevents crash, handles missing/invalid dates
+        return "Невалидна дата"; // Prevents crash, handles missing/invalid dates
     }
 
     return new Intl.DateTimeFormat('bg-BG', {
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
     try {
         let articles = await articleManager.getAllSorted(); // 🔥 Fetch sorted articles
         let singleArticle = articles[0]; // ✅ Select the newest article
-        singleArticle.dateCreated = formatDate(singleArticle.dateCreated)
+        singleArticle.dateCreated = formatDate(singleArticle.dateCreated);
 
         res.render('articles/article', {
             showSectionServices: true,
@@ -51,7 +51,7 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
         if (!req.file) {
             errors.articleImage = true;
         } else {
-            // ✅ Check if uploaded file is a **real** image
+            // ✅ Validate if the uploaded file is a real image
             const isImageValid = await isValidImage(req.file);
             if (!isImageValid) {
                 errors.articleImage = true;
@@ -102,14 +102,13 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
     }
 });
 
-
 router.get('/:articleId/details', async (req, res) => {
     try {
         let articles = await articleManager.getAllSorted();
         let articleId = req.params.articleId.toString();
         let singleArticle = await articleManager.getOne(articleId);
         singleArticle.dateCreated = formatDate(singleArticle.dateCreated); // Formatting the date for display
-        
+
         res.render('articles/article', {
             showSectionServices: true,
             singleArticle,
@@ -129,7 +128,7 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
         let articleId = req.params.articleId;
         let articleData = await articleManager.getOne(articleId);
         articleData.dateCreated = formatDate(articleData.dateCreated);
-        
+
         res.render('articles/editArticle', { ...articleData, title: "Редактиране на Блог статия" });
     } catch (error) {
         console.error('Error:', error);
@@ -149,7 +148,19 @@ router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (re
         };
 
         if (req.file) {
-            console.log("✅ New image uploaded, replacing existing one...");
+            console.log("✅ New image uploaded, validating...");
+            
+            // ✅ Validate if the uploaded file is a real image
+            const isImageValid = await isValidImage(req.file);
+            if (!isImageValid) {
+                return res.status(400).render("articles/editArticle", {
+                    error: "Изображението е компрометирано и не може да се използва!",
+                    errors: { articleImage: true },
+                    ...req.body
+                });
+            }
+
+            console.log("✅ Image is valid, replacing existing one...");
             const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "blogimages");
             articleData.articleImage = newImageUrl;
         } else {

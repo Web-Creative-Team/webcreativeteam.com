@@ -2,10 +2,10 @@
     <legend>Създаване на блог статия</legend>
 
     {{#if error}}
-<div class="messageContainer red">
-    <p class="messageText">{{{error}}}</p> 
-</div>
-{{/if}}
+    <div class="messageContainer red">
+        <p class="messageText">{{{error}}}</p>
+    </div>
+    {{/if}}
 
 
     <form id="createArticleForm" method="POST" enctype="multipart/form-data">
@@ -19,19 +19,23 @@
 
         <label for="articleAlt">Alt Текст за изображението<span class="redAsterix">*</span></label>
         <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
-        <p class="inputRequirements {{#if errors.articleAlt}}red{{/if}}">Моля добавете Alt атрибут, касаещ изображението на статията </p>
+        <p class="inputRequirements {{#if errors.articleAlt}}red{{/if}}">Моля добавете Alt атрибут, касаещ изображението
+            на статията </p>
 
         <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
         <textarea id="articleContent" name="articleContent">{{articleContent}}</textarea>
-        <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">Моля попълнете съдържанието на статията - до 2000 думи</p>
+        <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">Моля попълнете съдържанието на статията -
+            до 2000 думи</p>
 
         <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
         <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
-        <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">Моля въведете Meta Title на статията - до 70 символа</p>
+        <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">Моля въведете Meta Title на статията - до
+            70 символа</p>
 
         <label for="articleMetaDescription">Meta Description<span class="redAsterix">*</span></label>
         <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
-        <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">Моля въведете Meta Description на статията - до 160 символа</p>
+        <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">Моля въведете Meta Description на
+            статията - до 160 символа</p>
 
         <button class="additionalStyle">Създай статия</button>
     </form>
