@@ -13,27 +13,37 @@
             <!-- Template Image Upload -->
             <label for="templateImage">Upload Template Image<span class="redAsterix">*</span></label>
             <input type="file" name="templateImage" id="templateImage" accept="image/*" />
-            <p class="inputRequirements">Upload an image for the template (required)</p>
+            <p class="inputRequirements {{#if errors.templateImage}}red{{/if}}">
+                {{#if errors.templateImage}}{{error}}{{/if}}
+            </p>
 
             <!-- Template Alt Attribute -->
             <label for="templateAltAttribute">Alt Attribute<span class="redAsterix">*</span></label>
             <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{templateAltAttribute}}" />
-            <p class="inputRequirements">Please enter an Alt text (required)</p>
+            <p class="inputRequirements {{#if errors.templateAltAttribute}}red{{/if}}">
+                {{#if errors.templateAltAttribute}}{{error}}{{/if}}
+            </p>
 
             <!-- Template Title -->
             <label for="templateTitle">Template Title<span class="redAsterix">*</span></label>
             <input type="text" name="templateTitle" id="templateTitle" value="{{templateTitle}}" />
-            <p class="inputRequirements">Enter the template name (required)</p>
+            <p class="inputRequirements {{#if errors.templateTitle}}red{{/if}}">
+                {{#if errors.templateTitle}}{{error}}{{/if}}
+            </p>
 
             <!-- Template Short Description -->
             <label for="templateShortDescription">Template Short Description<span class="redAsterix">*</span></label>
             <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{templateShortDescription}}" />
-            <p class="inputRequirements">Enter a short description of the template (10-50 characters required)</p>
+            <p class="inputRequirements {{#if errors.templateShortDescription}}red{{/if}}">
+                {{#if errors.templateShortDescription}}{{error}}{{/if}}
+            </p>
 
             <!-- Preview Link -->
             <label for="previewLink">Preview Link<span class="redAsterix">*</span></label>
             <input type="text" name="previewLink" id="previewLink" value="{{previewLink}}" />
-            <p class="inputRequirements">Enter the preview link for the template</p>
+            <p class="inputRequirements {{#if errors.previewLink}}red{{/if}}">
+                {{#if errors.previewLink}}{{error}}{{/if}}
+            </p>
 
             <button class="additionalStyle">Create Template</button>
         </form>

@@ -8,32 +8,42 @@
         </div>
         {{/if}}
 
-    <form method="post" enctype="multipart/form-data">
-        <div style="max-width: 500px;">
-            <img src="{{this.templateImage}}" alt="{{this.templateAltAttribute}}">
-        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div style="max-width: 500px;">
+                <img src="{{this.templateImage}}" alt="{{this.templateAltAttribute}}">
+            </div>
 
-        <label for="templateImage">Upload New Image</label>
-        <input type="file" name="templateImage" id="templateImage">
-        <p class="inputRequirements {{#if errors.templateImage}}red{{/if}}">Моля изберете изображение</p>
+            <label for="templateImage">Upload New Image</label>
+            <input type="file" name="templateImage" id="templateImage">
+            <p class="inputRequirements {{#if errors.templateImage}}red{{/if}}"> {{#if
+                errors.templateImage}}{{error}}{{/if}}</p>
 
-        <label for="templateAltAttribute">Edit Alt Attribute</label>
-        <input type="text" name="templateAltAttribute" id="templateAltAttribute" value="{{this.templateAltAttribute}}">
-        <p class="inputRequirements {{#if errors.templateAltAttribute}}red{{/if}}">Моля добавете Alt атрибут</p>
+            <label for="templateAltAttribute">Edit Alt Attribute</label>
+            <input type="text" name="templateAltAttribute" id="templateAltAttribute"
+                value="{{this.templateAltAttribute}}">
+            <p class="inputRequirements {{#if errors.templateAltAttribute}}red{{/if}}"> {{#if
+                errors.templateAltAttribute}}{{error}}{{/if}}</p>
 
-        <label for="templateTitle">Edit Title</label>
-        <input type="text" name="templateTitle" id="templateTitle" value="{{this.templateTitle}}">
-        <p class="inputRequirements {{#if errors.templateTitle}}red{{/if}}">Моля въведете заглавие на темплейта</p>
+            <label for="templateTitle">Edit Title</label>
+            <input type="text" name="templateTitle" id="templateTitle" value="{{this.templateTitle}}">
+            <p class="inputRequirements {{#if errors.templateTitle}}red{{/if}}">{{#if
+                errors.templateTitle}}{{error}}{{/if}}</p>
 
-        <label for="templateShortDescription">Edit Short Description</label>
-        <input type="text" name="templateShortDescription" id="templateShortDescription" value="{{this.templateShortDescription}}">
-        <p class="inputRequirements {{#if errors.templateShortDescription}}red{{/if}}">Описание (до 50 символа)</p>
+            <label for="templateShortDescription">Edit Short Description</label>
+            <input type="text" name="templateShortDescription" id="templateShortDescription"
+                value="{{this.templateShortDescription}}">
+            <p class="inputRequirements {{#if errors.templateShortDescription}}red{{/if}}">{{#if
+                errors.templateShortDescription}}{{error}}{{/if}}</p>
 
-        <label for="previewLink">Edit Preview Link</label>
-        <input type="text" name="previewLink" id="previewLink" value="{{this.previewLink}}">
-        <p class="inputRequirements {{#if errors.previewLink}}red{{/if}}">Невалиден формат за линк</p>
+            <label for="previewLink">Edit Preview Link</label>
+            <input type="text" name="previewLink" id="previewLink" value="{{this.previewLink}}">
+            <p class="inputRequirements {{#if errors.previewLink}}red{{/if}}">{{#if errors.previewLink}}{{error}}{{/if}}
+            </p>
 
-    <input type="submit" value="Save Changes">
-    </form>
+            <div class="editCancelBtnContainer">
+                <button class="additionalStyle cancel" href="/btemplates/edit">Cancel</button>
+                <input class="additionalStyle" type="submit" value="Save Changes">
+            </div>
+        </form>
     </fieldset>
 </main>

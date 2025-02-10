@@ -6,6 +6,7 @@ const bannersManager = require('../managers/bannersManager');
 const { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorHelpers');
 const { uploadFileToPCloud } = require("../managers/pClowdManager");
+const { isValidImage } = require("../utils/fileValidator");  // ✅ Add this line
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -31,11 +32,25 @@ router.get('/create', isAuth, (req, res) => {
 
 router.post("/create", isAuth, upload.single("templateImage"), async (req, res) => {
     try {
+        let errors = {};
+
         if (!req.file) {
-            return res.status(400).render("WPTemplates/createTemplate", { 
-                error: "Моля изберете изображение!", 
-                errors: { templateImage: true }, 
-                ...req.body 
+            errors.templateImage = "Моля изберете изображение!";
+        } else {
+            const isImageValid = await isValidImage(req.file);
+            if (!isImageValid) {
+                errors.templateImage = "Файлът е компрометиран и не може да бъде използван!";
+            }
+        }
+
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).render("WPTemplates/createTemplate", {
+                error: Object.values(errors).join("<br>"),
+                errors,
+                templateAltAttribute: req.body.templateAltAttribute,
+                templateTitle: req.body.templateTitle,
+                templateShortDescription: req.body.templateShortDescription,
+                previewLink: req.body.previewLink
             });
         }
 
@@ -59,14 +74,19 @@ router.post("/create", isAuth, upload.single("templateImage"), async (req, res) 
 
         const errorInfo = getErrorMessage(error);
 
+        console.log("errorInfo: ", errorInfo);
+
+
         res.render("WPTemplates/createTemplate", {
-            error: errorInfo.messages.join("\n"),
+            error: errorInfo.messages[errorInfo.messages.length - 1],
             errors: errorInfo.fields,
-            ...req.body
+            templateAltAttribute: req.body.templateAltAttribute,
+            templateTitle: req.body.templateTitle,
+            templateShortDescription: req.body.templateShortDescription,
+            previewLink: req.body.previewLink
         });
     }
 });
-
 
 router.get('/edit', isAuth, async (req, res) => {
     try {
@@ -96,12 +116,31 @@ router.get('/:templateId/edit', isAuth, async (req, res) => {
 });
 
 router.post('/:templateId/edit', isAuth, upload.single("templateImage"), async (req, res) => {
+    let templateId = req.params.templateId;
+    let existingTemplate = await templatesManager.getOne(templateId);
     try {
-        let templateId = req.params.templateId;
-        let existingTemplate = await templatesManager.getOne(templateId);
-
+        console.log(existingTemplate);
+        
         if (!existingTemplate) {
             throw new Error("Template not found.");
+        }
+
+        let errors = {};
+
+        if (req.file) {
+            const isImageValid = await isValidImage(req.file);
+            if (!isImageValid) {
+                errors.templateImage = "Файлът е компрометиран и не може да бъде използван!";
+            }
+        }
+
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).render("WPTemplates/editTemplateForm", { 
+                error: "Файлът е компрометиран и не може да бъде използван!",
+                errors, 
+                ...req.body, 
+                templateImage: existingTemplate.templateImage // Keep old image
+            });
         }
 
         let templateData = {
@@ -120,27 +159,26 @@ router.post('/:templateId/edit', isAuth, upload.single("templateImage"), async (
             templateData.templateImage = existingTemplate.templateImage;
         }
 
-        // ✅ Force validation to run on update
         await templatesManager.edit(templateId, templateData);
-
         console.log("✅ Template updated:", templateData);
         res.redirect('/templates/edit');
 
     } catch (error) {
-        console.error("❌ Error updating template:", error);
+        console.error("❌ Template update failed:", error);
 
         const errorInfo = getErrorMessage(error);
 
         res.render("WPTemplates/editTemplateForm", {
-            error: errorInfo.messages.join("\n"),
+            error: errorInfo.messages[errorInfo.messages.length - 1],
             errors: errorInfo.fields,
-            ...req.body,
-            templateImage: (await templatesManager.getOne(req.params.templateId)).templateImage // Keep image
+            templateAltAttribute: req.body.templateAltAttribute,
+            templateTitle: req.body.templateTitle,
+            templateShortDescription: req.body.templateShortDescription,
+            previewLink: req.body.previewLink,
+            templateImage: existingTemplate.templateImage // Keep image
         });
     }
 });
-
-
 
 router.get('/:templateId/delete', isAuth, async (req, res) => {
     try {
