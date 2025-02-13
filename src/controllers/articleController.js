@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         });
     } catch (error) {
         console.error('Error loading articles or banners:', error);
-        res.status(500).send('Error loading page');
+        res.status(404).render('404');
     }
 });
 

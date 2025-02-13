@@ -23,10 +23,11 @@ body, input, button, textarea, table, th, td {
 
 h1, h2, h3, h4, h5, h6 {
     font-size: 1em;
-    /* margin-bottom: 0.5em; */
+    margin-bottom: 0.5em;
     /* font-weight: normal; */
     font-weight: lighter;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     color: #EF7F19;
