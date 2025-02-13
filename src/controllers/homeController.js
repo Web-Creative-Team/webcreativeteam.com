@@ -27,7 +27,6 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-
 router.get('/prices', async (req, res, next) => {
     try {
         let banners = await bannersManager.getAll();

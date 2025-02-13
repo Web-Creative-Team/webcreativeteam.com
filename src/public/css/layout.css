@@ -90,7 +90,6 @@
         gap: 3em;
     }
 
-
     .noAside {
         display: flex;
         flex-direction: column;
@@ -105,13 +104,27 @@
     }
 
     .sectionAboutUs p {
-        flex: 0 1 40%;
+        flex: 0 1 80%;
         padding-bottom: 1em;
     }
 
     .section {
         padding: 0 20em;
         margin-top: 4em;
+    }
+
+    .threeColumns{
+        display: flex;
+        gap: 5em;
+        margin-top: 3em;
+    }
+
+    .iconContainer{
+        min-width: 35%;
+        min-height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .sectionServices {
@@ -181,7 +194,6 @@
         opacity: 50%;
     }
 
-
     .sectionTeam {
         min-height: 400px;
         background: #ddd;
@@ -196,6 +208,7 @@
         background-color: #F8F9FA;
         padding: 1.5em;
         color: #1A6B41;
+        margin-top: 2em;
     }
 
     footer i {
@@ -237,32 +250,46 @@
         font-weight: bold;
         font-style: none;
         color: #1A6B41;
-        border: 1px solid #1A6B41;
-        background: #eee;
+        background-color: #EF7F19;
         border-radius: 0.3em;
         padding: 0.4em;
+        margin: 0;
+        width: 100%;
     }
 
     h4.pnf404:hover {
         box-shadow: 0 0 2em 0 rgb(0, 0, 0, 0.3);
         background: #1A6B41;
-        color: #eee;
+        color: #EF7F19
+    }
+
+    .not-found {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .goHomeLink {
         text-decoration: none;
+        min-width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    
-    .messageText{
+
+    .messageText {
         margin: 0;
         font-size: 1.2em;
     }
-    
-    .red,.redAsterix, .messageText.red {
+
+    .red,
+    .redAsterix,
+    .messageText.red {
         color: red;
     }
-    
-    .messageText.green{
+
+    .messageText.green {
         color: #1A6B41;
     }
 
@@ -277,6 +304,7 @@
         /* background-color: #eee; */
         border-radius: 0.5em;
     }
+
     .messageContainer.green {
         background-color: #cdffe5;
     }
@@ -286,19 +314,41 @@
     }
 
     .fade-out {
-        animation: fadeOut 1s forwards; /* 1s fade, fill forwards means stay at opacity: 0 */
-      }
+        animation: fadeOut 1s forwards;
+        /* 1s fade, fill forwards means stay at opacity: 0 */
+    }
 
-      .dateCreated{
+    .dateCreated {
         font-size: 0.8em;
         color: #bbb;
-      }
-      
-      @keyframes fadeOut {
+    }
+
+    .logoInside{
+        font-weight: bold;
+        color: #1A6B41;
+        font-size: 1.2em;
+    }
+
+    .paragraphWithIcons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3em;
+        flex-direction: column;
+        flex: 0 1 30%;
+    }
+
+
+
+
+
+
+
+    @keyframes fadeOut {
         to {
-          opacity: 0;
+            opacity: 0;
         }
-      }
+    }
 
 
     @media (max-width: 600px) {
@@ -380,6 +430,15 @@
             margin: 0;
         }
 
+        .paragraphWithIcons{
+            flex-direction: column;
+            margin-top: 2em;
+        }
+
+        .icon{
+            font-size: 5em;
+        }
+
         .section.sectionAboutUs p {
             flex: 1 1 100%;
         }
@@ -416,6 +475,7 @@
             gap: 2em;
             font-size: 2em;
             padding: 3em;
+            margin-top: 2em;
         }
 
         .footerArticle {
@@ -430,5 +490,9 @@
         .footerArticle,
         .footerNav li {
             flex: 1 1 100%
+        }
+
+        .threeColumns{
+            flex-direction: column;
         }
     }
