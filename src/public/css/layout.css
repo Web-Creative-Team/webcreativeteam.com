@@ -127,6 +127,15 @@
         align-items: center;
     }
 
+    .iconContainer.width{
+        min-width: 45%;
+    }
+
+    .widthIcon{
+        display: block;
+        min-height: 100px;
+    }
+
     .sectionServices {
         padding: 0;
         display: flex;
