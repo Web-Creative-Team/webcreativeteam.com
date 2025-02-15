@@ -163,7 +163,7 @@
         align-self: stretch;
         justify-content: space-between;
         padding: 0;
-        gap: 4em;
+        /* gap: 1.3em; */
         background-color: #ddd;
         text-decoration: none;
     }
@@ -181,7 +181,7 @@
         font-size: 3em;
         max-width: 15ch;
         line-height: 1.2em;
-        margin: 0.8em 0;
+        margin: 0.5em 0;
 
     }
 
@@ -347,9 +347,35 @@
         flex: 0 1 30%;
     }
 
+    .servicesDescribtions{
+        margin-bottom: 0.8rem;
+    }
+    p.servicesDescribtion{
+        font-weight: lighter;
+        font-size: 1.5em;
+        margin-bottom: 0;
+        color: #1A6B41;
+        display: flex;
+        align-items: center;
+    }
 
+    .fa-check{
+        display: block;
+        margin-right: 0.5em;
+    }
 
+    .fa-registered{
+        font-size: 0.4em;
+        font-weight: lighter;
+        display: block;
+        margin-right: 0.6em;
+        align-self: flex-start;
+        margin-top: 0.6em;
+    }
 
+    .servicesSubtitleSecondLine{
+        margin-left: 1.35em;
+    }
 
 
 
