@@ -136,6 +136,10 @@
         min-height: 100px;
     }
 
+    .highIcon{
+        max-height: 150px;
+    }
+
     .sectionServices {
         padding: 0;
         display: flex;

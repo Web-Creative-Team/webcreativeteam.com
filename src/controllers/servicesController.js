@@ -11,10 +11,21 @@ router.get('/website', async (req, res) => {
         description: "Изработка на интернет сайт и онлайн магазини. Уеб сайт по шаблон. Индивидуални решения за вас. Сингъл и мултипейдж апликации" })
 });
 
-router.get('/seo', async (req, res) => {
+// router.get('/seo', async (req, res) => {
+//     let banners = await bannersManager.getAll();
+
+//     res.render('servicesViews/seo', { 
+//             showSectionServices: true, 
+//             banners: banners, 
+//             title: "SEO оптимизация | Първи места в търсачките", 
+//             description: "Оптимизация на уеб сайт. Първи места Гугъл класацията. Повишаване на посещаемостта на сайта ви" 
+//         })
+// });
+
+router.get('/maintenance', async (req, res) => {
     let banners = await bannersManager.getAll();
 
-    res.render('servicesViews/seo', { 
+    res.render('servicesViews/maintenance', { 
             showSectionServices: true, 
             banners: banners, 
             title: "SEO оптимизация | Първи места в търсачките", 
