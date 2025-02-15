@@ -382,6 +382,39 @@
     }
 
 
+    .digitalMarketingOptions{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .digitalMarketingOption{
+        display: flex;
+    }
+
+      li{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .digitalMarketingOptionAccent{
+        color: #1A6B41;
+    }
+
+    .digitalMarketingOptionSubtitleContainer{
+        display: flex;
+    }
+
+    .digitalMarketingOptionSubtitleContainer i{
+        color: #1A6B41;
+    }
+
+    .card-text{
+        display: flex;
+    }
+
+
 
     @keyframes fadeOut {
         to {

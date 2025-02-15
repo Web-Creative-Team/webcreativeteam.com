@@ -33,14 +33,25 @@ router.get('/maintenance', async (req, res) => {
         })
 });
 
-router.get('/social', async (req, res) => {
+// router.get('/social', async (req, res) => {
+//     let banners = await bannersManager.getAll();
+
+//     res.render('servicesViews/social', { 
+//         showSectionServices: true, 
+//         banners: banners, 
+//         title: "Рекламиране в интернет | Google ads | Facebook реклама", 
+//         description: "Digital marketing. Рекламиране с Google ads и Facebook. Присъствие в социалните мрежи" 
+//     })
+// });
+
+router.get('/digitalmarketing', async (req, res) => {
     let banners = await bannersManager.getAll();
 
-    res.render('servicesViews/social', { 
+    res.render('servicesViews/digitalMarketing', { 
         showSectionServices: true, 
         banners: banners, 
-        title: "Рекламиране в интернет | Google ads | Facebook реклама", 
-        description: "Digital marketing. Рекламиране с Google ads и Facebook. Присъствие в социалните мрежи" 
+        title: "Дигитална агенция WebCreativeTeam. Увеличете бизнеса онлайн. Онлайн маркетинг решения", 
+        description: "Увеличете продажбите си с експертен дигитален маркетинг! | SEO, Google Ads, Google Analytics, Facebook реклама, Email маркетинг и анализи за бизнес растеж. Оптимизиране на бизнеса! Увеличете трафика и продажбите!" 
     })
 });
 
