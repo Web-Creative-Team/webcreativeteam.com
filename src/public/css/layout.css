@@ -113,13 +113,13 @@
         margin-top: 4em;
     }
 
-    .threeColumns{
+    .threeColumns {
         display: flex;
         gap: 5em;
         margin-top: 3em;
     }
 
-    .iconContainer{
+    .iconContainer {
         min-width: 35%;
         min-height: 150px;
         display: flex;
@@ -127,16 +127,16 @@
         align-items: center;
     }
 
-    .iconContainer.width{
+    .iconContainer.width {
         min-width: 45%;
     }
 
-    .widthIcon{
+    .widthIcon {
         display: block;
         min-height: 100px;
     }
 
-    .highIcon{
+    .highIcon {
         max-height: 150px;
     }
 
@@ -336,13 +336,13 @@
         color: #bbb;
     }
 
-    .logoInside{
+    .logoInside {
         font-weight: bold;
         color: #1A6B41;
         font-size: 1.2em;
     }
 
-    .paragraphWithIcons{
+    .paragraphWithIcons {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -351,10 +351,11 @@
         flex: 0 1 30%;
     }
 
-    .servicesDescribtions{
+    .servicesDescribtions {
         margin-bottom: 0.8rem;
     }
-    p.servicesDescribtion{
+
+    p.servicesDescribtion {
         font-weight: lighter;
         font-size: 1.5em;
         margin-bottom: 0;
@@ -363,12 +364,12 @@
         align-items: center;
     }
 
-    .fa-check{
+    .fa-check {
         display: block;
         margin-right: 0.5em;
     }
 
-    .fa-registered{
+    .fa-registered {
         font-size: 0.4em;
         font-weight: lighter;
         display: block;
@@ -377,41 +378,61 @@
         margin-top: 0.6em;
     }
 
-    .servicesSubtitleSecondLine{
+    .servicesSubtitleSecondLine {
         margin-left: 1.35em;
     }
 
 
-    .digitalMarketingOptions{
+    .digitalMarketingOptions {
         display: flex;
         flex-direction: column;
         gap: 1em;
+        padding-left: 0;
     }
 
-    .digitalMarketingOption{
+    .digitalMarketingOption {
         display: flex;
     }
 
-      li{
+    li {
         list-style: none;
         display: flex;
         flex-direction: column;
     }
 
-    .digitalMarketingOptionAccent{
+    .digitalMarketingOptionAccent {
         color: #1A6B41;
     }
 
-    .digitalMarketingOptionSubtitleContainer{
+    .digitalMarketingOptionSubtitleContainer {
         display: flex;
     }
 
-    .digitalMarketingOptionSubtitleContainer i{
+    .digitalMarketingOptionSubtitleContainer i {
         color: #1A6B41;
     }
 
-    .card-text{
+    .digitalMarketingintroducingParagraph{
+        width: 70%;
+    align-self: center;
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: lighter;
+    /* color: #1A6B41; */
+    color: #EF7F19;
+    }
+
+    .listOptionParagraph {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .card-text {
         display: flex;
+    }
+
+    .inlineStrong {
+        display: inline;
     }
 
 
@@ -502,12 +523,12 @@
             margin: 0;
         }
 
-        .paragraphWithIcons{
+        .paragraphWithIcons {
             flex-direction: column;
             margin-top: 2em;
         }
 
-        .icon{
+        .icon {
             font-size: 5em;
         }
 
@@ -564,7 +585,7 @@
             flex: 1 1 100%
         }
 
-        .threeColumns{
+        .threeColumns {
             flex-direction: column;
         }
     }

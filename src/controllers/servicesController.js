@@ -50,8 +50,8 @@ router.get('/digitalmarketing', async (req, res) => {
     res.render('servicesViews/digitalMarketing', { 
         showSectionServices: true, 
         banners: banners, 
-        title: "Дигитална агенция WebCreativeTeam. Увеличете бизнеса онлайн. Онлайн маркетинг решения", 
-        description: "Увеличете продажбите си с експертен дигитален маркетинг! | SEO, Google Ads, Google Analytics, Facebook реклама, Email маркетинг и анализи за бизнес растеж. Оптимизиране на бизнеса! Увеличете трафика и продажбите!" 
+        title: "Дигитален маркетинг – SEO, реклама и стратегия за успех", 
+        description: "Увеличете продажбите си с експертен дигитален маркетинг! SEO, Google Ads, Facebook реклама, имейл маркетинг и анализи за повече трафик и растеж." 
     })
 });
 
