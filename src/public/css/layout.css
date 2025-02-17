@@ -113,18 +113,31 @@
         margin-top: 4em;
     }
 
-    .threeColumns{
+    .threeColumns {
         display: flex;
         gap: 5em;
         margin-top: 3em;
     }
 
-    .iconContainer{
+    .iconContainer {
         min-width: 35%;
         min-height: 150px;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .iconContainer.width {
+        min-width: 45%;
+    }
+
+    .widthIcon {
+        display: block;
+        min-height: 100px;
+    }
+
+    .highIcon {
+        max-height: 150px;
     }
 
     .sectionServices {
@@ -154,7 +167,7 @@
         align-self: stretch;
         justify-content: space-between;
         padding: 0;
-        gap: 4em;
+        /* gap: 1.3em; */
         background-color: #ddd;
         text-decoration: none;
     }
@@ -172,7 +185,7 @@
         font-size: 3em;
         max-width: 15ch;
         line-height: 1.2em;
-        margin: 0.8em 0;
+        margin: 0.5em 0;
 
     }
 
@@ -323,13 +336,13 @@
         color: #bbb;
     }
 
-    .logoInside{
+    .logoInside {
         font-weight: bold;
         color: #1A6B41;
         font-size: 1.2em;
     }
 
-    .paragraphWithIcons{
+    .paragraphWithIcons {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -338,9 +351,93 @@
         flex: 0 1 30%;
     }
 
+    .servicesDescribtions {
+        margin-bottom: 0.8rem;
+    }
+
+    p.servicesDescribtion {
+        font-weight: lighter;
+        font-size: 1.5em;
+        margin-bottom: 0;
+        color: #1A6B41;
+        display: flex;
+        align-items: center;
+    }
+
+    .fa-check {
+        display: block;
+        margin-right: 0.5em;
+    }
+
+    .fa-registered {
+        font-size: 0.4em;
+        font-weight: lighter;
+        display: block;
+        margin-right: 0.6em;
+        align-self: flex-start;
+        margin-top: 0.6em;
+    }
+
+    .servicesSubtitleSecondLine {
+        margin-left: 1.35em;
+    }
 
 
+    .digitalMarketingOptions {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        padding-left: 0;
+    }
 
+    .digitalMarketingOption {
+        display: flex;
+    }
+
+    li {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .digitalMarketingOptionAccent {
+        color: #1A6B41;
+    }
+
+    .digitalMarketingOptionSubtitleContainer {
+        display: flex;
+    }
+
+    .digitalMarketingOptionSubtitleContainer i {
+        color: #1A6B41;
+    }
+
+    .digitalMarketingintroducingParagraph{
+        width: 70%;
+    align-self: center;
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: lighter;
+    /* color: #1A6B41; */
+    color: #EF7F19;
+    }
+
+    .listOptionParagraph {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .card-text {
+        display: flex;
+    }
+
+    .inlineStrong {
+        display: inline;
+    }
+
+    .section.sectionDigitalMarketing{
+        padding: 0 5em;
+    }
 
 
 
@@ -430,12 +527,12 @@
             margin: 0;
         }
 
-        .paragraphWithIcons{
+        .paragraphWithIcons {
             flex-direction: column;
             margin-top: 2em;
         }
 
-        .icon{
+        .icon {
             font-size: 5em;
         }
 
@@ -492,7 +589,7 @@
             flex: 1 1 100%
         }
 
-        .threeColumns{
+        .threeColumns {
             flex-direction: column;
         }
     }
