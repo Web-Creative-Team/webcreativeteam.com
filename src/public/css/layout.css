@@ -435,6 +435,10 @@
         display: inline;
     }
 
+    .section.sectionDigitalMarketing{
+        padding: 0 5em;
+    }
+
 
 
     @keyframes fadeOut {
