@@ -80,3 +80,9 @@ textarea, input{
     color: red;
     background: none;
 }
+
+@media (max-width: 900px) {
+    fieldset {
+        max-width: 90%;
+    }
+}

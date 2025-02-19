@@ -57,15 +57,29 @@
     }
 
 
-    .mainNav li:hover {
+    .mainNav li:hover,
+    .mainNav li.active {
         border-bottom: 0.1em solid #EF7F19;
         color: #EF7F19;
     }
 
-    .mainNav a:hover {
+    .mainNav a:hover,
+    .mainNav li.active a {
 
         color: #EF7F19;
     }
+
+    /* Style the active submenu item */
+    .servicesSubMenu a.active-submenu {
+        color: #EF7F19;
+        font-weight: bold;
+    }
+
+    /* Ensure submenu items keep the same spacing and hover behavior */
+    .servicesSubMenu a:hover {
+        color: #EF7F19;
+    }
+
 
     .container-fluid {
         gap: 5em;
@@ -412,14 +426,14 @@
         color: #1A6B41;
     }
 
-    .digitalMarketingintroducingParagraph{
+    .digitalMarketingintroducingParagraph {
         width: 70%;
-    align-self: center;
-    font-size: 1.5em;
-    font-style: italic;
-    font-weight: lighter;
-    /* color: #1A6B41; */
-    color: #EF7F19;
+        align-self: center;
+        font-size: 1.5em;
+        font-style: italic;
+        font-weight: lighter;
+        /* color: #1A6B41; */
+        color: #EF7F19;
     }
 
     .listOptionParagraph {
@@ -435,9 +449,103 @@
         display: inline;
     }
 
-    .section.sectionDigitalMarketing{
+    .section.sectionDigitalMarketing {
         padding: 0 5em;
     }
+
+    .servicesSubMenu {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        gap: 0 !important;
+        position: absolute;
+        background-color: #fff;
+        align-items: start;
+    }
+
+    .servicesSubMenu li {
+        display: none;
+        border-bottom: none;
+    }
+
+    .servicesSubMenu:hover {
+        display: flex;
+        justify-content: start;
+
+    }
+
+
+    /* Ensure submenu is hidden by default */
+    .servicesSubMenu {
+        display: none;
+        /* Hide initially */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        min-width: 180px;
+        z-index: 10;
+        opacity: 0;
+        /* Start with 0 opacity */
+        visibility: hidden;
+        /* Ensure it's not interactive */
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    }
+
+    /* Position relative for the parent */
+    .nav-item {
+        position: relative;
+    }
+
+    /* Show submenu when hovering over Услуги */
+    .nav-item:hover .servicesSubMenu {
+        display: block;
+        opacity: 1;
+        /* Fade in */
+        visibility: visible;
+    }
+
+    /* Style submenu items */
+    .servicesSubMenu li {
+        display: block;
+        padding: 0.5em 1em;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .servicesSubMenu li:last-child {
+        border-bottom: none;
+    }
+
+    .servicesSubMenu li a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #1A6B41;
+        display: block;
+        padding: 0.5em;
+    }
+
+    /* Hover effect */
+    .servicesSubMenu li a:hover {
+        color: #EF7F19;
+        background-color: rgba(239, 127, 25, 0.1);
+    }
+
+
+    .subService {
+        font-size: 0.7em;
+    }
+
+
+
+
+
+
+
 
 
 
@@ -448,7 +556,7 @@
     }
 
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
 
         body,
         .siteContainer,
@@ -500,7 +608,8 @@
         .mainNav ul li {
             border: none;
             flex: 0 0 50%;
-            text-align: center;
+            text-align: left;
+            padding-left: 2em;
         }
 
         .mainNav ul a {
@@ -592,4 +701,6 @@
         .threeColumns {
             flex-direction: column;
         }
+
+     
     }
