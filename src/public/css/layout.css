@@ -556,7 +556,7 @@
     }
 
 
-    @media (max-width: 900px) {
+    @media (max-width: 992px) {
 
         body,
         .siteContainer,
@@ -700,6 +700,26 @@
 
         .threeColumns {
             flex-direction: column;
+        }
+
+        .servicesSubMenu {
+            display: none; /* Hide submenu by default */
+            position: relative;
+            background: none;
+            box-shadow: none;
+            padding-left: 1.5rem;
+        }
+    
+        .nav-item.show .servicesSubMenu {
+            display: block; /* Show when parent has 'show' class */
+        }
+    
+        .servicesSubMenu li {
+            padding-left: 1rem;
+        }
+    
+        .servicesSubMenu a {
+            font-size: 0.9em;
         }
 
      

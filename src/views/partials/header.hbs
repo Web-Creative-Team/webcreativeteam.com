@@ -14,12 +14,20 @@
                         <a class="nav-link" href="/">Начало</a>
                     </li>
                     <li class="nav-item {{#if (or (eq currentPage 'services') (eq parentPage 'services'))}}active{{/if}}">
-                        <a class="nav-link" href="/#sectionServices">Услуги</a>
+                        <a class="nav-link" href="/#sectionServices">Услуги <i class="fa-solid fa-caret-down"></i></a>
                         <ul class="servicesSubMenu">
-                            <li><a class="nav-link {{#if (eq currentPage 'website')}}active{{/if}}" href="/services/website">Изработка</a></li>
-                            <li><a class="nav-link {{#if (eq currentPage 'maintenance')}}active{{/if}}" href="/services/maintenance">Поддръжка</a></li>
-                            <li><a class="nav-link {{#if (eq currentPage 'digitalmarketing')}}active{{/if}}" href="/services/digitalmarketing">Дигитален маркетинг</a></li>
-                            <li><a class="nav-link {{#if (eq currentPage 'design')}}active{{/if}}" href="/services/design">Дизайн</a></li>
+                            <li>
+                                <a class="nav-link {{#if (eq currentPage 'website')}}active-submenu{{else}}inactive{{/if}}" href="/services/website">Изработка</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{#if (eq currentPage 'maintenance')}}active-submenu{{else}}inactive{{/if}}" href="/services/maintenance">Поддръжка</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{#if (eq currentPage 'digitalmarketing')}}active-submenu{{else}}inactive{{/if}}" href="/services/digitalmarketing">Дигитален маркетинг</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{#if (eq currentPage 'design')}}active-submenu{{else}}inactive{{/if}}" href="/services/design">Дизайн</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item {{#if (eq currentPage 'prices')}}active{{/if}}">
