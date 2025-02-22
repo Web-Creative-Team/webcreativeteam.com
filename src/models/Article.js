@@ -29,7 +29,7 @@ const articleSchema = new mongoose.Schema({
     articleContent: {
         type: String,
         required: [true, "Content is required!"],
-        match: [/^[\p{L}0-9\s\-\., - – |!?%$&@„“‘’(){}\[\]:;\/\\_=\+\*#^~`]+$/u, "The Article Content contains invalid characters!"], 
+        // match: [/^[\p{L}0-9\s\-\., - – |!?%$&@„“‘’(){}\[\]:;\/\\_=\+\*#^~`]+$/u, "The Article Content contains invalid characters!"], 
 
     },
 
