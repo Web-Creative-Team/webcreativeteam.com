@@ -14,8 +14,11 @@
             <img src="{{articleImage}}" alt="{{articleAlt}}" />
         </div>
 
-        <label for="articleImage">Качи ново изображение (по желание)</label>
+        <label for="articleImage">Качи ново основно изображение (по желание)</label>
         <input type="file" name="articleImage" id="articleImage">
+
+        <label for="articleThumbnailImage">Качи ново миниатюрно изображение (по желание)</label>
+        <input type="file" id="articleThumbnailImage" name="articleThumbnailImage">
 
         <label for="articleAlt">Alt Текст за изображението</label>
         <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
