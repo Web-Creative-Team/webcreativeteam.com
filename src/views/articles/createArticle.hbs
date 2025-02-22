@@ -13,9 +13,15 @@
         <input type="text" id="articleTitle" name="articleTitle" value="{{articleTitle}}">
         <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">Моля въведете заглавие на статията</p>
 
-        <label for="articleImage">Изображение<span class="redAsterix">*</span></label>
+        <label for="articleImage">Основно изображение<span class="redAsterix">*</span></label>
         <input type="file" id="articleImage" name="articleImage">
-        <p class="inputRequirements {{#if errors.articleImage}}red{{/if}}">Моля изберете изображение на статията</p>
+        <p class="inputRequirements {{#if errors.articleImage}}red{{/if}}">Моля изберете основно изображение на статията
+        </p>
+
+        <label for="articleThumbnailImage">Миниатюрно изображение<span class="redAsterix">*</span></label>
+        <input type="file" id="articleThumbnailImage" name="articleThumbnailImage">
+        <p class="inputRequirements {{#if errors.articleThumbnailImage}}red{{/if}}">Моля изберете миниатюрно изображение
+            на статията</p>
 
         <label for="articleAlt">Alt Текст за изображението<span class="redAsterix">*</span></label>
         <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">

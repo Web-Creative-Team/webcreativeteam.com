@@ -49,4 +49,38 @@
             </div>
         </div>
     </nav>
+
+    {{#if isAuthenticated}}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary adminNav mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/users/logout">Hello, {{user.username}} | Logout</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/banners/create">Create Banner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/banners/edit">Edit Banners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/articles/create">Create Blog Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/templates/create">Create Template</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/templates/edit">Edit Templates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/register">Register User</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {{/if}}
 </header>

@@ -44,35 +44,50 @@ router.get('/create', isAuth, (req, res) => {
     res.render('articles/createArticle', { title: "Създаване на блог статия" });
 });
 
-router.post("/create", isAuth, upload.single("articleImage"), async (req, res) => {
+router.post("/create", isAuth, upload.fields([{ name: "articleImage" }, { name: "articleThumbnailImage" }]), async (req, res) => {
     try {
         let errors = {};
 
-        if (!req.file) {
+        // Validate Main Image
+        if (!req.files.articleImage) {
             errors.articleImage = true;
         } else {
-            // ✅ Validate if the uploaded file is a real image
-            const isImageValid = await isValidImage(req.file);
+            const isImageValid = await isValidImage(req.files.articleImage[0]);
             if (!isImageValid) {
                 errors.articleImage = true;
-                return res.status(400).render("articles/createArticle", { 
-                    error: "Изображението е компрометирано и не може да се използва!", 
-                    errors,
-                    articleTitle: req.body.articleTitle, 
-                    articleAlt: req.body.articleAlt, 
-                    articleContent: req.body.articleContent, 
-                    articleMetaTitle: req.body.articleMetaTitle, 
-                    articleMetaDescription: req.body.articleMetaDescription
-                });
             }
         }
 
+        // ✅ Validate Thumbnail Image
+        if (!req.files.articleThumbnailImage) {
+            errors.articleThumbnailImage = true;
+        } else {
+            const isThumbnailValid = await isValidImage(req.files.articleThumbnailImage[0]);
+            if (!isThumbnailValid) {
+                errors.articleThumbnailImage = true;
+            }
+        }
+
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).render("articles/createArticle", {
+                error: "Моля попълнете всички задължителни полета!",
+                errors,
+                articleTitle: req.body.articleTitle,
+                articleAlt: req.body.articleAlt,
+                articleContent: req.body.articleContent,
+                articleMetaTitle: req.body.articleMetaTitle,
+                articleMetaDescription: req.body.articleMetaDescription
+            });
+        }
+
         const storageFolder = "blogimages";
-        const imageUrl = req.file ? await uploadFileToPCloud(req.file.buffer, req.file.originalname, storageFolder) : null;
+        const imageUrl = await uploadFileToPCloud(req.files.articleImage[0].buffer, req.files.articleImage[0].originalname, storageFolder);
+        const thumbnailUrl = await uploadFileToPCloud(req.files.articleThumbnailImage[0].buffer, req.files.articleThumbnailImage[0].originalname, storageFolder);
 
         const articleData = {
             articleTitle: req.body.articleTitle,
             articleImage: imageUrl,
+            articleThumbnailImage: thumbnailUrl,  // 🔥 Save Thumbnail URL
             articleAlt: req.body.articleAlt,
             articleContent: req.body.articleContent,
             articleMetaTitle: req.body.articleMetaTitle,
@@ -81,26 +96,24 @@ router.post("/create", isAuth, upload.single("articleImage"), async (req, res) =
         };
 
         await articleManager.create(articleData);
-        console.log("✅ Article saved to database:", articleData);
         res.redirect("/articles");
 
     } catch (error) {
         console.error("❌ Article creation failed:", error);
-
-        // ✅ Get detailed validation errors
         let validationErrors = getErrorMessage(error);
 
-        res.render("articles/createArticle", { 
-            error: validationErrors.messages.join("<br>"), 
-            errors: validationErrors.fields, 
-            articleTitle: req.body.articleTitle, 
-            articleAlt: req.body.articleAlt, 
-            articleContent: req.body.articleContent, 
-            articleMetaTitle: req.body.articleMetaTitle, 
+        res.render("articles/createArticle", {
+            error: validationErrors.messages.join("<br>"),
+            errors: validationErrors.fields,
+            articleTitle: req.body.articleTitle,
+            articleAlt: req.body.articleAlt,
+            articleContent: req.body.articleContent,
+            articleMetaTitle: req.body.articleMetaTitle,
             articleMetaDescription: req.body.articleMetaDescription
         });
     }
 });
+
 
 router.get('/:articleId/details', async (req, res) => {
     try {
@@ -136,7 +149,7 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
     }
 });
 
-router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (req, res) => {
+router.post('/:articleId/edit', isAuth, upload.fields([{ name: "articleImage" }, { name: "articleThumbnailImage" }]), async (req, res) => {
     try {
         let articleId = req.params.articleId;
         let articleData = {
@@ -147,11 +160,9 @@ router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (re
             articleAlt: req.body.articleAlt,
         };
 
-        if (req.file) {
-            console.log("✅ New image uploaded, validating...");
-            
-            // ✅ Validate if the uploaded file is a real image
-            const isImageValid = await isValidImage(req.file);
+        // ✅ Update Main Image
+        if (req.files.articleImage) {
+            const isImageValid = await isValidImage(req.files.articleImage[0]);
             if (!isImageValid) {
                 return res.status(400).render("articles/editArticle", {
                     error: "Изображението е компрометирано и не може да се използва!",
@@ -159,43 +170,39 @@ router.post('/:articleId/edit', isAuth, upload.single("articleImage"), async (re
                     ...req.body
                 });
             }
-
-            console.log("✅ Image is valid, replacing existing one...");
-            const newImageUrl = await uploadFileToPCloud(req.file.buffer, req.file.originalname, "blogimages");
+            const newImageUrl = await uploadFileToPCloud(req.files.articleImage[0].buffer, req.files.articleImage[0].originalname, "blogimages");
             articleData.articleImage = newImageUrl;
-        } else {
-            console.log("ℹ️ No new image uploaded, keeping the old one.");
+        }
+
+        // ✅ Update Thumbnail Image
+        if (req.files.articleThumbnailImage) {
+            const isThumbnailValid = await isValidImage(req.files.articleThumbnailImage[0]);
+            if (!isThumbnailValid) {
+                return res.status(400).render("articles/editArticle", {
+                    error: "Миниатюрното изображение е компрометирано!",
+                    errors: { articleThumbnailImage: true },
+                    ...req.body
+                });
+            }
+            const newThumbnailUrl = await uploadFileToPCloud(req.files.articleThumbnailImage[0].buffer, req.files.articleThumbnailImage[0].originalname, "blogimages");
+            articleData.articleThumbnailImage = newThumbnailUrl;
         }
 
         await articleManager.edit(articleId, articleData, { runValidators: true });
-        console.log("✅ Article updated:", articleData);
         res.redirect(`/articles/${articleId}/details`);
 
     } catch (error) {
-        console.log("❌ Error updating article:", error);
+        console.error("❌ Error updating article:", error);
 
-        let errors = {};
-
-        if (error instanceof mongoose.Error.ValidationError) {
-            for (const field in error.errors) {
-                let message = error.errors[field].message;
-
-                if (message.includes("match")) {
-                    errors[field] = "Използване на забранени символи!";
-                } else {
-                    errors[field] = message;  // Default Mongoose error
-                }
-            }
-        } else {
-            errors.general = error.message;
-        }
+        let validationErrors = getErrorMessage(error);
 
         res.render("articles/editArticle", {
             ...req.body,
-            errors,
+            errors: validationErrors.fields
         });
     }
 });
+
 
 router.get('/:articleId/delete', async (req, res) => {
     if (!req.user) {

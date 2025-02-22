@@ -1,62 +1,49 @@
-.pricesCard {
-    flex: 0 1 25%;
-    border: 1px solid #1A6B41;
-    border-radius: 0.5em;
-    padding: 2.5em;
-    padding-bottom: 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-}
-
-.pricesCard h4 {
-    font-weight: bold;
-    margin: 1em 0;
-}
-
-.pricesCard p {
-    color: #1A6B41;
-    margin-bottom: 0.5em;
+.pricesContainer{
+padding: 0 5em;
+display: flex;
+gap: 2em;
 }
 
 p.pricesAmount {
-    font-weight: bold;
     margin-bottom: 1em;
     text-align: right;
-}
-
-h4.priceCardtitle{
-    margin: 0;
-}
-
-.pricesCard h5{
-    /* font-weight: bold; */
-}
-
-.priceCardCustomStyle{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pricesLinkToContacts a{
-    text-decoration: none;
-    margin-top: 2em;
-    align-self: end;
-    padding: 0.3em 0.5em;
-    max-width: 50%;
-    border: none;
-    border-radius: 5px;
-    background: #1A6B41;
-    color: #EF7F19;
+    color: #1A6B41;
     font-weight: bold;
 }
 
-.pricesLinkToContacts a:hover{
-    background: #EF7F19;
-    color: #1A6B41;
+.paragraphWithIcons.prices{
+    /* border: 1px solid #1A6B41; */
+}
+
+.logoInside.prices{
+    display: block;
+    align-self: center;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+
+
+.askForOfferBtn{
+    text-decoration: none;
+    margin-top: 2em;
+    align-self: center;
+    text-align: center;
+    padding: 0.3em 0.5em;
+    width: 60%;
+    border: none;
+    border-radius: 5px;
+    background: #FFC68D;
+    color:#1A6B41;
+    font-weight: bold;
+}
+
+.askForOfferBtn:hover{
+    /* background: #EF7F19;
+    color: #1A6B41; */
+
+    background: #96B575;
+    color:#FFC68D;
 }
 
 .customOffer{

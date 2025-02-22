@@ -360,7 +360,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 3em;
+        gap: 1em;
         flex-direction: column;
         flex: 0 1 30%;
     }
@@ -432,8 +432,8 @@
         font-size: 1.5em;
         font-style: italic;
         font-weight: lighter;
-        /* color: #1A6B41; */
-        color: #EF7F19;
+        color: #1A6B41;
+        /* color: #EF7F19; */
     }
 
     .listOptionParagraph {
@@ -627,7 +627,7 @@
         }
 
         .section.sectionAboutUs {
-            font-size: 2em;
+            font-size: 1.6em;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -721,6 +721,17 @@
         .servicesSubMenu a {
             font-size: 0.9em;
         }
+
+        .digitalMarketingintroducingParagraph{
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .paragraphWithIcons{
+            border-bottom: 1px solid #1A6B41;
+        }
+
+        
 
      
     }

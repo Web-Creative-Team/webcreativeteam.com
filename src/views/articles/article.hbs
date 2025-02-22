@@ -22,7 +22,15 @@
         <h3>Други теми:</h3>
         <ul class="asideList">
             {{#each articles}}
-            <li><a href="/articles/{{_id}}/details">{{articleTitle}}</a></li>
+            <li class="asideArticleListItem">
+                <div class="aricleThumbnailImageContainer">
+                    <img src="{{this.articleThumbnailImage}}" alt="{{this.alt}}" srcset="">
+                </div>
+                <p class="asideListArticleTitle">
+                    <a href="/articles/{{_id}}/details">{{articleTitle}}</a>
+                </p>
+
+            </li>
             {{/each}}
         </ul>
     </aside>

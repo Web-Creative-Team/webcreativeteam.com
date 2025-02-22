@@ -1,54 +1,84 @@
-.asideLayout{
+.asideLayout {
     display: flex;
-    padding-left: 4em;
+    padding: 0 4em;
     margin-top: 4em;
+    gap: 5em;
 }
 
 .withAside {
     display: flex;
-    flex-flow: column ;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-    flex: 1 1 70%;
-}
-.withAside h1{
-flex: 1 1 100%
+    flex: 1 0 70%;
+    padding-right: 2em;
 }
 
-
-.withAside p{
-    max-width: 70ch;
+.withAside h1 {
+    flex: 1 1 100%;
+    text-align: center;
 }
 
-.blogAside{
-    padding-right: 4em;
+
+.withAside p {
+    max-width: 100%;
 }
 
-.blogAside h3{
+.blogAside {
+    /* padding-right: 4em; */
+    padding-right: 0;
+    flex: 0 1 35%;
+}
+
+.asideList {
+    display: flex;
+    flex-direction: column;
+}
+
+.asideArticleListItem{
+    display: flex;
+    flex-flow: row;
+    list-style: none;
+    gap: 1em;
+    align-items: center;
+    padding: 1em;
+    border-bottom: 1px solid #1A6B41;
+
+}
+
+.asideListArticleTitle{
+    flex: 0 1 70%;
+    /* width: 65%; */
+}
+
+.aricleThumbnailImageContainer{
+    /* width: 130px;
+    height: 75px; */
     
+    flex: 1 0 30%;
 }
 
-.asideList li{
-list-style: none;
-display: block;
-}
 
-.asideList a{
+.asideList a {
     text-decoration: none;
     color: #1A6B41;
+    font-weight: bold;
 }
 
-.asideList a:hover{
+.asideList a:hover {
     color: #EF7F19;
+    font-weight: bold;
 }
 
-@media (max-width: 600px){
-    .asideLayout{
+.asideArticleListItem {}
+
+@media (max-width: 600px) {
+    .asideLayout {
         flex-direction: column;
     }
 
-    .blogAside{
+    .blogAside {
         display: flex;
         flex-direction: column;
         justify-content: center;
