@@ -25,7 +25,7 @@
 /* h1 { font-size: 2.8em; } */
 .ql-editor h1 { font-size: 4.2em; }
 /* h2 { font-size: 2.2em; } */
-.ql-editor h2 { font-size: 4.2em; }
+.ql-editor h2 { font-size: 3em; }
 /* h3 { font-size: 1.8em; } */
 .ql-editor h3 { font-size: 2em; }
 .ql-editor h4 { font-size: 1.4em; }
@@ -33,20 +33,44 @@
 .ql-editor h6 { font-size: 1em; }
 
 
-/* Custom Quill Font Sizes Using Classes */
-.ql-editor .ql-size-small {
-    font-size: 12px !important;
+
+.singleArticleContent .ql-align-left {
+    text-align: left;
 }
 
-.ql-editor .ql-size-normal {
-    font-size: 16px !important;
+.singleArticleContent .ql-align-center {
+    text-align: center;
 }
 
-.ql-editor .ql-size-large {
-    font-size: 24px !important;
+.singleArticleContent .ql-align-right {
+    text-align: right;
 }
 
-.ql-editor .ql-size-huge {
-    font-size: 32px !important;
+.singleArticleContent .ql-align-justify {
+    text-align: justify;
 }
+
+
+
+
+
+
+.singleArticleContent .ql-size-small {
+    font-size: 1em;
+}
+
+.singleArticleContent .ql-size-normal {
+    font-size: 1.2em;
+}
+
+.singleArticleContent .ql-size-large {
+    font-size: 1.6em;
+}
+
+.singleArticleContent .ql-size-huge {
+    font-size: 2em;
+}
+
+
+
 
