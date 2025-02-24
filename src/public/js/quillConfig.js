@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     ['clean']  // Clear formatting
                 ]
             },
-            placeholder: 'Въведете съдържанието на статията тук...'  // Friendly placeholder
+            placeholder: 'Моля въведете съдържанието на статията тук...'  // Friendly placeholder
         });
 
         // 👉 Force Quill to Save Classes in HTML

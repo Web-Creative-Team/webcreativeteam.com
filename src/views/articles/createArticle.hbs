@@ -30,11 +30,11 @@
 
         <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
         <div id="editor-container">
-            <p>Въведете съдържанието на статията тук...</p>
+            <p>Моля въведете съдържанието на статията тук...</p>
         </div>
         <input type="hidden" id="articleContent" name="articleContent">
         <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">
-            Моля попълнете съдържанието на статията - до 2000 думи
+            Моля въведете съдържанието на статията - до 2000 думи
         </p>
 
         <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
@@ -50,3 +50,8 @@
         <button class="additionalStyle">Създай статия</button>
     </form>
 </fieldset>
+
+<script>
+    // 👉 Pass the preloaded content as a global JavaScript variable
+    window.preloadedContent = `{{{articleContentRaw}}}` || '';
+</script>
