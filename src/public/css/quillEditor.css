@@ -33,32 +33,20 @@
 .ql-editor h6 { font-size: 1em; }
 
 
-/* .ql-editor h1 {
-    font-size: 32px;
-    font-weight: bold;
+/* Custom Quill Font Sizes Using Classes */
+.ql-editor .ql-size-small {
+    font-size: 12px !important;
 }
 
-.ql-editor h2 {
-    font-size: 28px;
-    font-weight: bold;
+.ql-editor .ql-size-normal {
+    font-size: 16px !important;
 }
 
-.ql-editor h3 {
-    font-size: 24px;
-    font-weight: bold;
+.ql-editor .ql-size-large {
+    font-size: 24px !important;
 }
 
-.ql-editor h4 {
-    font-size: 20px;
-    font-weight: bold;
+.ql-editor .ql-size-huge {
+    font-size: 32px !important;
 }
 
-.ql-editor h5 {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.ql-editor h6 {
-    font-size: 16px;
-    font-weight: bold;
-} */
