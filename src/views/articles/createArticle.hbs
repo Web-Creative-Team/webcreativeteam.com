@@ -30,7 +30,7 @@
 
         <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
         <div id="editor-container">
-            <p>Моля въведете съдържанието на статията тук...</p>
+            {{{articleContent}}}
         </div>
         <input type="hidden" id="articleContent" name="articleContent">
         <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">
@@ -52,6 +52,9 @@
 </fieldset>
 
 <script>
-    // 👉 Pass the preloaded content as a global JavaScript variable
-    window.preloadedContent = `{{{articleContentRaw}}}` || '';
+    // 👉 Pass the current articleContent as preloaded content
+    window.preloadedContent = `{{{articleContent}}}` || '';
+    if (window.preloadedContent === 'undefined') {
+        window.preloadedContent = '';
+    }
 </script>

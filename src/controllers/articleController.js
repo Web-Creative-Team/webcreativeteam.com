@@ -65,10 +65,11 @@ router.post("/create",
                 errors: extractedErrors,
                 articleTitle: req.body.articleTitle,
                 articleAlt: req.body.articleAlt,
-                articleContent: req.body.articleContent,
+                articleContent: req.body.articleContent, // Preserve user's input
                 articleMetaTitle: req.body.articleMetaTitle,
                 articleMetaDescription: req.body.articleMetaDescription
             });
+            
         }
 
         try {
