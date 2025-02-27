@@ -73,4 +73,8 @@ p.pricesAmount {
     .pricesCard p{
         font-size: 2em;
     }
+
+    .threeColumns.pricesContainer{
+        padding: 0 1em
+    }
 }

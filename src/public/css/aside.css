@@ -93,4 +93,35 @@
         align-items: center;
         gap: 0.5em
     }
+
+    /* Hero Banner Adjustments */
+    .articleImage {
+        height: 25vh; /* 25% от височината на екрана */
+        overflow: hidden;
+        position: relative;
+        margin-top: 0;
+    }
+
+    .articleImage img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* Adjustments for main content */
+    .asideLayout {
+        padding: 0 1em;
+        margin-top: 2em;
+    }
+
+    .articleHeading {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .articleContent p {
+        font-size: 1em;
+        line-height: 1.4em;
+    }
 }

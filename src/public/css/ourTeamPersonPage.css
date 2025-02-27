@@ -43,7 +43,7 @@
     padding-left: 1em;
 }
 
-.stefan{
+.stefan {
     margin-left: 0;
     margin-right: 15em;
 }
@@ -54,6 +54,7 @@
 
 .quote {
     max-width: 100%;
+    color: #1A6B41;
 }
 
 .quoteAuthor {
@@ -62,7 +63,7 @@
     justify-content: flex-end;
     align-items: end;
     margin-bottom: 0;
-    color: #EF7F19;
+    color: #1A6B41;
 }
 
 
@@ -82,5 +83,9 @@
     .quotes,
     .quote {
         max-width: 100%;
+    }
+
+    .shortBio {
+        padding-top: 0;
     }
 }
