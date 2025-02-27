@@ -28,15 +28,55 @@
     color: #1A6B41;
 }
 
+/* Mobile Styles for Carousel */
 @media (max-width: 768px) {
+
+    /* Adjust image height */
+    .carousel-item img {
+        height: 25vh;
+        object-fit: cover;
+    }
+
+    /* Position and style for caption block */
+    .carouselBlock {
+        position: absolute;
+        bottom: 5%;
+        left: 0;
+        width: 100%;
+        padding: 0.5em 1em;
+        /* text-align: left; */
+        justify-content: start;
+        align-items: start;
+        box-sizing: border-box;
+    }
+
+    /* Adjust title and subtitle font sizes */
     .carouselTitle {
-        font-size: 2em;
+        font-size: 1.6em;
+        line-height: 1.2em;
+        margin-bottom: 0.2em;
     }
 
     .carouselSubtitle {
-        font-size: 1.5em;
+        font-size: 1.1em;
+        line-height: 1.2em;
+        margin-bottom: 0;
     }
 
+    /* Hide carousel controls in mobile */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
 
+    /* Adjust indicators for better mobile view */
+    .carousel-indicators {
+        bottom: 5px;
+    }
 
+    .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
 }

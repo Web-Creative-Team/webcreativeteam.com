@@ -735,6 +735,32 @@
             border-bottom: 1px solid #1A6B41;
         }
 
+        .carousel{
+            margin-top: 0;
+        }
+
+        .mainNav{
+            margin: 0;
+            
+        }
+
+        .container-fluid{
+            display: flex;
+            padding: 0.5em;
+        }
+
+        .navbar-brand{
+            flex: 0 1 65%;
+        }
+
+        
+
+
+
+
+
+
+
         
 
      
