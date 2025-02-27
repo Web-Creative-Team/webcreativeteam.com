@@ -47,9 +47,17 @@
 
 }
 
+.articleHeading{
+    font-size: 3em;
+}
+
 .asideListArticleTitle{
     flex: 0 1 70%;
     /* width: 65%; */
+}
+
+.articleContent p{
+    margin-bottom: 0.3em;
 }
 
 .aricleThumbnailImageContainer{

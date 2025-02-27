@@ -1,4 +1,4 @@
-.carouselBlock{
+.carouselBlock {
     background: white;
     opacity: 85%;
     width: 100%;
@@ -12,18 +12,31 @@
 }
 
 .carouselTitle,
-.carouselSubtitle{
+.carouselSubtitle {
     font-family: Roboto, sans-serif;
     font-weight: 100;
     margin-bottom: 0;
 }
 
-.carouselTitle{
+.carouselTitle {
     font-size: 4em;
-    color:  #EF7F19;
+    color: #EF7F19;
 }
 
-.carouselSubtitle{
+.carouselSubtitle {
     font-size: 2em;
     color: #1A6B41;
+}
+
+@media (max-width: 768px) {
+    .carouselTitle {
+        font-size: 2em;
+    }
+
+    .carouselSubtitle {
+        font-size: 1.5em;
+    }
+
+
+
 }

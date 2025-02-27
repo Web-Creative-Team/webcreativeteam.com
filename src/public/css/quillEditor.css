@@ -1,0 +1,39 @@
+/* Quill Editor Custom Styles */
+.ql-editor {
+    font: 1.2em/1.5 "Roboto", sans-serif;
+    color: #333;
+}
+
+/* Define Sizes */
+.ql-size-small {
+    font-size: 0.875em;
+}
+
+.ql-size-normal {
+    font-size: 1.2em;
+}
+
+.ql-size-large {
+    font-size: 1.5em;
+}
+
+.ql-size-huge {
+    font-size: 2em;
+}
+
+/* Headings */
+.ql-editor h1, .ql-editor h2, .ql-editor h3, 
+.ql-editor h4, .ql-editor h5, .ql-editor h6 {
+    font-weight: lighter;
+    color: #EF7F19;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Specific Heading Sizes */
+.ql-editor h1 { font-size: 4.2em; }
+.ql-editor h2 { font-size: 3em; }
+.ql-editor h3 { font-size: 2em; }
+.ql-editor h4 { font-size: 1.4em; }
+.ql-editor h5 { font-size: 1.2em; }
+.ql-editor h6 { font-size: 1em; }

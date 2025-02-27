@@ -663,8 +663,8 @@
             gap: 2em;
         }
 
-        .articleServices .imageContainer {
-            order: 0;
+        a .articleServices .imageContainer {
+            order: 1;
         }
 
         .articleServices h3 {
@@ -672,8 +672,12 @@
             font-size: 3.5em;
         }
 
-        .articleServices:nth-child(even) {
-            flex-direction: column;
+        .articleServices {
+            flex-direction: column-reverse;
+        }
+
+        .articleServices h3{
+            order: 1;
         }
 
         footer {

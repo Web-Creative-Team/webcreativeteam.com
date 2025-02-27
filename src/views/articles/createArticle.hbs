@@ -29,9 +29,13 @@
             на статията </p>
 
         <label for="articleContent">Съдържание<span class="redAsterix">*</span></label>
-        <textarea id="articleContent" name="articleContent">{{articleContent}}</textarea>
-        <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">Моля попълнете съдържанието на статията -
-            до 2000 думи</p>
+        <div id="editor-container">
+            {{{articleContent}}}
+        </div>
+        <input type="hidden" id="articleContent" name="articleContent">
+        <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">
+            Моля въведете съдържанието на статията - до 2000 думи
+        </p>
 
         <label for="articleMetaTitle">Meta Title<span class="redAsterix">*</span></label>
         <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
@@ -46,3 +50,11 @@
         <button class="additionalStyle">Създай статия</button>
     </form>
 </fieldset>
+
+<script>
+    // 👉 Pass the current articleContent as preloaded content
+    window.preloadedContent = `{{{articleContent}}}` || '';
+    if (window.preloadedContent === 'undefined') {
+        window.preloadedContent = '';
+    }
+</script>

@@ -1,12 +1,14 @@
 <div class="articleImage">
-    <img src="{{singleArticle.articleImage}}" alt="{{this.alt}}" srcset="">
+    <img src="{{singleArticle.articleImage}}" alt="{{singleArticle.articleAlt}}" srcset="">
 </div>
+
 <div class="asideLayout">
-
-
     <main class="withAside">
-        <h1>{{singleArticle.articleTitle}}</h1>
-        <p>{{singleArticle.articleContent}}</p>
+        <h1 class="articleHeading">{{singleArticle.articleTitle}}</h1>
+        <!-- Render Quill-formatted content safely with triple braces -->
+        <div class="articleContent singleArticleContent">
+            {{{singleArticle.articleContent}}}
+        </div>
         <p class="dateCreated">{{singleArticle.dateCreated}}</p>
 
         {{#if isAuthenticated}}
@@ -24,15 +26,13 @@
             {{#each articles}}
             <li class="asideArticleListItem">
                 <div class="aricleThumbnailImageContainer">
-                    <img src="{{this.articleThumbnailImage}}" alt="{{this.alt}}" srcset="">
+                    <img src="{{this.articleThumbnailImage}}" alt="{{this.articleAlt}}" srcset="">
                 </div>
                 <p class="asideListArticleTitle">
                     <a href="/articles/{{_id}}/details">{{articleTitle}}</a>
                 </p>
-
             </li>
             {{/each}}
         </ul>
     </aside>
-
 </div>
