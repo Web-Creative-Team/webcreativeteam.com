@@ -59,7 +59,7 @@
 }
 
 .ourTeamPersonalPageLinks p {
-    color: #EF7F19;
+    color: #1A6B41;
 }
 
 .card-img-top {
@@ -108,7 +108,7 @@
 
 .personCardBody {
     /* padding: 2em; */
-    margin-top: 1.5em;
+    /* margin-top: 1.5em; */
 }
 
 
@@ -116,6 +116,7 @@
 @media (max-width: 992px) {
     .mobileViewBanner {
         display: block;
+        margin-top: 0;
     }
 
     .desktopViewBanner {
@@ -125,6 +126,12 @@
     .ourTeam {
         background-image: none;
         flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+    .ourTeamContent{
+        padding: 2em;
     }
 
     .ourTeamPersonalPageLinks {

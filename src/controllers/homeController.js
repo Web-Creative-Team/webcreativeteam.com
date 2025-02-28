@@ -34,7 +34,8 @@ router.get('/prices', async (req, res, next) => {
             title: "Цени и промоции на уебсайт...",
             description: "Цялостни решения за изработване...",
             banners,
-            showCarousel: true
+            showCarousel: true,
+            showSectionServices: true,
         });
     } catch (error) {
         next(error);

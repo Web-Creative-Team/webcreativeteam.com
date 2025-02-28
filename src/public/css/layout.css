@@ -676,16 +676,16 @@
             flex-direction: column-reverse;
         }
 
-        .articleServices h3{
+        .articleServices h3 {
             order: 1;
         }
 
         footer {
             flex-direction: column;
-            gap: 2em;
+            gap: 0.5em;
             font-size: 2em;
-            padding: 3em;
-            margin-top: 2em;
+            padding: 1em;
+            margin-top: 1em;
         }
 
         .footerArticle {
@@ -706,36 +706,68 @@
             flex-direction: column;
         }
 
+        footer p {
+            font-size: 0.8em;
+        }
+
         .servicesSubMenu {
-            display: none; /* Hide submenu by default */
+            display: none;
+            /* Hide submenu by default */
             position: relative;
             background: none;
             box-shadow: none;
             padding-left: 1.5rem;
         }
-    
+
         .nav-item.show .servicesSubMenu {
-            display: block; /* Show when parent has 'show' class */
+            display: block;
+            /* Show when parent has 'show' class */
         }
-    
+
         .servicesSubMenu li {
             padding-left: 1rem;
         }
-    
+
         .servicesSubMenu a {
             font-size: 0.9em;
         }
 
-        .digitalMarketingintroducingParagraph{
+        .digitalMarketingintroducingParagraph {
             font-size: 1em;
             width: 100%;
         }
 
-        .paragraphWithIcons{
+        .paragraphWithIcons {
             border-bottom: 1px solid #1A6B41;
         }
 
-        
+        .carousel {
+            margin-top: 0;
+        }
 
-     
+        .mainNav {
+            margin: 0;
+
+        }
+
+        .container-fluid {
+            display: flex;
+            padding: 0.5em;
+        }
+
+        .navbar-brand {
+            flex: 0 1 65%;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
