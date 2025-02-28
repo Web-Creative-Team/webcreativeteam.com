@@ -5,51 +5,78 @@
     overflow: hidden;
     padding: 1em;
     padding-bottom: 1.5em; */
-    border-bottom: 1px solid #1A6B41;;
+    border-bottom: 1px solid #1A6B41;
+    ;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
 }
 
-.sectionTemplates{
+.sectionTemplates {
     display: flex;
     gap: 1.5em;
     flex-flow: row wrap;
 }
 
-.templatesLink{
+.templatesLink {
     text-decoration: none;
 }
 
-.templatesLink p{
+.templatesLink p {
     color: #1A6B41;
     max-width: 80%;
     align-self: center;
 }
 
-.templatesCard:hover{
+.templatesCard:hover {
     font-weight: bold;
     border: 1px solid #1A6B41;
 
 }
 
-@media (max-width: 600px){
-    .section.sectionTemplates{
+@media (max-width: 600px) {
+    .section.sectionTemplates {
         flex-direction: column;
         padding: 2em;
     }
 
-    .pricesCard h4{
-        font-size: 2.5em;
+    .templatesLink {
+        display: flex;
+        /* padding: 0.5em; */
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+
+   .templatesCard{
+    margin-bottom: 2.5em;
+   }
+
+    .pricesCard h4 {
+        font-size: 2em;
     }
 
     .pricesCard h5 {
-       font-size: 1.5em;
-       font-weight: bold;
+        font-size: 1.5em;
+        font-weight: bold;
     }
 
-    .pricesCard p{
+    .pricesCard p {
         font-size: 2em;
+    }
+
+    .priceCardCustomStyle{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .priceCardCustomStyle h4 {
+        font-size: 2.6em;
+    }
+
+    .priceCardCustomStyle p {
+        font-size: 1.5em;
+        text-align: center;
     }
 }
