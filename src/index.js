@@ -9,7 +9,10 @@ const routes = require('./routes');
 const { auth } = require('./middlewares/authMiddleware')
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
 
-const { DBLINK, PORT } = require('./config/config');
+// const { DBLINK, PORT } = require('./config/config');
+const DBLINK = process.env.DBLINK;
+const PORT = process.env.PORT;
+
 
 const app = express();
 

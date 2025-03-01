@@ -1,5 +1,8 @@
 const jwt = require('../lib/jwt');
-const { SECRET, TOKEN_KEY } = require('../config/config');
+// const { SECRET, TOKEN_KEY } = require('../config/config');
+const SECRET = process.env.SECRET;
+const TOKEN_KEY = process.env.TOKEN_KEY;
+
 
 exports.auth = async (req, res, next) => {
     const token = req.cookies[TOKEN_KEY];
