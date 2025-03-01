@@ -30,7 +30,7 @@ router.get('/register', isAuth, (req, res) => {
 // Register with username and password, and redirect to the Home  Page
 router.post('/register', async (req, res) => {
     const { username, email, password, repeatPassword } = req.body;
-    // console.log(req.body);
+    console.log("controller: ", req.body);
 
     if (password !== repeatPassword) {
         return res.render('users/register', {
@@ -49,7 +49,9 @@ router.post('/register', async (req, res) => {
         res.redirect('/');
 
     } catch (err) {
-        res.render('users/register', { error: getErrorMessage(err), username, email });
+        console.log("Controller said - Error: ", err.message);
+        
+        res.render('users/register', { error: err.message, username, email });
         // next(err);
     }
 
