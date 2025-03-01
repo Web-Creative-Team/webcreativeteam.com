@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager');
-const { TOKEN_KEY } = require('../config/config');
+// const { TOKEN_KEY } = require('../config/config');
+const TOKEN_KEY = process.env.SECRET;
 const { getErrorMessage } = require('../utils/errorHelpers');
 const { isAuth } = require('../middlewares/authMiddleware');
 

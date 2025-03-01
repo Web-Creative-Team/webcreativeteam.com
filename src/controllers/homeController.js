@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const transporter = require('../managers/emailManager'); // Adjust path as needed
-const { CAPTCHA_SITE_KEY } = require('../config/config');
+// const { CAPTCHA_SITE_KEY } = require('../config/config');
+const CAPTCHA_SITE_KEY = process.env.SECRET;
+
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
 router.get('/', async (req, res, next) => {
@@ -105,6 +107,11 @@ router.post('/contacts', async (req, res, next) => {
             message
         });
     }
+
+    console.log('EMAIL:', process.env.EMAIL);
+    console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD);
+    console.log('EMAIL_SERVICE:', process.env.EMAIL_SERVICE);
+
 
     if (recaptchaToken) {
         try {
