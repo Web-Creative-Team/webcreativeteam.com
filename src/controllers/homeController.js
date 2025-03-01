@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const transporter = require('../managers/emailManager'); // Adjust path as needed
 // const { CAPTCHA_SITE_KEY } = require('../config/config');
-const CAPTCHA_SITE_KEY = process.env.SECRET;
+const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
 
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
