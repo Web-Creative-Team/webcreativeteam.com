@@ -80,8 +80,8 @@
         color: #EF7F19;
     }
 
-    .grecaptcha-badge { 
-        visibility: hidden; 
+    .grecaptcha-badge {
+        visibility: hidden;
     }
 
     .container-fluid {
@@ -650,6 +650,11 @@
 
         .section.sectionAboutUs p {
             flex: 1 1 100%;
+        }
+
+        .section.sectionAboutUs h1 {
+            font-size: 2em;
+            text-align: center;
         }
 
         .sectionAboutUs p:nth-of-type() {
