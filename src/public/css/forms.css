@@ -19,12 +19,12 @@ button.additionalStyle:hover, input.additionalStyle:hover {
     min-width: 30%;
 }
 
-.additionalStyle.cancel{
+.additionalStyle.cancel, a.additionalStyle.cancel{
     background: #EF7F19;
     color: #1A6B41;
 }
 
-.additionalStyle.cancel:hover{
+.additionalStyle.cancel:hover, a.additionalStyle.cancel:hover{
     background: #1A6B41;
     color: #EF7F19;
 }

@@ -81,9 +81,11 @@
 
 .asideArticleListItem {}
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .asideLayout {
         flex-direction: column;
+        padding: 0 2em;
+        margin-top: 2.5em;
     }
 
     .blogAside {
@@ -92,6 +94,10 @@
         justify-content: center;
         align-items: center;
         gap: 0.5em
+    }
+
+    .withAside{
+        width: 100%;
     }
 
     /* Hero Banner Adjustments */
@@ -110,10 +116,6 @@
     }
 
     /* Adjustments for main content */
-    .asideLayout {
-        padding: 0 1em;
-        margin-top: 2em;
-    }
 
     .articleHeading {
         font-size: 2em;
