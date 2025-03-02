@@ -56,24 +56,6 @@
  </div>
         </form>
 
-        <!-- Preload Existing Content Script -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Check if Quill is already initialized
-                if (window.quill) {
-                    // 👉 Inject the raw HTML directly into Quill
-                    var editorContainer = document.querySelector('#editor-container .ql-editor');
-                    editorContainer.innerHTML = `{{{articleContentRaw}}}`;
-                }
-
-                // Update hidden input before form submission
-                var form = document.querySelector('form');
-                form.onsubmit = function () {
-                    var articleContent = document.querySelector('#articleContent');
-                    articleContent.value = quill.root.innerHTML;
-                };
-            });
-        </script>
         <script>
             // 👉 Pass the preloaded content as a global JavaScript variable
             window.preloadedContent = `{{{articleContentRaw}}}`;

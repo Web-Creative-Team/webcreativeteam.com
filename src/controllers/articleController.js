@@ -132,7 +132,6 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
     let articleId = req.params.articleId;
     let articleData = await articleManager.getOne(articleId);
     articleData.dateCreated = formatDate(articleData.dateCreated);
-    console.log(articleId);
     
     try {
 
