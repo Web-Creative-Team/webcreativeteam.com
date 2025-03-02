@@ -1,63 +1,63 @@
-    <fieldset>
-        <legend>Редактиране на статия</legend>
+<fieldset>
+    <legend>Редактиране на статия</legend>
 
-        {{#if error}}
-        <div class="messageContainer red">
-            <p class="messageText">{{{error}}}</p>
+    {{#if error}}
+    <div class="messageContainer red">
+        <p class="messageText">{{{error}}}</p>
+    </div>
+    {{/if}}
+
+    <form id="editForm" method="POST" enctype="multipart/form-data">
+
+        <label for="articleTitle">Заглавие</label>
+        <input type="text" name="articleTitle" id="articleTitle" value="{{articleTitle}}" />
+        <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">
+            {{errors.articleTitle}}
+        </p>
+
+        <div style="max-width: 500px;">
+            <img src="{{articleImage}}" alt="{{articleAlt}}" />
         </div>
-        {{/if}}
 
-        <form id="editForm" method="POST" enctype="multipart/form-data">
+        <label for="articleImage">Качи ново основно изображение (по желание)</label>
+        <input type="file" name="articleImage" id="articleImage">
 
-            <label for="articleTitle">Заглавие</label>
-            <input type="text" name="articleTitle" id="articleTitle" value="{{articleTitle}}" />
-            <p class="inputRequirements {{#if errors.articleTitle}}red{{/if}}">
-                {{errors.articleTitle}}
-            </p>
+        <label for="articleThumbnailImage">Качи ново миниатюрно изображение (по желание)</label>
+        <input type="file" id="articleThumbnailImage" name="articleThumbnailImage">
 
-            <div style="max-width: 500px;">
-                <img src="{{articleImage}}" alt="{{articleAlt}}" />
-            </div>
+        <label for="articleAlt">Alt Текст за изображението</label>
+        <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
+        <p class="inputRequirements {{#if errors.articleAlt}}red{{/if}}">
+            {{errors.articleAlt}}
+        </p>
 
-            <label for="articleImage">Качи ново основно изображение (по желание)</label>
-            <input type="file" name="articleImage" id="articleImage">
-
-            <label for="articleThumbnailImage">Качи ново миниатюрно изображение (по желание)</label>
-            <input type="file" id="articleThumbnailImage" name="articleThumbnailImage">
-
-            <label for="articleAlt">Alt Текст за изображението</label>
-            <input type="text" id="articleAlt" name="articleAlt" value="{{articleAlt}}">
-            <p class="inputRequirements {{#if errors.articleAlt}}red{{/if}}">
-                {{errors.articleAlt}}
-            </p>
-
-            <label for="articleContent">Съдържание</label>
-            <div id="editor-container"></div>
-            <input type="hidden" name="articleContent" id="articleContent">
-            <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">
-                {{errors.articleContent}}
-            </p>
+        <label for="articleContent">Съдържание</label>
+        <div id="editor-container"></div>
+        <input type="hidden" name="articleContent" id="articleContent">
+        <p class="inputRequirements {{#if errors.articleContent}}red{{/if}}">
+            {{errors.articleContent}}
+        </p>
 
 
-            <label for="articleMetaTitle">Meta Title</label>
-            <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
-            <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">
-                {{errors.articleMetaTitle}}
-            </p>
+        <label for="articleMetaTitle">Meta Title</label>
+        <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
+        <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">
+            {{errors.articleMetaTitle}}
+        </p>
 
-            <label for="articleMetaDescription">Meta Description</label>
-            <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
-            <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">
-                {{errors.articleMetaDescription}}
-            </p>
-<div class="editCancelBtnContainer">
-                <a class="additionalStyle cancel" href="/articles/{{articleId}}/details">Cancel</a>
+        <label for="articleMetaDescription">Meta Description</label>
+        <input type="text" id="articleMetaDescription" name="articleMetaDescription" value="{{articleMetaDescription}}">
+        <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">
+            {{errors.articleMetaDescription}}
+        </p>
+        <div class="editCancelBtnContainer">
+            <a class="additionalStyle cancel" href="/articles/{{articleId}}/details">Cancel</a>
             <button class="additionalStyle">Запази промените</button>
- </div>
-        </form>
+        </div>
+    </form>
 
-        <script>
-            // 👉 Pass the preloaded content as a global JavaScript variable
-            window.preloadedContent = `{{{articleContentRaw}}}`;
-        </script>
-    </fieldset>
+    <script>
+        // 👉 Pass the preloaded content as a global JavaScript variable
+        window.preloadedContent = `{{{articleContentRaw}}}`;
+    </script>
+</fieldset>
