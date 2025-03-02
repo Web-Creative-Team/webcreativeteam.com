@@ -142,9 +142,9 @@
         justify-content: center;
         align-items: center;
     }
- 
 
-   
+
+
     /* .widthIcon {
         display: block;
         min-height: 100px;
@@ -639,13 +639,22 @@
         .paragraphWithIcons {
             flex-direction: row;
             margin-top: 2em;
+            display: flex;
+            align-items: flex-start;
         }
 
-        .paragraphWithIcons p{
+        .paragraphWithIcons.prices {
+
+            align-items: center;
+        }
+        
+
+        .paragraphWithIcons p {
             min-width: 65%;
         }
 
-        .iconContainer, .width {
+        .iconContainer,
+        .width {
             /* max-width:  30%; */
             flex: 0 1 20%;
             overflow: hidden;
