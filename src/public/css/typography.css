@@ -5,22 +5,6 @@ html {
     font: 11px/1.5 "Roboto", sans-serif;
 }
 
-@media (min-width: 600px) {
-    html { font-size: 12px; }
-}
-
-@media (min-width: 800px) {
-    html { font-size: 14px; }
-}
-
-@media (min-width: 1200px) {
-    html { font-size: 16px; }
-}
-
-body, input, button, textarea, table, th, td {
-    font: inherit;
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-size: 1em;
     margin-bottom: 0.5em;
@@ -45,6 +29,26 @@ h4 { font-size: 1.4em; }
 h5 { font-size: 1.2em; }
 h6 { font-size: 1em; }
 
-/* p, ul, ol {
-    padding-bottom: 1.5em;
-} */
+p, ul, ol {
+    padding-bottom: 1em;
+}
+
+@media (min-width: 600px) {
+    html { font-size: 12px; }
+    h1 { font-size: 3em; }
+}
+
+@media (min-width: 800px) {
+    html { font-size: 14px; }
+}
+
+@media (min-width: 1200px) {
+    html { font-size: 16px; }
+}
+
+body, input, button, textarea, table, th, td {
+    font: inherit;
+}
+
+
+

@@ -137,21 +137,18 @@
     }
 
     .iconContainer {
-        min-width: 35%;
-        min-height: 150px;
+        /* min-height: 150px; */
         display: flex;
         justify-content: center;
         align-items: center;
     }
+ 
 
-    .iconContainer.width {
-        min-width: 45%;
-    }
-
-    .widthIcon {
+   
+    /* .widthIcon {
         display: block;
         min-height: 100px;
-    }
+    } */
 
     .highIcon {
         max-height: 150px;
@@ -640,12 +637,18 @@
         }
 
         .paragraphWithIcons {
-            flex-direction: column;
+            flex-direction: row;
             margin-top: 2em;
         }
 
-        .icon {
-            font-size: 5em;
+        .paragraphWithIcons p{
+            min-width: 65%;
+        }
+
+        .iconContainer, .width {
+            /* max-width:  30%; */
+            flex: 0 1 20%;
+            overflow: hidden;
         }
 
         .section.sectionAboutUs p {
@@ -712,6 +715,8 @@
 
         .threeColumns {
             flex-direction: column;
+            margin-top: 0;
+            gap: 0;
         }
 
         footer p {
