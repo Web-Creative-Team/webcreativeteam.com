@@ -1,5 +1,8 @@
 const nodemailer = require('nodemailer');
-const { EMAIL, EMAIL_PASSWORD, EMAIL_SERVICE } = require('../config/config'); 
+
+const EMAIL = process.env.EMAIL;
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+const EMAIL_SERVICE = process.env.EMAIL_SERVICE;
 
 const transporter = nodemailer.createTransport({
     service: EMAIL_SERVICE,

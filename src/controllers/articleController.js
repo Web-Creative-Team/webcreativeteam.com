@@ -129,14 +129,17 @@ router.get('/:articleId/details', async (req, res) => {
 });
 
 router.get('/:articleId/edit', isAuth, async (req, res) => {
+    let articleId = req.params.articleId;
+    let articleData = await articleManager.getOne(articleId);
+    articleData.dateCreated = formatDate(articleData.dateCreated);
+    console.log(articleId);
+    
     try {
-        let articleId = req.params.articleId;
-        let articleData = await articleManager.getOne(articleId);
-        articleData.dateCreated = formatDate(articleData.dateCreated);
 
         // 👉 Pass the raw HTML for preloading
         res.render('articles/editArticle', {
             ...articleData,
+            articleId,
             articleContentRaw: articleData.articleContent,  // Pass as raw HTML
             title: "Редактиране на Блог статия"
         });

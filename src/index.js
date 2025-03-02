@@ -9,7 +9,10 @@ const routes = require('./routes');
 const { auth } = require('./middlewares/authMiddleware')
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
 
-const { DBLINK, PORT } = require('./config/config');
+// const { DBLINK, PORT } = require('./config/config');
+const DBLINK = process.env.DBLINK;
+const PORT = process.env.PORT;
+
 
 const app = express();
 
@@ -49,5 +52,12 @@ app.use(routes);
 app.use(errorHandler);
 
 
-const port = process.env.PORT || PORT || 3000;
-app.listen(port, console.log(`Server is listening on port ${port}...`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}...`);
+});
+
+
+
+
+

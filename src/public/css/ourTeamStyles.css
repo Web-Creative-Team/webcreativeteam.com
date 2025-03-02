@@ -1,0 +1,20 @@
+.ourTeam {
+    display: flex;
+    /* flex-direction: column; */
+    /* background-image: url('/images/aboutUsBannerMain_noOpacity.png');
+    background-repeat: no-repeat; */
+    /* justify-content: end;
+    align-items: start; */
+    /* padding: 3em; */
+    padding-top: 2em;
+    padding-left: 2em;
+    padding-bottom: 0;
+    max-width: 100%;
+    /* min-height: 600px; */
+    margin:  0;
+    overflow-x: hidden;
+}
+
+.mobileViewBanner {
+    display: none;
+}

@@ -7,7 +7,7 @@
         </div>
         {{/if}}
 
-        <form method="POST" enctype="multipart/form-data">
+        <form id="editForm" method="POST" enctype="multipart/form-data">
 
             <label for="articleTitle">Заглавие</label>
             <input type="text" name="articleTitle" id="articleTitle" value="{{articleTitle}}" />
@@ -39,9 +39,6 @@
             </p>
 
 
-
-
-
             <label for="articleMetaTitle">Meta Title</label>
             <input type="text" id="articleMetaTitle" name="articleMetaTitle" value="{{articleMetaTitle}}">
             <p class="inputRequirements {{#if errors.articleMetaTitle}}red{{/if}}">
@@ -53,8 +50,10 @@
             <p class="inputRequirements {{#if errors.articleMetaDescription}}red{{/if}}">
                 {{errors.articleMetaDescription}}
             </p>
-
+<div class="editCancelBtnContainer">
+                <a class="additionalStyle cancel" href="/articles/{{articleId}}/details">Cancel</a>
             <button class="additionalStyle">Запази промените</button>
+ </div>
         </form>
 
         <!-- Preload Existing Content Script -->
