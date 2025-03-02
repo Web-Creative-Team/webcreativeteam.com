@@ -65,8 +65,8 @@ router.get('/design', async(req, res) => {
     res.render('servicesViews/design', { 
         showSectionServices: true, 
         banners: banners, 
-        title: "Създаване и поддръжка на уеб сайтове", 
-        description: "test",
+        title: "Уеб и графичен дизайн | Брандиране | Web Creative Team", 
+        description: "Предлагаме уеб дизайн, графичен дизайн, брандиране, дизайн на печатни материали и визии за социални мрежи. Доверете се на Web Creative Team за креативни решения!",
         currentPage: "design",
         parentPage: "services"
     });
