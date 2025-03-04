@@ -613,7 +613,7 @@
         }
 
         .mainNav ul a {
-            font-size: 1em;
+            font-size: 1.2em;
         }
 
         .banner h1 {
@@ -627,7 +627,7 @@
         }
 
         .section.sectionAboutUs {
-            font-size: 1em;
+            font-size: 1.2em;
             display: flex;
             flex-direction: column;
             justify-content: center;
