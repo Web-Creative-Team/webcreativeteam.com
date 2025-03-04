@@ -371,7 +371,7 @@
 
     p.servicesDescribtion {
         font-weight: lighter;
-        font-size: 1.5em;
+        font-size: 1em;
         margin-bottom: 0;
         color: #1A6B41;
         display: flex;
@@ -429,7 +429,7 @@
     .digitalMarketingintroducingParagraph {
         width: 70%;
         align-self: center;
-        font-size: 1.5em;
+        font-size: 1.2em;
         font-style: italic;
         font-weight: lighter;
         color: #1A6B41;
@@ -627,7 +627,7 @@
         }
 
         .section.sectionAboutUs {
-            font-size: 1.6em;
+            font-size: 1em;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -644,7 +644,6 @@
         }
 
         .paragraphWithIcons.prices {
-
             align-items: center;
         }
         
@@ -665,7 +664,7 @@
         }
 
         .section.sectionAboutUs h1 {
-            font-size: 2em;
+            font-size: 2rem;
             text-align: center;
         }
 
@@ -699,6 +698,7 @@
         .articleServices h3 {
             order: 1;
         }
+
 
         footer {
             flex-direction: column;
