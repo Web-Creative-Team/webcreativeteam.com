@@ -8,6 +8,7 @@ input.additionalStyle {
     background: #1A6B41;
     color: #EF7F19;
     font-weight: bold;
+    margin-top: 0.8em;
 }
 
 button.additionalStyle:hover,

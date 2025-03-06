@@ -46,6 +46,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 0 1em;
+    margin-bottom: 1em;
 }
 
 .ourTeamPersonImageContainer{
@@ -130,6 +131,7 @@ text-align: right;
     .personCardHeader{
         flex-direction: row;
         gap: 1em;
+        margin-bottom: 1em;
     }
 
     .ourTeamPersonImageContainer{

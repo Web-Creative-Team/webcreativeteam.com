@@ -369,13 +369,18 @@
         margin-bottom: 0.8rem;
     }
 
-    p.servicesDescribtion {
+    .articleServices h3 {
+        font-size: 2.5em;
+    }
+
+    .servicesDescribtions p.servicesDescribtion {
         font-weight: lighter;
-        font-size: 1em;
+        font-size: 1.2em;
         margin-bottom: 0;
         color: #1A6B41;
         display: flex;
         align-items: center;
+        padding-bottom: 0.38em;
     }
 
     .fa-check {
