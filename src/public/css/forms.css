@@ -8,7 +8,6 @@ input.additionalStyle {
     background: #1A6B41;
     color: #EF7F19;
     font-weight: bold;
-    margin-top: 0.8em;
 }
 
 button.additionalStyle:hover,
@@ -92,6 +91,10 @@ input {
 .inputRequirements.red {
     color: red;
     background: none;
+}
+
+#message{
+    margin-bottom: 1em;
 }
 
 @media (max-width: 900px) {
