@@ -786,6 +786,14 @@
             flex: 0 1 65%;
         }
 
+        .servicesDescribtions p.servicesDescribtion{
+            font-size: 2em;
+        }
+
+        .servicesDescribtions h3{
+            font-size: 2.5em;
+        }
+
 
 
 
