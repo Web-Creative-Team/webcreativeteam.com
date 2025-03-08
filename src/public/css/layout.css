@@ -794,4 +794,8 @@ li {
         font-size: 2.5em;
     }
 
+    .hide-on-mobile {
+        display: none !important;
+    }
+
 }
