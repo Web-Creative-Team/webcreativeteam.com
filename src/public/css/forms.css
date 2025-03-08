@@ -1,5 +1,5 @@
-button.additionalStyle,input.additionalStyle {
-    margin-top: 2em;
+button.additionalStyle,
+input.additionalStyle {
     align-self: end;
     padding: 0.3em 0.5em;
     max-width: 50%;
@@ -10,26 +10,37 @@ button.additionalStyle,input.additionalStyle {
     font-weight: bold;
 }
 
-button.additionalStyle:hover, input.additionalStyle:hover {
+button.additionalStyle:hover,
+input.additionalStyle:hover {
     background: #EF7F19;
     color: #1A6B41;
 }
 
-.editBtn, .deleteBtn{
+.editBtn,
+.deleteBtn {
     min-width: 30%;
 }
 
-.additionalStyle.cancel, a.additionalStyle.cancel{
+.additionalStyle.cancel,
+a.additionalStyle.cancel {
     background: #EF7F19;
     color: #1A6B41;
+    display: flex;
+    text-decoration: none;
+    padding: 0 0.5em;
+    border-radius: 0.3em;
+    align-content: center;
+    /* justify-content: center; */
+    align-items: center;
 }
 
-.additionalStyle.cancel:hover, a.additionalStyle.cancel:hover{
+.additionalStyle.cancel:hover,
+a.additionalStyle.cancel:hover {
     background: #1A6B41;
     color: #EF7F19;
 }
 
-.editCancelBtnContainer{
+.editCancelBtnContainer {
     display: flex;
     gap: 0.5em;
     justify-content: end;
@@ -65,20 +76,25 @@ form label {
     font-weight: bold;
 }
 
-textarea, input{
+textarea,
+input {
     padding: 0.5em;
     font-weight: normal;
 }
 
-.inputRequirements{
+.inputRequirements {
     color: #aaa;
     font-size: 0.8em;
     font-weight: normal;
 }
 
-.inputRequirements.red{
+.inputRequirements.red {
     color: red;
     background: none;
+}
+
+#message{
+    margin-bottom: 1em;
 }
 
 @media (max-width: 900px) {

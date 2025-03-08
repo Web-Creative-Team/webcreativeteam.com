@@ -54,6 +54,10 @@ p.pricesAmount {
     font-weight: bold;
 }
 
+.askForOfferBtn.mobile{
+    display: none;
+}
+
 .askForOfferBtn:hover{
     /* background: #EF7F19;
     color: #1A6B41; */
@@ -71,7 +75,7 @@ p.pricesAmount {
     color: #1A6B41;
 }
 
-@media (max-width: 600px){
+@media (max-width: 900px){
     .section.sectionPricess{
         flex-direction: column;
         padding: 2em;
@@ -96,5 +100,13 @@ p.pricesAmount {
 
     .pricesAmount a{
         margin-top: 1em;
+    }
+
+    .askForOfferBtn.mobile{
+        display: block;
+    }
+
+    .askForOfferBtn.desktop{
+        display: none;
     }
 }

@@ -25,45 +25,45 @@ const SECRET = process.env.SECRET;
 
     };
 
-// exports.register = async (userData) => {
-//     try {
-//         console.log("manager received data: ", userData);
+exports.register = async (userData) => {
+    try {
+        console.log("manager received data: ", userData);
 
-//         // Ensure password matches repeatPassword before proceeding
-//         if (userData.password !== userData.repeatPassword) {
-//             throw new Error('Passwords do not match!');
-//         }
+        // Ensure password matches repeatPassword before proceeding
+        if (userData.password !== userData.repeatPassword) {
+            throw new Error('Passwords do not match!');
+        }
 
-//         // Check if username already exists
-//         const existingUser = await User.findOne({ 
-//             $or: [{ username: userData.username }, { email: userData.email }]
-//         });
+        // Check if username already exists
+        const existingUser = await User.findOne({ 
+            $or: [{ username: userData.username }, { email: userData.email }]
+        });
 
-//         if (existingUser) {
-//             if (existingUser.username === userData.username) {
-//                 throw new Error('Username is already taken!');
-//             } else {
-//                 throw new Error('Email is already registered!');
-//             }
-//         }
+        if (existingUser) {
+            if (existingUser.username === userData.username) {
+                throw new Error('Username is already taken!');
+            } else {
+                throw new Error('Email is already registered!');
+            }
+        }
 
-//         // Create the user
-//         const createdUser = await User.create({
-//             username: userData.username,
-//             email: userData.email,
-//             password: userData.password,  // Store only password
-//         });
+        // Create the user
+        const createdUser = await User.create({
+            username: userData.username,
+            email: userData.email,
+            password: userData.password,  // Store only password
+        });
 
-//         console.log("Successfully created user: ", createdUser);
+        console.log("Successfully created user: ", createdUser);
         
-//         const token = await generateToken(createdUser);
-//         return token;
+        const token = await generateToken(createdUser);
+        return token;
 
-//     } catch (error) {
-//         console.error("Error during registration:", error);
-//         throw error; // Re-throw to be handled in the controller
-//     }
-// };
+    } catch (error) {
+        console.error("Error during registration:", error);
+        throw error; // Re-throw to be handled in the controller
+    }
+};
 
 async function generateToken(user) {
     // Generate jwt

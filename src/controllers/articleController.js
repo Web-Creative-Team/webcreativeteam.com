@@ -132,7 +132,6 @@ router.get('/:articleId/edit', isAuth, async (req, res) => {
     let articleId = req.params.articleId;
     let articleData = await articleManager.getOne(articleId);
     articleData.dateCreated = formatDate(articleData.dateCreated);
-    console.log(articleId);
     
     try {
 
@@ -241,5 +240,16 @@ router.get('/:articleId/delete', async (req, res) => {
         }
     }
 });
+
+router.get('/api', async (req, res) => {
+    try {
+        let articles = await articleManager.getAllSorted();
+        res.json(articles); // Връща JSON отговор
+    } catch (error) {
+        console.error('Error fetching articles:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 module.exports = router;

@@ -16,8 +16,8 @@ router.get('/', async (req, res, next) => {
             showSectionServices: true,
             showCarousel: true,
             banners,
-            title: "Интернет агенция | Изработка уебсайт | WebCreativeTeam",
-            description: "Изработка на уебсайт...",
+            title: "Изработка на сайт | Интернет агенция | WebCreativeTeam",
+            description: "Цялостни решения за изработване на уебсайт и онлайн магазин. Изгодни цени, промоции и отстъпки. ",
             recaptchaSiteKey: CAPTCHA_SITE_KEY,
 
             // Pass them to the template
@@ -33,8 +33,8 @@ router.get('/prices', async (req, res, next) => {
     try {
         let banners = await bannersManager.getAll();
         res.render('prices', {
-            title: "Цени и промоции на уебсайт...",
-            description: "Цялостни решения за изработване...",
+            title: "Цени и промоции на уебсайт | Уеб магазини | WebCreativeTeam",
+            description: "Цялостни решения за изработване на уебсайт и онлайн магазин. Изгодни цени, промоции и отстъпки.",
             banners,
             showCarousel: true,
             showSectionServices: true,

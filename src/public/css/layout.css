@@ -142,9 +142,9 @@
         justify-content: center;
         align-items: center;
     }
- 
 
-   
+
+
     /* .widthIcon {
         display: block;
         min-height: 100px;
@@ -369,13 +369,18 @@
         margin-bottom: 0.8rem;
     }
 
-    p.servicesDescribtion {
+    .articleServices h3 {
+        font-size: 2.5em;
+    }
+
+    .servicesDescribtions p.servicesDescribtion {
         font-weight: lighter;
-        font-size: 1.5em;
+        font-size: 1.2em;
         margin-bottom: 0;
         color: #1A6B41;
         display: flex;
         align-items: center;
+        padding-bottom: 0.28em;
     }
 
     .fa-check {
@@ -429,7 +434,7 @@
     .digitalMarketingintroducingParagraph {
         width: 70%;
         align-self: center;
-        font-size: 1.5em;
+        font-size: 1.2em;
         font-style: italic;
         font-weight: lighter;
         color: #1A6B41;
@@ -613,7 +618,7 @@
         }
 
         .mainNav ul a {
-            font-size: 2em;
+            font-size: 1.2em;
         }
 
         .banner h1 {
@@ -627,7 +632,7 @@
         }
 
         .section.sectionAboutUs {
-            font-size: 1.6em;
+            font-size: 1.2em;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -639,13 +644,21 @@
         .paragraphWithIcons {
             flex-direction: row;
             margin-top: 2em;
+            display: flex;
+            align-items: flex-start;
         }
 
-        .paragraphWithIcons p{
+        .paragraphWithIcons.prices {
+            align-items: center;
+        }
+        
+
+        .paragraphWithIcons p {
             min-width: 65%;
         }
 
-        .iconContainer, .width {
+        .iconContainer,
+        .width {
             /* max-width:  30%; */
             flex: 0 1 20%;
             overflow: hidden;
@@ -656,7 +669,7 @@
         }
 
         .section.sectionAboutUs h1 {
-            font-size: 2em;
+            font-size: 2rem;
             text-align: center;
         }
 
@@ -690,6 +703,7 @@
         .articleServices h3 {
             order: 1;
         }
+
 
         footer {
             flex-direction: column;
@@ -770,6 +784,14 @@
 
         .navbar-brand {
             flex: 0 1 65%;
+        }
+
+        .servicesDescribtions p.servicesDescribtion{
+            font-size: 2em;
+        }
+
+        .servicesDescribtions h3{
+            font-size: 2.5em;
         }
 
 

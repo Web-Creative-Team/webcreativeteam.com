@@ -46,18 +46,32 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 0 1em;
+    margin-bottom: 1em;
 }
 
 .ourTeamPersonImageContainer{
     flex: 0 1 50%;
 }
 
-.shortBio h3, .shortBio p {
+.shortBio{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1em;
+}
+
+.shortBio h4, .shortBio p {
     color: #EF7F19;
 }
 
-.shortBio h3{
+.shortBio h4{
     margin-bottom: 0.5em;
+    text-align: left;
+}
+
+.shortBio p{
+    margin: 0;
+    
 }
 
 .quote, .quoteAuthor{
@@ -117,6 +131,7 @@ text-align: right;
     .personCardHeader{
         flex-direction: row;
         gap: 1em;
+        margin-bottom: 1em;
     }
 
     .ourTeamPersonImageContainer{
@@ -128,6 +143,11 @@ text-align: right;
 
     .quotes{
         font-size: 1.2em;
+    }
+
+    .shortBio p{
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 
 
