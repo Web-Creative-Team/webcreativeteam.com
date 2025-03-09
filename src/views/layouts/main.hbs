@@ -47,62 +47,74 @@
 
     {{#if showSectionServices}}
     <section id="sectionServices" class="section sectionServices">
-        {{!-- <h2 class="sectionHeading">Нашите услуги</h2> --}}
-        <a href="/services/website" class="articleServices">
-            <h3>Изработка на сайт / магазин</h3>
-            <div class="servicesDescribtions">
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Уебсайт</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Електронен магазин</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>WordPress темплейти</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Персонализиран дизайн</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Индивидуални решения</p>
+        <a href="/services/website" class="articleServices {{#if (eq currentPage 'website')}}hide-on-mobile{{/if}}">
+            <div>
+                <h3>Изработка на сайт / магазин</h3>
+                <div class="servicesDescribtions">
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Уебсайт</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Електронен магазин</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>WordPress темплейти</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Персонализиран дизайн</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Индивидуални решения</p>
+                </div>
             </div>
-            {{!-- <h4>или електронен магазин</h4> --}}
+
             <div class="imageContainer">
-                <img src="/images/website_creation.png" alt="Websites and E-commerce banner image" srcset="">
+                <img src="/images/website_creation.png" alt="Websites and E-commerce banner image">
             </div>
         </a>
 
-        <a href="/services/maintenance" class="articleServices">
-            <div class="servicesDescribtions">
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Дизайн</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Функционалности</p>
-                {{!-- <p class="servicesDescribtion servicesSubtitleSecondLine">на </p> --}}
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Подобряване на   </p>
-                <p class="servicesDescribtion servicesSubtitleSecondLine">потребителското изживяване</p>
+        <a href="/services/maintenance"
+            class="articleServices {{#if (eq currentPage 'maintenance')}}hide-on-mobile{{/if}}">
+            <div>
+                <h3>Поддръжка на сайт / магазин</h3>
+                <div class="servicesDescribtions">
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Дизайн</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Функционалности</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Потребителско изживяване</p>
+                </div>
             </div>
-            <h3>Поддръжка на сайт / магазин</h3>
+
             <div class="imageContainer">
-                <img src="/images/website_maintanace.png" alt="Maintanace image" srcset="">
+                <img src="/images/website_maintanace.png" alt="Maintanace image">
             </div>
         </a>
 
-        <a href="/services/digitalmarketing" class="articleServices">
-            <h3>Дигитален маркетинг</h3>
-            <div class="servicesDescribtions">
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>SEO</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Google Ads & Google Analytics</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Социални медии</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Email маркетинг</p>
+        <a href="/services/digitalmarketing"
+            class="articleServices {{#if (eq currentPage 'digitalmarketing')}}hide-on-mobile{{/if}}">
+
+            <div>
+                <h3>Дигитален маркетинг</h3>
+                <div class="servicesDescribtions">
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>SEO</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Google Ads & Google Analytics</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Социални медии</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Email маркетинг</p>
+                </div>
             </div>
+
             <div class="imageContainer">
-                <img src="/images/digital_marketing_image.png" alt="Social Media and Digital Marketing image" srcset="">
+                <img src="/images/digital_marketing_image.png" alt="Social Media and Digital Marketing image">
             </div>
         </a>
 
-        <a href="/services/design" class="articleServices">
-            <div class="servicesDescribtions">
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>WEB дизайн</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Графичен дизайн</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Брандиране</p>
-                <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Печатна реклама</p>
+        <a href="/services/design" class="articleServices {{#if (eq currentPage 'design')}}hide-on-mobile{{/if}}">
+            <div>
+                <h3>Дизайн</h3>
+                <div class="servicesDescribtions">
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>WEB дизайн</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Графичен дизайн</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Брандиране</p>
+                    <p class="servicesDescribtion"><i class="fa-solid fa-check"></i>Печатна реклама</p>
+                </div>
             </div>
-            <h3>Дизайн</h3>
+
             <div class="imageContainer">
-                <img src="/images/web_design_image.png" alt="Design services image" srcset="">
+                <img src="/images/web_design_image.png" alt="Design services image">
             </div>
         </a>
     </section>
+
     {{/if}}
 
     <footer>
@@ -121,7 +133,7 @@
     <script src="/js/fadeOutMessages.js"></script>
     <script src="/js/mainNavToggle.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    
+
     <!-- Global Quill Configuration -->
     <script src="/js/quillConfig.js"></script>
     <script src="/js/editArticle.js"></script>
