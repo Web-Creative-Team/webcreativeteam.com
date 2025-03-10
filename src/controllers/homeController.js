@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
-const transporter = require('../managers/emailManager'); // Adjust path as needed
 // const { CAPTCHA_SITE_KEY } = require('../config/config');
 const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
+
+const { transporter, verifyRecaptcha } = require('../managers/emailManager'); 
 
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
@@ -108,17 +109,25 @@ router.post('/contacts', async (req, res, next) => {
         });
     }
 
-    if (recaptchaToken) {
-        try {
-            const verified = await verifyRecaptcha(recaptchaToken);
-            if (!verified) {
-                return res.status(400).send('Invalid reCAPTCHA token');
-            }
-        } catch (error) {
-            console.log(error);
-
-            // return next(error);
-        }
+    if (!recaptchaToken) {
+        return res.status(400).render('contactUs', {
+            error: 'Грешка при проверка на reCAPTCHA. Моля, опитайте отново.',
+            name,
+            email,
+            phone,
+            message,
+        });
+    }
+    
+    const verified = await verifyRecaptcha(recaptchaToken);
+    if (!verified) {
+        return res.status(400).render('contactUs', {
+            error: 'Неуспешна проверка на reCAPTCHA. Потвърдете, че не сте робот.',
+            name,
+            email,
+            phone,
+            message,
+        });
     }
 
     const mailOptions = {
