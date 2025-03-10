@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const transporter = require('../managers/emailManager'); // Adjust path as needed
 // const { CAPTCHA_SITE_KEY } = require('../config/config');
-const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
+// const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
 
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
             banners,
             title: "Изработка на сайт | Интернет агенция | WebCreativeTeam",
             description: "Цялостни решения за изработване на уебсайт и онлайн магазин. Изгодни цени, промоции и отстъпки. ",
-            recaptchaSiteKey: CAPTCHA_SITE_KEY,
+            // recaptchaSiteKey: CAPTCHA_SITE_KEY,
 
             // Pass them to the template
             notifyMessage,
