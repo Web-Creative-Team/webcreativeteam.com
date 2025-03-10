@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
 const transporter = require('../managers/emailManager');
-
-
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
 router.get('/', async (req, res, next) => {
