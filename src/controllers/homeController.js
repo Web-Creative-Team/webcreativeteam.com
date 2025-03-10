@@ -1,16 +1,11 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
-// const { CAPTCHA_SITE_KEY } = require('../config/config');
-const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
-
-const { transporter, verifyRecaptcha } = require('../managers/emailManager'); 
-
+const transporter = require('../managers/emailManager');
 const { hasForbiddenChars } = require('../utils/validationHelpers')
 
 router.get('/', async (req, res, next) => {
     let banners = await bannersManager.getAll();
     try {
-        // Grab optional "notifyMessage" and "notifyClass" from the query string
         const { notifyMessage, notifyClass } = req.query;
 
         res.render('home', {
@@ -19,9 +14,6 @@ router.get('/', async (req, res, next) => {
             banners,
             title: "Изработка на сайт | Интернет агенция | WebCreativeTeam",
             description: "Цялостни решения за изработване на уебсайт и онлайн магазин. Изгодни цени, промоции и отстъпки. ",
-            recaptchaSiteKey: CAPTCHA_SITE_KEY,
-
-            // Pass them to the template
             notifyMessage,
             notifyClass,
         });
@@ -66,10 +58,17 @@ const validateEmail = (email) => {
 };
 
 router.post('/contacts', async (req, res, next) => {
-    const { email, name, phone, message, recaptchaToken } = req.body;
+    const { email, name, phone, message } = req.body;
+
+    console.log("📩 Получена заявка за контакт:");
+    console.log("🔹 Name:", name);
+    console.log("🔹 Email:", email);
+    console.log("🔹 Phone:", phone || "Not provided");
+    console.log("🔹 Message:", message);
 
     // 1) Basic checks
     if (!email || !name || !message) {
+        console.log("❌ Грешка: Липсват задължителни полета.");
         return res.status(400).render('contactUs', {
             error: 'Всички полета отбелязани със * са задължителни.',
             name,
@@ -80,6 +79,7 @@ router.post('/contacts', async (req, res, next) => {
     }
 
     if (hasForbiddenChars(email) || hasForbiddenChars(name) || hasForbiddenChars(phone) || hasForbiddenChars(message)) {
+        console.log("❌ Грешка: Използване на забранени символи.");
         return res.status(400).render('contactUs', {
             error: 'Използване на забранени символи!',
             name,
@@ -90,6 +90,7 @@ router.post('/contacts', async (req, res, next) => {
     }
 
     if (name.length < 2) {
+        console.log("❌ Грешка: Името трябва да е поне 2 символа.");
         return res.status(400).render('contactUs', {
             error: 'Името трябва да съдържа поне 2 символа',
             name,
@@ -100,33 +101,13 @@ router.post('/contacts', async (req, res, next) => {
     }
 
     if (message.length < 10) {
+        console.log("❌ Грешка: Съобщението трябва да е поне 10 символа.");
         return res.status(400).render('contactUs', {
             error: 'Съобщението трябва да съдържа поне 10 символа',
             name,
             email,
             phone,
             message
-        });
-    }
-
-    if (!recaptchaToken) {
-        return res.status(400).render('contactUs', {
-            error: 'Грешка при проверка на reCAPTCHA. Моля, опитайте отново.',
-            name,
-            email,
-            phone,
-            message,
-        });
-    }
-    
-    const verified = await verifyRecaptcha(recaptchaToken);
-    if (!verified) {
-        return res.status(400).render('contactUs', {
-            error: 'Неуспешна проверка на reCAPTCHA. Потвърдете, че не сте робот.',
-            name,
-            email,
-            phone,
-            message,
         });
     }
 
@@ -144,13 +125,16 @@ router.post('/contacts', async (req, res, next) => {
     };
 
     try {
-        await transporter.sendMail(mailOptions);
+        console.log("📧 Опит за изпращане на имейл...");
+        let info = await transporter.sendMail(mailOptions);
+        console.log("✅ Имейл изпратен успешно:", info.messageId);
 
-        // SUCCESS -> Redirect to home page with success message in query
+        // SUCCESS -> Redirect to home page with success message
         return res.redirect('/?notifyMessage=Благодарим! Ще ви отговорим възможно най-бързо!&messageText=green');
     } catch (error) {
+        console.error("❌ Грешка при изпращане на имейл:", error);
+
         // ERROR -> Rerender contactUs with red error
-        // (We attach the user input so they don't lose what they typed)
         return res.render('contactUs', {
             error: 'Възникна грешка при изпращане на имейл. Опитайте отново.',
             name,
@@ -160,5 +144,6 @@ router.post('/contacts', async (req, res, next) => {
         });
     }
 });
+
 
 module.exports = router;
