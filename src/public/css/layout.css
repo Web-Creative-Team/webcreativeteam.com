@@ -80,9 +80,9 @@ header {
     color: #EF7F19;
 }
 
-.grecaptcha-badge {
+/* .grecaptcha-badge {
     visibility: hidden;
-}
+} */
 
 .container-fluid {
     gap: 5em;
