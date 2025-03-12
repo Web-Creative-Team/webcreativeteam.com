@@ -21,9 +21,12 @@
             <label for="message">Вашето съобщение <span class="red">*</span></label>
             <textarea id="message" name="message" required>{{message}}</textarea>
 
-            <input type="hidden" id="recaptchaResponse" name="recaptchaResponse">
-            <button class="additionalStyle" type="submit">Изпрати</button>
+            <input type="hidden" id="recaptchaSiteKey" value="{{recaptchaSiteKey}}">
+            {{!-- <button class="additionalStyle" type="submit">Изпрати</button> --}}
+            <button class="g-recaptcha additionalStyle" data-sitekey="{{recaptchaSiteKey}}" data-callback="onSubmit" data-action="submit">
+                Изпрати
+            </button>
         </form>
     </fieldset>
-    <script src="/js/recaptcha.js"></script>
+    <script src="/js/captcha.js"></script>
 </main>

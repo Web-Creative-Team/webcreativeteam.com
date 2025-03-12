@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
-const transporter = require('../managers/emailManager'); // Adjust path as needed
+const { transporter, verifyRecaptcha } = require('../managers/emailManager');
 // const { CAPTCHA_SITE_KEY } = require('../config/config');
 const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
 
@@ -50,6 +50,7 @@ router.get('/contacts', async (req, res, next) => {
         res.render('contactUs', {
             showCarousel: true,
             banners,
+            recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY,
             title: "Контакти и връзка с екипа | WebCreativeTeam",
             description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
         });
@@ -116,8 +117,6 @@ router.post('/contacts', async (req, res, next) => {
             }
         } catch (error) {
             console.log(error);
-
-            // return next(error);
         }
     }
 

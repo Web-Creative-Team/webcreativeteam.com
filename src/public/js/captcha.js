@@ -1,13 +1,19 @@
-const {CAPTCHA_SITE_KEY, CAPTCHA_SECRET_SITE_KEY} = require('../../config/config');
+function onSubmit(token) {
+    console.log("Generated reCAPTCHA token:", token);
 
-grecaptcha.ready(function () {
-    document.getElementById('contactForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        grecaptcha.execute(CAPTCHA_SITE_KEY, { action: 'submit' }).then(function (token) {
-            // Add the token to a hidden field in the form or append it to the form data
-            document.getElementById('recaptchaResponse').value = token;
-            // Finally submit the form
-            document.getElementById('contactForm').submit();
-        });
-    });
-});
+    const form = document.getElementById("contactForm");
+    if (!form) {
+        console.error("ERROR: contactForm not found!");
+        return;
+    }
+
+    // Добавяме токена директно към формата
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "recaptchaToken";
+    hiddenInput.value = token;
+    form.appendChild(hiddenInput);
+
+    console.log("Form is being submitted with reCAPTCHA token.");
+    form.submit();
+}
