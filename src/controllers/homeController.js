@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bannersManager = require('../managers/bannersManager');
-const transporter = require('../managers/emailManager'); // Adjust path as needed
+const { transporter, verifyRecaptcha } = require('../managers/emailManager');
 // const { CAPTCHA_SITE_KEY } = require('../config/config');
 const CAPTCHA_SITE_KEY = process.env.CAPTCHA_SITE_KEY;
 
@@ -50,6 +50,7 @@ router.get('/contacts', async (req, res, next) => {
         res.render('contactUs', {
             showCarousel: true,
             banners,
+            recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY,
             title: "Контакти и връзка с екипа | WebCreativeTeam",
             description: "За повече информация, контакти и връзка с екипа на WebCreativeTeam"
         });
@@ -108,18 +109,20 @@ router.post('/contacts', async (req, res, next) => {
         });
     }
 
-    if (recaptchaToken) {
-        try {
-            const verified = await verifyRecaptcha(recaptchaToken);
-            if (!verified) {
-                return res.status(400).send('Invalid reCAPTCHA token');
-            }
-        } catch (error) {
-            console.log(error);
-
-            // return next(error);
-        }
+    if (!recaptchaToken) {
+        return res.status(400).send("reCAPTCHA token is missing.");
     }
+    
+    try {
+        const verified = await verifyRecaptcha(recaptchaToken);
+        if (!verified) {
+            return res.status(400).send("Failed reCAPTCHA verification.");
+        }
+    } catch (error) {
+        console.error("reCAPTCHA validation error:", error);
+        return res.status(500).send("Internal reCAPTCHA validation error.");
+    }
+    
 
     const mailOptions = {
         from: email,
