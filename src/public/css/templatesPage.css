@@ -35,7 +35,7 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .section.sectionTemplates {
         flex-direction: column;
         padding: 2em;
@@ -50,6 +50,7 @@
 
    .templatesCard{
     margin-bottom: 2.5em;
+    min-width: 100%;
    }
 
     .pricesCard h4 {
