@@ -8,7 +8,6 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "preinstall": "npm config set audit false",
-    "postinstall": "npm install --production"
 },
   "keywords": [],
   "author": "",
@@ -36,5 +35,5 @@
     "pcloud-sdk-js": "^2.0.0",
     "validator": "^13.12.0"
   }
-  
+
 }
