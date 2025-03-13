@@ -75,7 +75,7 @@ p.pricesAmount {
     color: #1A6B41;
 }
 
-@media (max-width: 900px){
+@media (max-width: 768px){
     .section.sectionPricess{
         flex-direction: column;
         padding: 2em;

@@ -81,7 +81,7 @@
 
 .asideArticleListItem {}
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .asideLayout {
         flex-direction: column;
         padding: 0 2em;
