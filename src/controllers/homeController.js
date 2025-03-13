@@ -109,16 +109,20 @@ router.post('/contacts', async (req, res, next) => {
         });
     }
 
-    if (recaptchaToken) {
-        try {
-            const verified = await verifyRecaptcha(recaptchaToken);
-            if (!verified) {
-                return res.status(400).send('Invalid reCAPTCHA token');
-            }
-        } catch (error) {
-            console.log(error);
-        }
+    if (!recaptchaToken) {
+        return res.status(400).send("reCAPTCHA token is missing.");
     }
+    
+    try {
+        const verified = await verifyRecaptcha(recaptchaToken);
+        if (!verified) {
+            return res.status(400).send("Failed reCAPTCHA verification.");
+        }
+    } catch (error) {
+        console.error("reCAPTCHA validation error:", error);
+        return res.status(500).send("Internal reCAPTCHA validation error.");
+    }
+    
 
     const mailOptions = {
         from: email,
