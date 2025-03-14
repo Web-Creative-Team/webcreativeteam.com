@@ -1,5 +1,5 @@
 function onSubmit(token) {
-    console.log("Generated reCAPTCHA token:", token);
+    console.log("Generated reCAPTCHA token :", token);
 
     const form = document.getElementById("contactForm");
     if (!form) {
