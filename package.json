@@ -3,20 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
-"scripts": {
+  "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "preinstall": "npm config set audit false"
-},
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-
   "dependencies": {
     "axios": "^1.7.5",
     "bcrypt": "^5.1.1",
@@ -33,7 +30,7 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.14",
     "pcloud-sdk-js": "^2.0.0",
+    "sitemap": "^8.0.0",
     "validator": "^13.12.0"
   }
-
 }

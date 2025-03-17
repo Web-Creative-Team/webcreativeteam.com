@@ -545,6 +545,21 @@ li {
     font-size: 0.7em;
 }
 
+.hiddenParagraph {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.paragraphWithIcons:hover .hiddenParagraph {
+    opacity: 1;
+    max-height: 500px; /* Достатъчно голяма стойност, за да се покаже целият текст */
+}
+
+
+
+
 
 
 
