@@ -6,9 +6,11 @@
   "scripts": {
   "start": "node src/index.js",
   "dev": "nodemon src/index.js",
-  "preinstall": "npm config set audit false",
   "generate-sitemap": "node generateSitemap.js",
-  "start:prod": "npm run generate-sitemap && npm start"
+  "cleanup-preview": "node cleanupPreview.js",
+  "start:prod": "npm run generate-sitemap && npm start",
+  "start:preview": "npm run cleanup-preview && npm start",
+  "preinstall": "npm config set audit false"
 },
   "keywords": [],
   "author": "",
