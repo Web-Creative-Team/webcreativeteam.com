@@ -12,7 +12,7 @@ async function generateSitemap() {
   const sitemapLinks = [
     { url: '/', changefreq: 'daily', priority: 1.0 },
     { url: '/contacts', changefreq: 'monthly', priority: 0.7 },
-    { url: '/aboutus', changefreq: 'monthly', priority: 0.6 },
+    { url: '/ourteam', changefreq: 'monthly', priority: 0.6 },
     { url: '/prices', changefreq: 'weekly', priority: 0.8 },
     { url: '/services/website', changefreq: 'weekly', priority: 0.9 },
     { url: '/services/digitalmarketing', changefreq: 'weekly', priority: 0.9 },
