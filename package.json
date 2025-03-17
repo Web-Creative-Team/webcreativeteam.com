@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "preinstall": "npm config set audit false"
-  },
+  "start": "node src/index.js",
+  "dev": "nodemon src/index.js",
+  "preinstall": "npm config set audit false",
+  "generate-sitemap": "node generateSitemap.js",
+  "start:prod": "npm run generate-sitemap && npm start"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
