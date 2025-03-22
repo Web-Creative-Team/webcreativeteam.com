@@ -71,7 +71,7 @@ header {
 
 .homePageCardsLinks {
     text-decoration: none;
-    display: block;
+    display: inline;
 
 }
 
@@ -143,7 +143,7 @@ aside {
 }
 
 .iconContainer {
-    min-height: 250px;
+    /* min-height: 250px; */
     max-width: 150px;
     display: flex;
     justify-content: center;
@@ -374,6 +374,13 @@ h4.pnf404:hover {
     gap: 3em;
     flex-direction: column;
     flex: 0 1 30%;
+    text-decoration: none;
+    color: black;
+}
+
+.paragraphTitle{
+    color: #1A6B41;
+    font-size: 1.2em;
 }
 
 .servicesDescribtions {
@@ -665,7 +672,7 @@ li {
         justify-content: center;
     }
 
-    .section.sectionAboutUs {
+    .section.sectionAboutUs, .section.sectionDigitalMarketing {
         font-size: 1.2em;
         display: flex;
         flex-direction: column;
@@ -828,8 +835,12 @@ li {
         flex: 0 1 65%;
     }
 
+    .servicesDescribtions{
+        padding: 1.5em;
+    }
+
     .servicesDescribtions p.servicesDescribtion{
-        font-size: 2em;
+        font-size: 1.5em;
     }
 
     .servicesDescribtions h3{
