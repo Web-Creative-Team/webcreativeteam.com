@@ -839,6 +839,10 @@ li {
         display: none !important;
     }
 
+    .servicesTitle{
+        font-size: 1.2em;
+    }
+
 
 
 }
