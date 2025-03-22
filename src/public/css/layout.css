@@ -69,6 +69,12 @@ header {
     color: #EF7F19;
 }
 
+.homePageCardsLinks {
+    text-decoration: none;
+    display: block;
+
+}
+
 /* Style the active submenu item */
 .servicesSubMenu a.active-submenu {
     color: #EF7F19;
@@ -145,6 +151,8 @@ aside {
     flex-direction: column;
     gap: 2em;
 }
+
+
 
 
 
