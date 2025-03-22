@@ -138,6 +138,7 @@ aside {
 
 .iconContainer {
     min-height: 250px;
+    max-width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -397,6 +398,14 @@ h4.pnf404:hover {
     margin-right: 0.6em;
     align-self: flex-start;
     margin-top: 0.6em;
+}
+.fa-solid.fa-check{
+display: inline;
+color: #1A6B41;
+}
+
+.servicesTitle{
+    text-align: center;
 }
 
 .servicesSubtitleSecondLine {
