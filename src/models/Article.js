@@ -36,7 +36,7 @@ const articleSchema = new mongoose.Schema({
     articleMetaTitle: {
         type: String,
         required: [true, "Meta Title is required!"],
-        match: [/^[\p{L}0-9\s\-\., - – |!?%$&@„“‘’]+$/u, "The Meta Title contains invalid characters!"], 
+        match: [/^[\p{L}0-9\s\-\., - – |!?%$&@„“‘’(){}\[\]:;\/\\_=\+\*#^~`]+$/u, "The Meta Title contains invalid characters!"], 
         maxLength: [70, "The Meta Title could be 70 characters long maximum"]
     },
 
