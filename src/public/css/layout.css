@@ -673,6 +673,7 @@ li {
         align-items: center;
         padding: 0 2em;
         margin: 0;
+        max-width: 90vw;
     }
 
     .paragraphWithIcons {
@@ -680,6 +681,8 @@ li {
         margin-top: 2em;
         display: flex;
         align-items: flex-start;
+        border-bottom: 1px solid #1A6B41;
+        gap: 1em;
     }
 
     .paragraphWithIcons.prices {
@@ -805,9 +808,7 @@ li {
         width: 100%;
     }
 
-    .paragraphWithIcons {
-        border-bottom: 1px solid #1A6B41;
-    }
+
 
     .carousel {
         margin-top: 0;
